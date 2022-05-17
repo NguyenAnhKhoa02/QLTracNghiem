@@ -8,11 +8,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.lang.model.util.ElementScanner14;
+
+import BLL.Question.OptionsQuestion;
+import BLL.Question.Question;
+import BLL.Question.YesNoQuestion;
+
 public class connectSQL {
-    connectSQL() {
+    public connectSQL() {
 
     }
 
+    // *************************************************************************************************************
     private void connetToSQL() {
         String url = "jdbc:sqlserver://DESKTOP-F7JKQMS\\SQLEXPRESS;databaseName=ManageQuiz;encrypt=false;";
         String account = "sa";
@@ -26,6 +33,14 @@ public class connectSQL {
             e.printStackTrace();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private void closeConnectSQL() {
+        try {
+            connection.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -63,8 +78,18 @@ public class connectSQL {
         return str_tempt;
     }
 
-    public ArrayList<HashMap<String, String>> getAllQuestions(String questionName) {
-        arrL_allQuestion = new ArrayList<>();
+    private ArrayList<?> setArrList(String questionName) {
+        if (questionName.equals("options"))
+            return new ArrayList<OptionsQuestion>();
+        else if (questionName.equals("yes/no"))
+            return new ArrayList<YesNoQuestion>();
+        else
+            return new ArrayList<Question>();
+    }
+    // *********************************************************************************************************************
+
+    public ArrayList<?> getAllQuestions(String questionName) {
+        ArrayList arrL_allQuestion = setArrList(questionName);
         String[] strArr_query = setQuery(questionName);
         connetToSQL();
         for (String str_query : strArr_query) {
@@ -74,28 +99,24 @@ public class connectSQL {
                 resultSet = statement.executeQuery(str_query);
 
                 while (resultSet.next()) {
-                    HM_question = new HashMap<String, String>();
-                    HM_question.put("Id", resultSet.getString("Id"));
-                    HM_question.put("Lv", resultSet.getString("LvName"));
-                    HM_question.put("Content", resultSet.getString("Content"));
-                    HM_question.put("Answer", resultSet.getString("Answer"));
-                    HM_question.put("NameSubject", resultSet.getString("NameSubject"));
-                    HM_question.put("FullName", resultSet.getString("FullName"));
-                    HM_question.put("TypeQues", resultSet.getString("TypeQues"));
-                    HM_question.put("Options", resultSet.getString("Options"));
+                    Question ques = new Question(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8));
 
-                    arrL_allQuestion.add(HM_question);
+                    arrL_allQuestion.add(ques);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             // **********************************************************************
         }
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        closeConnectSQL();
 
         return arrL_allQuestion;
     }
@@ -103,16 +124,8 @@ public class connectSQL {
     private Connection connection = null;
     private Statement statement = null;
     private ResultSet resultSet = null;
-    private HashMap<String, String> HM_question;
-    private ArrayList<HashMap<String, String>> arrL_allQuestion;
 
     public String OPTIONS_QUESTION = "options";
     public String YESNO_QUESTION = "yes/no";
     public String BOTH = "both";
-
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        connectSQL c = new connectSQL();
-        c.getAllQuestions(c.BOTH);
-        System.out.println("a");
-    }
 }
