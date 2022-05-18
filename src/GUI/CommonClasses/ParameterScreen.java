@@ -32,6 +32,28 @@ public class ParameterScreen {
             component.setBounds(x, y, component.getWidth(), component.getHeight());
         }
 
+        public void FULL(Component children, Component parent) {
+            children.setBounds(0, 0, parent.getWidth(), parent.getHeight());
+        }
+
+        public void PARENT_CHILD_HORIZONTAL(Component children, Component parent) {
+            x = parent.getX() - children.getWidth();
+            y = parent.getY();
+            children.setBounds(x, y, children.getWidth(), children.getHeight());
+        }
+
+        public void PARENT_CHILD_VERTICAL(Component children, Component parent) {
+            x = parent.getX();
+            y = parent.getY() - children.getHeight();
+            children.setBounds(x, y, children.getWidth(), children.getHeight());
+        }
+
+        public void CUSTOM_WITH_PERCENT(Component component, int x, int y) {
+            this.x = SCREEN_WIDTH * x / 100;
+            this.y = SCREEN_HEIGHT * y / 100;
+            component.setBounds(this.x, this.y, component.getWidth(), component.getHeight());
+        }
+
         private int x;
         private int y;
     }
