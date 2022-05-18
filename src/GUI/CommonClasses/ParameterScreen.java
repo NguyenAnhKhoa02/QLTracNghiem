@@ -54,6 +54,12 @@ public class ParameterScreen {
             component.setBounds(this.x, this.y, component.getWidth(), component.getHeight());
         }
 
+        public void BOTTOM_CENTER_CHILD_PARENT(Component childern, Component parent) {
+            x = parent.getWidth() / 2 - childern.getWidth() / 2;
+            y = parent.getHeight() - 3 * childern.getHeight();
+            childern.setBounds(x, y, childern.getWidth(), childern.getHeight());
+        }
+
         private int x;
         private int y;
     }

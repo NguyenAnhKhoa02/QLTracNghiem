@@ -87,7 +87,6 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     }
 
     private int indexType(String typeQues) {
-        int index = 0;
         if (typeQues.equalsIgnoreCase("options"))
             return 0;
         else if (typeQues.equalsIgnoreCase("yes/no"))

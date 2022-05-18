@@ -31,6 +31,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
         cb_Level = new JComboBox<>(strArr_level);
         cb_Level.setSize(int_widthCbLevel, int_heightCbLevel);
+        cb_Level.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Level, 5, 2);
 
         lb_titleLevel = new JLabel("Độ khó");
@@ -45,6 +46,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
         cb_Subject = new JComboBox<>(strArr_Subject);
         cb_Subject.setSize(int_widthCbSubject, int_heightCbSubject);
+        cb_Subject.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Subject, 19, 2);
 
         lb_titleSubject = new JLabel("Môn học");
@@ -57,6 +59,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
     private void makingLecture() {
         tf_Lecture = new JTextField();
         tf_Lecture.setSize(int_widthTfLecture, int_heightTfLecture);
+        tf_Lecture.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(tf_Lecture, 46, 2);
 
         lb_titleLecture = new JLabel("Giảng viên");
@@ -71,6 +74,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
         cb_Type = new JComboBox<>(strArr_Type);
         cb_Type.setSize(int_widthCbType, int_heightCbType);
+        cb_Type.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Type, 10, 10);
 
         lb_titleType = new JLabel("Loại");
@@ -98,6 +102,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
         cb_Answer = new JComboBox<>(strArr_options);
         cb_Answer.setSize(int_widthCbAnswer, int_heightCbAnswer);
+        cb_Answer.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Answer, 40, 10);
 
         lb_titleAnswer = new JLabel("Đáp án");
@@ -130,7 +135,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
             ta_Options.setEditable(false);
         } else {
             if (options.equals(""))
-                ta_Options.setText("");
+                ta_Options.setText("a.\nb.\nc.\nd.");
             else
                 ta_Options.setText(options);
 
@@ -188,7 +193,6 @@ public class paneDetailQuestion extends JPanel implements Parameter {
     @Override
     public void parameter() {
         setLayout(null);
-        setBackground(Color.gray);
 
         int_widthCbLevel = 100;
         int_heightCbLevel = 25;
@@ -234,6 +238,8 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
         int_widthLbTitleOptions = 60;
         int_heightLbTitleOptions = 25;
+
+        color = Color.WHITE;
     }
 
     private JLabel lb_titleLevel;
@@ -285,6 +291,9 @@ public class paneDetailQuestion extends JPanel implements Parameter {
     private int int_heightLbTitleOptions;
     private int int_widthLbTitleOptions;
 
+    private Color color;
+
     public static String OPTIONS_QUESTION = "options";
     public static String YESNO_QUESTION = "yes/no";
+
 }

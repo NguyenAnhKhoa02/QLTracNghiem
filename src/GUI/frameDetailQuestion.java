@@ -1,5 +1,6 @@
 package GUI;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import BLL.manageQuestion;
@@ -30,11 +31,22 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         parameter();
 
         pDQ_detailQuestion = new paneDetailQuestion();
-        posInScreen.FULL(pDQ_detailQuestion, this);
+        pDQ_detailQuestion.setSize(int_widthPaneDetailQuestion, int_heightPaneDetailQuestion);
+        posInScreen.CUSTOM_WITH_PERCENT(pDQ_detailQuestion, 0, 0);
         pDQ_detailQuestion.getType().addActionListener(this);
-
         add(pDQ_detailQuestion);
+
+        buttonController();
+
         setVisible(true);
+    }
+
+    private void buttonController() {
+        btn_Controller = new JButton("Sửa");
+        btn_Controller.setSize(int_widthBtnController, int_heightBtnController);
+        btn_Controller.setFocusable(false);
+        posInScreen.BOTTOM_CENTER_CHILD_PARENT(btn_Controller, this);
+        add(btn_Controller);
     }
 
     private void remove(Component... co) {
@@ -44,10 +56,17 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
 
     @Override
     public void parameter() {
-        // TODO Auto-generated method stub
         setLayout(null);
         setSize(parameterScreen.SCREEN_WIDTH * 60 / 100, parameterScreen.SCREEN_HEIGHT * 72 / 100);
+        setResizable(false);
         posInScreen.CENTER(this);
+
+        int_widthPaneDetailQuestion = this.getWidth();
+        int_heightPaneDetailQuestion = this.getHeight() * 85 / 100;
+
+        int_widthBtnController = 100;
+        int_heightBtnController = 25;
+
     }
 
     public paneDetailQuestion getPanelDetailQuestion() {
@@ -55,7 +74,13 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
     }
 
     private paneDetailQuestion pDQ_detailQuestion;
+    private int int_widthPaneDetailQuestion;
+    private int int_heightPaneDetailQuestion;
     private String options;
+
+    private JButton btn_Controller;
+    private int int_widthBtnController;
+    private int int_heightBtnController;
 
     @Override
     public void actionPerformed(ActionEvent e) {
