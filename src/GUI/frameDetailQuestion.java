@@ -23,7 +23,7 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         initialize();
         this.options = options;
 
-        if (options.equalsIgnoreCase("a.Đúng\nb.Sai\n"))
+        if (options.equalsIgnoreCase("a.Đúng\nb.Sai"))
             this.options = "";
     }
 

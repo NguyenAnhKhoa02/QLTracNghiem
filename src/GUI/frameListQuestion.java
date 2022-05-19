@@ -53,12 +53,12 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     }
 
     private void makingTable() {
-        String[][] data = mnQ_questions.getAllQuestions();
+        data = mnQ_questions.getAllQuestions();
         String[] column = { "Id", "Độ khó", "Nội dung", "Câu trả lời", "Môn học", "Giảng viên", "Loại câu hỏi" };
 
         tb_listQuestion = new JTable(data, column);
         tb_listQuestion.setRowHeight(int_heightRowTbListQuestion);
-        setParameterTable(tb_listQuestion, 10, 10, 200, 10, 150, 150);
+        setParameterTable(tb_listQuestion, 10, 10, 500, 10, 150, 150);
         tb_listQuestion.addMouseListener(this);
 
         JScrollPane scrollPane = new JScrollPane(tb_listQuestion);
@@ -77,6 +77,8 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     private JLabel lb_titleFrame;
     private int int_widthLbTitleFrame;
     private int int_heightLbTitleFrame;
+
+    private String[][] data;
 
     private frameDetailQuestion fDQ_detaulQuestion;
 
@@ -98,35 +100,22 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource() == tb_listQuestion) {
-            ArrayList<Question> arrL_detailQuestion = mnQ_questions.getQuestion(
-                    tb_listQuestion.getModel().getValueAt(tb_listQuestion.getSelectedRow(), 0).toString());
-            fDQ_detaulQuestion = new frameDetailQuestion(arrL_detailQuestion.get(0).getOptionsQuestion());
+            int int_indexSelected = tb_listQuestion.getSelectedRow();
 
+            fDQ_detaulQuestion = new frameDetailQuestion(data[int_indexSelected][7]);
             fDQ_detaulQuestion.getPanelDetailQuestion().getLevel()
-                    .setSelectedItem(arrL_detailQuestion.get(0).getLevelQuestion());
+                    .setSelectedItem(data[int_indexSelected][1]);
 
-            fDQ_detaulQuestion
-                    .getPanelDetailQuestion()
-                    .getContent()
-                    .setText(arrL_detailQuestion.get(0).getContentQuestion());
+            fDQ_detaulQuestion.getPanelDetailQuestion().getContent().setText(data[int_indexSelected][2]);
 
-            fDQ_detaulQuestion.getPanelDetailQuestion().getSubject()
-                    .setSelectedItem(arrL_detailQuestion.get(0).getSubjectQuestion());
+            fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer().setSelectedItem(data[int_indexSelected][3]);
 
-            fDQ_detaulQuestion.getPanelDetailQuestion().getLecture()
-                    .setText(arrL_detailQuestion.get(0).getLectureQuestion());
+            fDQ_detaulQuestion.getPanelDetailQuestion().getSubject().setSelectedItem(data[int_indexSelected][4]);
+
+            fDQ_detaulQuestion.getPanelDetailQuestion().getLecture().setText(data[int_indexSelected][5]);
             fDQ_detaulQuestion.getPanelDetailQuestion().getLecture().setEditable(false);
 
-            fDQ_detaulQuestion.getPanelDetailQuestion().getType()
-                    .setSelectedIndex(indexType(arrL_detailQuestion.get(0).getTypeQuestion()));
-
-            fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer()
-                    .setSelectedItem(arrL_detailQuestion.get(0).getAnswerQuestion());
-
-            if (indexType(arrL_detailQuestion.get(0).getTypeQuestion()) == 0)
-                fDQ_detaulQuestion.getPanelDetailQuestion().getOptions()
-                        .setText(arrL_detailQuestion.get(0).getOptionsQuestion());
-
+            fDQ_detaulQuestion.getPanelDetailQuestion().getOptions().setText(data[int_indexSelected][7]);
         }
     }
 
