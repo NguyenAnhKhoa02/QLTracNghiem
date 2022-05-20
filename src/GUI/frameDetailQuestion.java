@@ -19,10 +19,10 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         initialize();
     }
 
-    public frameDetailQuestion(String options) {
+    public frameDetailQuestion(String options, String Answer) {
         initialize();
         this.options = options;
-
+        this.answer = Answer;
         if (options.equalsIgnoreCase("a.Đúng\nb.Sai"))
             this.options = "";
     }
@@ -77,6 +77,7 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
     private int int_widthPaneDetailQuestion;
     private int int_heightPaneDetailQuestion;
     private String options;
+    private String answer;
 
     private JButton btn_Controller;
     private int int_widthBtnController;
@@ -87,12 +88,12 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         if (e.getSource() == pDQ_detailQuestion.getType()) {
             if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
                 remove(pDQ_detailQuestion.getAnswer(), pDQ_detailQuestion.getOptions());
-                pDQ_detailQuestion.changeStatus(pDQ_detailQuestion.OPTIONS_QUESTION, options);
+                pDQ_detailQuestion.changeStatus(paneDetailQuestion.OPTIONS_QUESTION, options, answer);
             }
 
             if (pDQ_detailQuestion.getType().getSelectedIndex() == 1) {
                 remove(pDQ_detailQuestion.getAnswer(), pDQ_detailQuestion.getOptions());
-                pDQ_detailQuestion.changeStatus(pDQ_detailQuestion.YESNO_QUESTION, options);
+                pDQ_detailQuestion.changeStatus(paneDetailQuestion.YESNO_QUESTION, options, answer);
             }
 
             pDQ_detailQuestion.repaint();

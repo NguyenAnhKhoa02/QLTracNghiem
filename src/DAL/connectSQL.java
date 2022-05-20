@@ -53,7 +53,7 @@ public class connectSQL {
         ArrayList<OptionsQuestion> arrL_tempt = new ArrayList<>();
         String str_Query = "select qs.Id, lv.LvName, qs.Content, qs.Answer, sbj.NameSubject,lc.FullName,qs.TypeQues, oQ.Options "
                 + "from Questions qs, Levels lv,Subjects sbj, Lectures lc, OptionsQuestion oQ "
-                + "where qs.Id = lv.Id and qs.IdLecture = lc.Id and qs.IdSubject = sbj.Id and oQ.Id = qs.Id";
+                + "where qs.LevelQues = lv.Id and qs.IdLecture = lc.Id and qs.IdSubject = sbj.Id and oQ.Id = qs.Id";
         connetToSQL();
         // *****************************************************************
         try {
@@ -89,7 +89,7 @@ public class connectSQL {
         ArrayList<YesNoQuestion> arrL_tempt = new ArrayList<>();
         String str_Query = "select qs.Id, lv.LvName, qs.Content, qs.Answer, sbj.NameSubject,lc.FullName,qs.TypeQues, ynQ.Options "
                 + "from Questions qs, Levels lv,Subjects sbj, Lectures lc, YesNoQuestion ynQ "
-                + "where qs.Id = lv.Id and qs.IdLecture = lc.Id and qs.IdSubject = sbj.Id and ynQ.Id = qs.Id";
+                + "where qs.LevelQues = lv.Id and qs.IdLecture = lc.Id and qs.IdSubject = sbj.Id and ynQ.Id = qs.Id";
         connetToSQL();
         // *****************************************************************
         try {

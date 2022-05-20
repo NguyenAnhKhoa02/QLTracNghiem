@@ -36,7 +36,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(null);
 
-        int_heightTbListQuestion = parameterScreen.SCREEN_HEIGHT * 75 / 100;
+        int_heightTbListQuestion = parameterScreen.SCREEN_HEIGHT * 72 / 100;
         int_widthTbListQuestion = parameterScreen.SCREEN_WIDTH;
         int_heightRowTbListQuestion = 30;
 
@@ -54,11 +54,11 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
     private void makingTable() {
         data = mnQ_questions.getAllQuestions();
-        String[] column = { "Id", "Độ khó", "Nội dung", "Câu trả lời", "Môn học", "Giảng viên", "Loại câu hỏi" };
+        String[] column = { "Id", "Mức độ", "Nội dung", "Câu trả lời", "Môn học", "Giảng viên", "Loại câu hỏi" };
 
         tb_listQuestion = new JTable(data, column);
         tb_listQuestion.setRowHeight(int_heightRowTbListQuestion);
-        setParameterTable(tb_listQuestion, 10, 10, 500, 10, 150, 150);
+        setParameterTable(tb_listQuestion, 10, 50, 500, 10, 150, 150);
         tb_listQuestion.addMouseListener(this);
 
         JScrollPane scrollPane = new JScrollPane(tb_listQuestion);
@@ -88,13 +88,11 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
     }
 
-    private int indexType(String typeQues) {
-        if (typeQues.equalsIgnoreCase("options"))
-            return 0;
-        else if (typeQues.equalsIgnoreCase("yes/no"))
+    private int getIndex(String options) {
+        if (options.equalsIgnoreCase("a.Đúng\nb.Sai"))
             return 1;
-
-        return -1;
+        else
+            return 0;
     }
 
     @Override
@@ -102,20 +100,23 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
         if (e.getSource() == tb_listQuestion) {
             int int_indexSelected = tb_listQuestion.getSelectedRow();
 
-            fDQ_detaulQuestion = new frameDetailQuestion(data[int_indexSelected][7]);
+            fDQ_detaulQuestion = new frameDetailQuestion(data[int_indexSelected][7], data[int_indexSelected][3]);
             fDQ_detaulQuestion.getPanelDetailQuestion().getLevel()
                     .setSelectedItem(data[int_indexSelected][1]);
 
             fDQ_detaulQuestion.getPanelDetailQuestion().getContent().setText(data[int_indexSelected][2]);
-
-            fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer().setSelectedItem(data[int_indexSelected][3]);
 
             fDQ_detaulQuestion.getPanelDetailQuestion().getSubject().setSelectedItem(data[int_indexSelected][4]);
 
             fDQ_detaulQuestion.getPanelDetailQuestion().getLecture().setText(data[int_indexSelected][5]);
             fDQ_detaulQuestion.getPanelDetailQuestion().getLecture().setEditable(false);
 
+            fDQ_detaulQuestion.getPanelDetailQuestion().getType()
+                    .setSelectedIndex(getIndex(data[int_indexSelected][7]));
+
             fDQ_detaulQuestion.getPanelDetailQuestion().getOptions().setText(data[int_indexSelected][7]);
+
+            fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer().setSelectedItem(data[int_indexSelected][3].trim());
         }
     }
 

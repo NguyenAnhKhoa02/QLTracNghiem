@@ -1,12 +1,7 @@
 package BLL;
 
-import java.util.ArrayList;
-
 import BLL.DTO.OptionsQuestionDTO;
 import BLL.DTO.YesNoQuestionDTO;
-import BLL.Question.OptionsQuestion;
-import BLL.Question.Question;
-import BLL.Question.YesNoQuestion;
 import DAL.connectSQL;
 
 public class manageQuestion {
@@ -39,15 +34,22 @@ public class manageQuestion {
         int i_row = 0;
         int i_column = 0;
 
+        int i_dataRow = -1;
+        int i_dataColumn = -1;
+
         for (; i_row < strArr1.length; i_row++) {
+            i_dataRow++;
+            i_dataColumn = -1;
             for (i_column = 0; i_column < column; i_column++) {
-                data[i_row][i_column] = strArr1[i_row][i_column];
+                data[i_dataRow][++i_dataColumn] = strArr1[i_row][i_column];
             }
         }
 
         for (i_row = 0; i_row < strArr2.length; i_row++) {
+            i_dataRow++;
+            i_dataColumn = -1;
             for (i_column = 0; i_column < column; i_column++) {
-                data[i_row][i_column] = strArr2[i_row][i_column];
+                data[i_dataRow][++i_dataColumn] = strArr2[i_row][i_column];
             }
         }
 

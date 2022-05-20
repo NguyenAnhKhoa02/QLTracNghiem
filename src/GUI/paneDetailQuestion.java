@@ -27,14 +27,14 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
     private void makingLevel() {
 
-        String[] strArr_level = { "Dễ", "Trung bình", "Khó", "Xuấ sắc" };
+        String[] strArr_level = { "Nhận biết", "Thông hiểu", "Vận dụng thấp", "Vận dụng cao" };
 
         cb_Level = new JComboBox<>(strArr_level);
         cb_Level.setSize(int_widthCbLevel, int_heightCbLevel);
         cb_Level.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Level, 5, 2);
 
-        lb_titleLevel = new JLabel("Độ khó");
+        lb_titleLevel = new JLabel("Mức độ");
         lb_titleLevel.setSize(int_widthLbTitleLevel, int_heightLbTitleLevel);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_titleLevel, cb_Level);
 
@@ -47,7 +47,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         cb_Subject = new JComboBox<>(strArr_Subject);
         cb_Subject.setSize(int_widthCbSubject, int_heightCbSubject);
         cb_Subject.setBackground(color);
-        posInScreen.CUSTOM_WITH_PERCENT(cb_Subject, 19, 2);
+        posInScreen.CUSTOM_WITH_PERCENT(cb_Subject, 20, 2);
 
         lb_titleSubject = new JLabel("Môn học");
         lb_titleSubject.setSize(int_widthLbTitleSubject, int_heightLbTitleSubject);
@@ -185,16 +185,17 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         return ta_Options;
     }
 
-    public void changeStatus(String typeQuestion, String options) {
+    public void changeStatus(String typeQuestion, String options, String Answer) {
         makingAnswer(typeQuestion);
         makingOptions(typeQuestion, options);
+        getAnswer().setSelectedItem(Answer);
     }
 
     @Override
     public void parameter() {
         setLayout(null);
 
-        int_widthCbLevel = 100;
+        int_widthCbLevel = 110;
         int_heightCbLevel = 25;
 
         int_widthLbTitleLevel = 50;
