@@ -26,7 +26,10 @@ public class OptionsQuestion extends Question {
                 str_tempt += "\n" + strArr_tempt[i];
                 continue;
             }
-            str_tempt += strArr_tempt[i] + " ";
+            if (strArr_tempt[i].equals("a."))
+                str_tempt += strArr_tempt[i];
+            else
+                str_tempt += strArr_tempt[i] + " ";
         }
 
         return str_tempt;

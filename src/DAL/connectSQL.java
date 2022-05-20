@@ -21,12 +21,14 @@ public class connectSQL {
 
     // *************************************************************************************************************
     private void connetToSQL() {
-        String url = "jdbc:sqlserver://DESKTOP-F7JKQMS\\SQLEXPRESS;databaseName=ManageQuiz;encrypt=false;";
-        String account = "sa";
-        String password = "admin";
+        String url = "jdbc:sqlserver://" + host_name
+                + ";databaseName=ManageQuiz;encrypt=false;"
+                + "user=" + user + ";"
+                + "password=" + password + ";";
+
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, account, password);
+            connection = DriverManager.getConnection(url);
 
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
@@ -160,9 +162,13 @@ public class connectSQL {
     private Statement statement = null;
     private ResultSet resultSet = null;
     private int column = 0;
-    private ArrayList arrL_allQuestion;
 
-    public String OPTIONS_QUESTION = "options";
-    public String YESNO_QUESTION = "yes/no";
-    public String BOTH = "both";
+    /*
+     * ******************
+     * Setting sql sever*
+     * ******************
+     */
+    private String host_name = "DESKTOP-F7JKQMS\\SQLEXPRESS";
+    private String user = "sa";
+    private String password = "admin";
 }

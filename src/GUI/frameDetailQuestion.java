@@ -84,7 +84,6 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         if (e.getSource() == pDQ_detailQuestion.getType()) {
             if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
                 remove(pDQ_detailQuestion.getAnswer(), pDQ_detailQuestion.getOptions());
