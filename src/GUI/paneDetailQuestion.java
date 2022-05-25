@@ -15,7 +15,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
     public paneDetailQuestion() {
         parameter();
-
+        makingId();
         makingLevel();
         makingSubject();
         makingLecture();
@@ -23,6 +23,22 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         makingAnswer(OPTIONS_QUESTION);
         makingContent();
         makingOptions(OPTIONS_QUESTION, "");
+
+    }
+
+    private void makingId() {
+        tf_Id = new JTextField();
+        tf_Id.setSize(int_widthTfId, int_heightTfId);
+        tf_Id.setBackground(color);
+        posInScreen.CUSTOM_WITH_PERCENT(tf_Id, 2, 2);
+
+        lb_titleId = new JLabel();
+        lb_titleId.setSize(int_widthLbId, int_heightLbId);
+        posInScreen.PARENT_CHILD_HORIZONTAL(lb_titleId, tf_Id);
+
+        addComponentToPanel(tf_Id, lb_titleId);
+        // tf_Id.setVisible(false);
+        // lb_titleId.setVisible(false);
     }
 
     private void makingLevel() {
@@ -156,6 +172,9 @@ public class paneDetailQuestion extends JPanel implements Parameter {
     }
 
     // ********************************************************************
+    public JTextField getId() {
+        return tf_Id;
+    }
 
     public JComboBox<String> getLevel() {
         return cb_Level;
@@ -194,6 +213,12 @@ public class paneDetailQuestion extends JPanel implements Parameter {
     @Override
     public void parameter() {
         setLayout(null);
+
+        int_widthTfId = 0;
+        int_heightTfId = 0;
+
+        int_widthLbId = 0;
+        int_heightLbId = 0;
 
         int_widthCbLevel = 110;
         int_heightCbLevel = 25;
@@ -242,6 +267,13 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
         color = Color.WHITE;
     }
+
+    private JLabel lb_titleId;
+    private JTextField tf_Id;
+    private int int_widthTfId;
+    private int int_heightTfId;
+    private int int_widthLbId;
+    private int int_heightLbId;
 
     private JLabel lb_titleLevel;
     private JComboBox<String> cb_Level;

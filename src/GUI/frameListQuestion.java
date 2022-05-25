@@ -2,10 +2,13 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -15,7 +18,7 @@ import BLL.manageQuestion;
 import BLL.Question.Question;
 import GUI.CommonClasses.*;
 
-public class frameListQuestion extends JFrame implements Parameter, MouseListener {
+public class frameListQuestion extends JFrame implements Parameter, MouseListener, ActionListener {
     public frameListQuestion() {
         parameter();
 
@@ -28,6 +31,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
         add(lb_titleFrame);
 
         makingTable();
+        displayAddButton();
         setVisible(true);
     }
 
@@ -42,6 +46,9 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
         int_widthLbTitleFrame = parameterScreen.SCREEN_WIDTH;
         int_heightLbTitleFrame = 100;
+
+        int_widthBtnAddQuestion = 100;
+        int_heightBtnAddQuestion = 50;
     }
 
     private void setParameterTable(JTable jTable, int... width) {
@@ -58,14 +65,20 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
         tb_listQuestion = new JTable(data, column);
         tb_listQuestion.setRowHeight(int_heightRowTbListQuestion);
-        setParameterTable(tb_listQuestion, 10, 50, 500, 10, 150, 150);
+        setParameterTable(tb_listQuestion, 0, 50, 500, 10, 150, 150);
         tb_listQuestion.addMouseListener(this);
 
-        JScrollPane scrollPane = new JScrollPane(tb_listQuestion);
+        scrollPane = new JScrollPane(tb_listQuestion);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setSize(int_widthTbListQuestion, int_heightTbListQuestion);
         posInScreen.CUSTOM_WITH_PERCENT(scrollPane, 0, 25);
         add(scrollPane);
+    }
+
+    private void displayAddButton() {
+        btn_AddQuestion = new JButton("Thêm");
+        btn_AddQuestion.setSize(int_widthBtnAddQuestion, int_heightBtnAddQuestion);
+        // posInScreen.C
     }
 
     private JTable tb_listQuestion;
@@ -77,14 +90,18 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     private JLabel lb_titleFrame;
     private int int_widthLbTitleFrame;
     private int int_heightLbTitleFrame;
+    private JScrollPane scrollPane;
 
     private String[][] data;
 
     private frameDetailQuestion fDQ_detaulQuestion;
 
+    private JButton btn_AddQuestion;
+    private int int_widthBtnAddQuestion;
+    private int int_heightBtnAddQuestion;
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -100,7 +117,10 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
         if (e.getSource() == tb_listQuestion) {
             int int_indexSelected = tb_listQuestion.getSelectedRow();
 
-            fDQ_detaulQuestion = new frameDetailQuestion(data[int_indexSelected][7], data[int_indexSelected][3]);
+            fDQ_detaulQuestion = new frameDetailQuestion(data[int_indexSelected][7],
+                    data[int_indexSelected][3]);
+            fDQ_detaulQuestion.getPanelDetailQuestion().getId().setText(data[int_indexSelected][0]);
+            fDQ_detaulQuestion.getPanelDetailQuestion().getId().setEditable(false);
             fDQ_detaulQuestion.getPanelDetailQuestion().getLevel()
                     .setSelectedItem(data[int_indexSelected][1]);
 
@@ -113,10 +133,26 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
             fDQ_detaulQuestion.getPanelDetailQuestion().getType()
                     .setSelectedIndex(getIndex(data[int_indexSelected][7]));
+            fDQ_detaulQuestion.initialize_type = fDQ_detaulQuestion.getPanelDetailQuestion().getType()
+                    .getSelectedIndex();
 
             fDQ_detaulQuestion.getPanelDetailQuestion().getOptions().setText(data[int_indexSelected][7]);
 
             fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer().setSelectedItem(data[int_indexSelected][3].trim());
+
+            fDQ_detaulQuestion.getEditButton().addActionListener(this);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        if (e.getSource() == fDQ_detaulQuestion.getEditButton()) {
+            fDQ_detaulQuestion.updateSQL();
+            fDQ_detaulQuestion.dispose();
+            getContentPane().remove(scrollPane);
+            repaint();
+            makingTable();
         }
     }
 

@@ -2,6 +2,8 @@ package BLL;
 
 import BLL.DTO.OptionsQuestionDTO;
 import BLL.DTO.YesNoQuestionDTO;
+import BLL.Question.OptionsQuestion;
+import BLL.Question.YesNoQuestion;
 import DAL.connectSQL;
 
 public class manageQuestion {
@@ -66,7 +68,16 @@ public class manageQuestion {
         return mertArray(pQDTO_optionsQuestion.getOptionsQuestion(), ynQDTO_yesNoQuestion.getYesNoQuestion());
     }
 
+    public Boolean updateYesNoQuestion(YesNoQuestion yNoQuestion, boolean isChange) {
+        return conSQL_question.updateYesNoQuestion(yNoQuestion, isChange);
+    }
+
+    public Boolean updateOptionsQuestion(OptionsQuestion optionsQuestion, boolean isChange) {
+        return conSQL_question.updateOptionsQuestion(optionsQuestion, isChange);
+    }
+
     private connectSQL conSQL_question;
     private OptionsQuestionDTO pQDTO_optionsQuestion;
     private YesNoQuestionDTO ynQDTO_yesNoQuestion;
+    private YesNoQuestion yesNoQuestion;
 }

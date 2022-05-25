@@ -8,6 +8,9 @@ public class YesNoQuestion extends Question {
         str_options = Options;
     }
 
+    public YesNoQuestion() {
+    }
+
     public String getOptionsQuestion() {
         str_options = "a.Đúng\nb.Sai";
         return str_options;

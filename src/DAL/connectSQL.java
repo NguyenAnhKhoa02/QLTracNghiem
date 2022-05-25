@@ -2,6 +2,7 @@ package DAL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,10 +22,10 @@ public class connectSQL {
 
     // *************************************************************************************************************
     private void connetToSQL() {
-        String url = "jdbc:sqlserver://" + host_name
+        String url = "jdbc:sqlserver://" + host_name_1
                 + ";databaseName=ManageQuiz;encrypt=false;"
                 + "user=" + user + ";"
-                + "password=" + password + ";";
+                + "password=" + password_1 + ";";
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -36,6 +37,7 @@ public class connectSQL {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            System.out.println("ko kết nối sql sever");
         }
     }
 
@@ -121,6 +123,72 @@ public class connectSQL {
         return arrL_tempt;
     }
 
+    public Boolean updateQuestion() {
+
+        return null;
+
+    }
+
+    public Boolean updateYesNoQuestion(YesNoQuestion yNoQuestion, boolean isChange) {
+        String str_Update = "update Questions "
+                + "set Questions.Content = N'" + yNoQuestion.getContentQuestion() + "' "
+                + ", Questions.LevelQues=N'" + yNoQuestion.getLevelQuestion() + "' "
+                + ", Questions.Answer=N'" + yNoQuestion.getAnswerQuestion() + "' "
+                + ", Questions.TypeQues=N'Yes/No' "
+                + "where Questions.Id=" + yNoQuestion.getIdQuestion() + "";
+        String str_UpdateOp = " update OptionsQuestion "
+                + "set OptionsQuestion.Options=N'a.Đúng b.Sai'";
+        String str_Clear = "Delete from OptionsQuestion where Id=" + yNoQuestion.getIdQuestion();
+        String str_Insert = "insert into YesNoQuestion (Id,Options) values (" + yNoQuestion.getIdQuestion()
+                + ",N'a.Đúng b.Sai')";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            if (isChange) {
+                statement.executeUpdate(str_Clear);
+                statement.executeUpdate(str_Insert);
+            }
+            statement.executeUpdate(str_Update);
+            statement.executeUpdate(str_UpdateOp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+    }
+
+    public Boolean updateOptionsQuestion(OptionsQuestion optionsQuestion, boolean isChange) {
+        String str_Update = "update Questions "
+                + "set Questions.Content = N'" + optionsQuestion.getContentQuestion() + "' "
+                + ", Questions.LevelQues=N'" + optionsQuestion.getLevelQuestion() + "' "
+                + ", Questions.Answer=N'" + optionsQuestion.getAnswerQuestion() + "' "
+                + ", Questions.TypeQues=N'Options' "
+                + "where Questions.Id=" + optionsQuestion.getIdQuestion() + "";
+        String str_UpdateOp = " update OptionsQuestion "
+                + "set OptionsQuestion.Options=N'" + optionsQuestion.getOptionQuestionToSQL() + "'";
+        String str_Clear = "Delete from YesNoQuestion where Id=" + optionsQuestion.getIdQuestion();
+        String str_Insert = "insert into OptionsQuestion (Id,Options) values (" + optionsQuestion.getIdQuestion()
+                + ",N'" + optionsQuestion.getOptionsQuestion()
+                + "')";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            if (isChange) {
+                statement.executeUpdate(str_Clear);
+                statement.executeUpdate(str_Insert);
+            }
+            statement.executeUpdate(str_Update);
+            statement.executeUpdate(str_UpdateOp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+
+    }
+
     public OptionsQuestion getSearchOptionsQuestion(String Id) {
         OptionsQuestion ques = null;
 
@@ -158,6 +226,7 @@ public class connectSQL {
         return column;
     }
 
+    private PreparedStatement ps = null;
     private Connection connection = null;
     private Statement statement = null;
     private ResultSet resultSet = null;
@@ -169,6 +238,8 @@ public class connectSQL {
      * ******************
      */
     private String host_name = "DESKTOP-F7JKQMS\\SQLEXPRESS";
+    private String host_name_1 = "QUYQUY";
     private String user = "sa";
     private String password = "admin";
+    private String password_1 = "0977";
 }

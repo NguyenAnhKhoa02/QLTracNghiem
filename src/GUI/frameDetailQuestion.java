@@ -1,11 +1,18 @@
 package GUI;
 
+import javax.lang.model.util.ElementScanner14;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 
 import BLL.manageQuestion;
+import BLL.Question.OptionsQuestion;
 import BLL.Question.Question;
+import BLL.Question.YesNoQuestion;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +65,6 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
     public void parameter() {
         setLayout(null);
         setSize(parameterScreen.SCREEN_WIDTH * 60 / 100, parameterScreen.SCREEN_HEIGHT * 72 / 100);
-        setResizable(false);
         posInScreen.CENTER(this);
 
         int_widthPaneDetailQuestion = this.getWidth();
@@ -73,6 +79,59 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         return pDQ_detailQuestion;
     }
 
+    public void updateSQL() {
+        if (pDQ_detailQuestion.getType().getSelectedIndex() == initialize_type)
+            isChange = false;
+        else
+            isChange = true;
+
+        if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
+            optionsQuestion = new OptionsQuestion();
+            optionsQuestion.setStr_Id(pDQ_detailQuestion.getId().getText());
+            optionsQuestion.setStr_Level(pDQ_detailQuestion.getLevel().getSelectedIndex() + 1 + "");
+            optionsQuestion.setStr_Content(pDQ_detailQuestion.getContent().getText());
+            optionsQuestion.setStr_Answer(pDQ_detailQuestion.getAnswer().getSelectedItem().toString());
+            optionsQuestion.setStr_Lecture(pDQ_detailQuestion.getLecture().getText());
+            if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 0) {
+                optionsQuestion.setStr_Subject("LTJV");
+            }
+            if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
+                optionsQuestion.setStr_Type("Options");
+            } else {
+                optionsQuestion.setStr_Type("Yes/No");
+            }
+
+            optionsQuestion.setStr_options(pDQ_detailQuestion.getOptions().getText());
+            manageQuestion.updateOptionsQuestion(optionsQuestion, isChange);
+        }
+        if (pDQ_detailQuestion.getType().getSelectedIndex() == 1) {
+            yesNoQuestion = new YesNoQuestion();
+            yesNoQuestion.setStr_Id(pDQ_detailQuestion.getId().getText());
+            yesNoQuestion.setStr_Level(pDQ_detailQuestion.getLevel().getSelectedIndex() + 1 +
+                    "");
+            yesNoQuestion.setStr_Content(pDQ_detailQuestion.getContent().getText());
+            yesNoQuestion.setStr_Answer(pDQ_detailQuestion.getAnswer().getSelectedItem().toString());
+            yesNoQuestion.setStr_Lecture(pDQ_detailQuestion.getLecture().getText());
+            if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 0) {
+                yesNoQuestion.setStr_Subject("LTJV");
+            }
+            if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
+                yesNoQuestion.setStr_Type("Options");
+            } else {
+                yesNoQuestion.setStr_Type("Yes/No");
+            }
+
+            yesNoQuestion.getOptionsQuestion().toString();
+            manageQuestion.updateYesNoQuestion(yesNoQuestion, isChange);
+
+            // JOptionPane.showMessageDialog(null, yesNoQuestion.getOptionsQuestion());
+        }
+    }
+
+    public JButton getEditButton() {
+        return btn_Controller;
+    }
+
     private paneDetailQuestion pDQ_detailQuestion;
     private int int_widthPaneDetailQuestion;
     private int int_heightPaneDetailQuestion;
@@ -82,15 +141,22 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
     private JButton btn_Controller;
     private int int_widthBtnController;
     private int int_heightBtnController;
+    private YesNoQuestion yesNoQuestion;
+    private OptionsQuestion optionsQuestion;
+    private manageQuestion manageQuestion = new manageQuestion();
+    private frameListQuestion frameListQuestion;
+    public int initialize_type;
+
+    private boolean isChange;
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String getEvent = e.getActionCommand();
         if (e.getSource() == pDQ_detailQuestion.getType()) {
             if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
                 remove(pDQ_detailQuestion.getAnswer(), pDQ_detailQuestion.getOptions());
                 pDQ_detailQuestion.changeStatus(paneDetailQuestion.OPTIONS_QUESTION, options, answer);
             }
-
             if (pDQ_detailQuestion.getType().getSelectedIndex() == 1) {
                 remove(pDQ_detailQuestion.getAnswer(), pDQ_detailQuestion.getOptions());
                 pDQ_detailQuestion.changeStatus(paneDetailQuestion.YESNO_QUESTION, options, answer);
