@@ -49,10 +49,10 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
     }
 
     private void buttonController() {
-        btn_Controller = new JButton("Sửa");
+        btn_Controller = new JButton("Controller");
         btn_Controller.setSize(int_widthBtnController, int_heightBtnController);
         btn_Controller.setFocusable(false);
-        posInScreen.BOTTOM_CENTER_CHILD_PARENT(btn_Controller, this);
+        posInScreen.CUSTOM_CHILD_PARENT(btn_Controller, this, 45, 85);
         add(btn_Controller);
     }
 
@@ -79,7 +79,7 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         return pDQ_detailQuestion;
     }
 
-    public void updateSQL() {
+    public void updateSQL(String Id) {
         if (pDQ_detailQuestion.getType().getSelectedIndex() == initialize_type)
             isChange = false;
         else
@@ -91,7 +91,11 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
             optionsQuestion.setStr_Level(pDQ_detailQuestion.getLevel().getSelectedIndex() + 1 + "");
             optionsQuestion.setStr_Content(pDQ_detailQuestion.getContent().getText());
             optionsQuestion.setStr_Answer(pDQ_detailQuestion.getAnswer().getSelectedItem().toString());
-            optionsQuestion.setStr_Lecture(pDQ_detailQuestion.getLecture().getText());
+            if (Id == null)
+                optionsQuestion.setStr_Lecture(pDQ_detailQuestion.getLecture().getText());
+            else
+                optionsQuestion.setStr_Lecture(Id);
+
             if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 0) {
                 optionsQuestion.setStr_Subject("LTJV");
             }
@@ -102,16 +106,24 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
             }
 
             optionsQuestion.setStr_options(pDQ_detailQuestion.getOptions().getText());
-            manageQuestion.updateOptionsQuestion(optionsQuestion, isChange);
+            if (Id == null) {
+                manageQuestion.updateOptionsQuestion(optionsQuestion, isChange);
+            }
+
+            else {
+                manageQuestion.addOptionsQuestion(optionsQuestion);
+            }
         }
         if (pDQ_detailQuestion.getType().getSelectedIndex() == 1) {
             yesNoQuestion = new YesNoQuestion();
             yesNoQuestion.setStr_Id(pDQ_detailQuestion.getId().getText());
-            yesNoQuestion.setStr_Level(pDQ_detailQuestion.getLevel().getSelectedIndex() + 1 +
-                    "");
+            yesNoQuestion.setStr_Level(pDQ_detailQuestion.getLevel().getSelectedIndex() + 1 + "");
             yesNoQuestion.setStr_Content(pDQ_detailQuestion.getContent().getText());
             yesNoQuestion.setStr_Answer(pDQ_detailQuestion.getAnswer().getSelectedItem().toString());
-            yesNoQuestion.setStr_Lecture(pDQ_detailQuestion.getLecture().getText());
+            if (Id == null)
+                yesNoQuestion.setStr_Lecture(pDQ_detailQuestion.getLecture().getText());
+            else
+                yesNoQuestion.setStr_Lecture(Id);
             if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 0) {
                 yesNoQuestion.setStr_Subject("LTJV");
             }
@@ -122,13 +134,17 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
             }
 
             yesNoQuestion.getOptionsQuestion().toString();
-            manageQuestion.updateYesNoQuestion(yesNoQuestion, isChange);
+            if (Id == null) {
+                manageQuestion.updateYesNoQuestion(yesNoQuestion, isChange);
+            }
 
-            // JOptionPane.showMessageDialog(null, yesNoQuestion.getOptionsQuestion());
+            else {
+                manageQuestion.addYesNoQuestion(yesNoQuestion);
+            }
         }
     }
 
-    public JButton getEditButton() {
+    public JButton getControllerButton() {
         return btn_Controller;
     }
 

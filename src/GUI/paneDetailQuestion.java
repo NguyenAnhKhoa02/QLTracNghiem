@@ -144,6 +144,8 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         ta_Options = new JTextArea();
         ta_Options.setSize(int_widthTaOptions, int_heightTaOptions);
         posInScreen.CUSTOM_WITH_PERCENT(ta_Options, 1, 40);
+        if (options == null)
+            options = "";
 
         if (typeQuestion.equals("yes/no")) {
             String s = "a.Đúng\nb.Sai";

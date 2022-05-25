@@ -8,6 +8,11 @@ public class OptionsQuestion extends Question {
         str_options = Options;
     }
 
+    public OptionsQuestion(String Content, String Options) {
+        super(Content);
+        str_options = Options;
+    }
+
     private boolean isOptions(String str_tempt) {
         for (String str : strArr_options)
             if (str_tempt.equalsIgnoreCase(str) && !str.equals("a."))

@@ -1,6 +1,7 @@
 package BLL;
 
 import BLL.DTO.OptionsQuestionDTO;
+import BLL.DTO.QuestionDTO;
 import BLL.DTO.YesNoQuestionDTO;
 import BLL.Question.OptionsQuestion;
 import BLL.Question.YesNoQuestion;
@@ -74,6 +75,46 @@ public class manageQuestion {
 
     public Boolean updateOptionsQuestion(OptionsQuestion optionsQuestion, boolean isChange) {
         return conSQL_question.updateOptionsQuestion(optionsQuestion, isChange);
+    }
+
+    public Boolean addYesNoQuestion(YesNoQuestion yNoQuestion) {
+        return conSQL_question.addYesNoQuestion(yNoQuestion, String.valueOf(getAllCountQuestions() + 1));
+    }
+
+    public Boolean addOptionsQuestion(OptionsQuestion optionsQuestion) {
+        return conSQL_question.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions() + 1));
+    }
+
+    public int getCountQuestions(String level) {
+        return conSQL_question.getCountQuesionsByLevel(level);
+    }
+
+    public int getAllCountQuestions() {
+        int int_sum = 0;
+        String[] strArr_Levels = { "Nhận biết", "Thông hiểu", "Vận dụng thấp", "Vận dụng cao" };
+
+        for (String str : strArr_Levels) {
+            int_sum += getCountQuestions(str);
+        }
+
+        return int_sum;
+    }
+
+    public String[] getAllIdQuestion(String lv) {
+        return new QuestionDTO(conSQL_question.getAllIdQuestion(lv)).getStrArrQuestion();
+    }
+
+    public String getAnswer(String Id) {
+        return conSQL_question.getAnswer(Id);
+    }
+
+    public OptionsQuestion getOptionsQuestionById(String Id) {
+        return conSQL_question.getOptionQuestionByID(Id);
+    }
+
+    public YesNoQuestion getYesNoQuestionById(String Id) {
+        return conSQL_question.getYesNoQuestionById(Id);
+
     }
 
     private connectSQL conSQL_question;

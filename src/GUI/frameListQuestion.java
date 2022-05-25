@@ -14,13 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import BLL.manageLecture;
 import BLL.manageQuestion;
 import BLL.Question.Question;
 import GUI.CommonClasses.*;
 
 public class frameListQuestion extends JFrame implements Parameter, MouseListener, ActionListener {
-    public frameListQuestion() {
+    public frameListQuestion(String IdLecture) {
         parameter();
+        str_idLecture = IdLecture;
 
         mnQ_questions = new manageQuestion();
 
@@ -78,7 +80,9 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     private void displayAddButton() {
         btn_AddQuestion = new JButton("Thêm");
         btn_AddQuestion.setSize(int_widthBtnAddQuestion, int_heightBtnAddQuestion);
-        // posInScreen.C
+        posInScreen.CUSTOM_WITH_PERCENT(btn_AddQuestion, 90, 18);
+        this.add(btn_AddQuestion);
+        btn_AddQuestion.addActionListener(this);
     }
 
     private JTable tb_listQuestion;
@@ -99,6 +103,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     private JButton btn_AddQuestion;
     private int int_widthBtnAddQuestion;
     private int int_heightBtnAddQuestion;
+    private String str_idLecture;
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -140,19 +145,43 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
             fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer().setSelectedItem(data[int_indexSelected][3].trim());
 
-            fDQ_detaulQuestion.getEditButton().addActionListener(this);
+            fDQ_detaulQuestion.getControllerButton().setText("Sửa");
+            fDQ_detaulQuestion.getControllerButton().addActionListener(this);
+            ;
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        if (e.getSource() == fDQ_detaulQuestion.getEditButton()) {
-            fDQ_detaulQuestion.updateSQL();
-            fDQ_detaulQuestion.dispose();
-            getContentPane().remove(scrollPane);
-            repaint();
-            makingTable();
+        if (fDQ_detaulQuestion != null) {
+            if (fDQ_detaulQuestion.getControllerButton().getText().equals("Sửa")) {
+                fDQ_detaulQuestion.updateSQL(null);
+                fDQ_detaulQuestion.dispose();
+                getContentPane().remove(scrollPane);
+                repaint();
+                makingTable();
+            }
+
+            if (fDQ_detaulQuestion.getControllerButton().getText().equals("Thêm")) {
+                fDQ_detaulQuestion.updateSQL(str_idLecture);
+                fDQ_detaulQuestion.dispose();
+                getContentPane().remove(scrollPane);
+                repaint();
+                makingTable();
+            }
+        }
+
+        if (e.getSource() == btn_AddQuestion)
+
+        {
+            fDQ_detaulQuestion = new frameDetailQuestion();
+            fDQ_detaulQuestion.getControllerButton().setText("Thêm");
+            fDQ_detaulQuestion.getControllerButton().addActionListener(this);
+
+            fDQ_detaulQuestion.getPanelDetailQuestion().getLecture()
+                    .setText(new manageLecture().getNameLectureById(str_idLecture));
+            fDQ_detaulQuestion.getPanelDetailQuestion().getLecture().setEditable(false);
         }
     }
 
@@ -175,6 +204,6 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     }
 
     public static void main(String[] args) {
-        frameListQuestion a = new frameListQuestion();
+        frameListQuestion a = new frameListQuestion("1");
     }
 }
