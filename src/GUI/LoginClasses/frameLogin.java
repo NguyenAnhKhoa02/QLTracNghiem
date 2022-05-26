@@ -116,19 +116,22 @@ public class frameLogin extends JFrame implements ActionListener {
     public void addControls() {
 
         JPanel jpTitle = new JPanel();
-        // jpTitle.setBorder(BorderFactory.createLineBorder(Color.red)); //Tạo viền bảng
+        jpTitle.setBackground(Color.white);
+    //    jpTitle.setBorder(BorderFactory.createLineBorder(Color.red)); //Tạo viền bảng
         jpTitle.add(lb_nameTitle = new JLabel("ĐĂNG NHẬP", JLabel.CENTER));
         lb_nameTitle.setFont(new Font("Times New Roman", Font.BOLD, 30));
         lb_nameTitle.setForeground(Color.BLUE);
-        add(lb_nameTitle, BorderLayout.NORTH); // Căn tiêu đề phía trên cùng (NORTH : Phía bắc)
+        add(jpTitle, BorderLayout.NORTH); //Căn tiêu đề phía trên cùng (NORTH : Phía bắc)
 
         JPanel jpLeft = new JPanel();
+        jpLeft.setBackground(Color.white);
         // jpLeft.setBorder(BorderFactory.createLineBorder(Color.red));
         ImageIcon imageLeft = new ImageIcon("..\\QLTracNghiem\\src\\images\\account.png");
         jpLeft.add(new JLabel(imageLeft));
         add(jpLeft, BorderLayout.WEST); // Căn ảnh bên trái (WEST: phía Tây)
 
         JPanel jpBottom = new JPanel();
+        jpBottom.setBackground(Color.white);
         jpBottom.setBorder(BorderFactory.createLineBorder(Color.gray));
         buttonLogin = new JButton("Đăng nhập");
         buttonExit = new JButton("Thoát");
@@ -144,10 +147,11 @@ public class frameLogin extends JFrame implements ActionListener {
         add(jpBottom, BorderLayout.SOUTH);
 
         JPanel jpCenter = new JPanel();
-        jpCenter.add(lb_User = new JLabel("Tên đăng nhập"));
-        lb_User.setFont(new Font("Times New Roman", Font.BOLD, 14));
-        jpCenter.add(tf_inputName = new JTextField(20));
-        jpCenter.add(lb_Password = new JLabel("Mật khẩu"));
+        jpCenter.setBackground(Color.white);
+        jpCenter.add(lb_User=new JLabel("Tên đăng nhập"));
+        lb_User.setFont(new Font("Times New Roman",	Font.BOLD,	14));
+        jpCenter.add(tf_inputName=new JTextField(20));
+        jpCenter.add(lb_Password=new JLabel("Mật khẩu"));
         lb_Password.setFont(new Font("Times New Roman", Font.BOLD, 14));
         jpCenter.add(pf_inputPassword = new JPasswordField(20));
         jpCenter.add(showPassword = new JCheckBox("Hiển thị mật khẩu"));

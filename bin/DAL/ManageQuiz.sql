@@ -180,15 +180,16 @@ insert into StudentsLogin(userStudent,pass) values ('234','01012002')
 select * from StudentsLogin
 
 create table LectureLogin(
-	userLecture char(50) not null,
+	userLecture varchar(10) not null,
 	pass varchar(100)
 )
 
 alter table LectureLogin add constraint PK_LectureLogin primary key(userLecture)
 alter table LectureLogin add constraint FK_LectureLogon_Lecture foreign key (userLecture) references Lectures(Id)
 
-
-
+insert into LectureLogin(userLecture,pass) values ('1','123')
+insert into LectureLogin(userLecture,pass) values ('2','123')
+insert into LectureLogin(userLecture,pass) values ('3','123')
 
 create table YesNoQuestion(
 	Id varchar(10) not null,
@@ -210,7 +211,7 @@ insert into YesNoQuestion(Id,Options) values (30,N'a.Đúng b.Sai')
 insert into YesNoQuestion(Id,Options) values (32,N'a.Đúng b.Sai')
 insert into YesNoQuestion(Id,Options) values (35,N'a.Đúng b.Sai')
 insert into YesNoQuestion(Id,Options) values (36,N'a.Đúng b.Sai')
-
+delete from YesNoQuestion
 delete from YesNoQuestion
 create table OptionsQuestion(
 	Id varchar(10) not null,
@@ -254,13 +255,12 @@ insert into OptionsQuestion (Id,Options) values (37,N'a. Nếu condition là tru
 insert into OptionsQuestion (Id,Options) values (38,N'a. ! b. >> c. << d. !!')
 insert into OptionsQuestion (Id,Options) values (39,N'a. Có thể truy cập các lớp từ trong cùng package b. Có thể truy cập đối tượng từ các lớp trong cùng package và lớp con nằm trong package c. Có thể truy cập đối tượng từ các phương thức khác trong lớp đó d. Có thể truy cập đối tượng từ bất kì vị trí nào của chương trình')
 insert into OptionsQuestion (Id,Options) values (40,N'a. UTF-8 b. UTF-16 c. UTF-32 d. Tất cả đều sai')
-<<<<<<< HEAD
+delete from OptionsQuestion
 
 
-=======
 select * from OptionsQuestion where Id =42
 delete from OptionsQuestion where Id=42
->>>>>>> 8da57441668ab3ef1ad7f3f1a5af2db212caca59
+
 
 delete from OptionsQuestion
 update OptionsQuestion
@@ -278,7 +278,7 @@ alter table Exam add constraint FK_Exam_TimeExam foreign key (TimeName) referenc
 insert into Exam (Id,TimeName) values (123,N'Kì thi kết thúc học phần 2022 - 2023')
 select Id 
 from Exam
-
+delete from DetailExam
 delete from Exam
 where Id = '886'
 
@@ -287,7 +287,6 @@ create table DetailExam(
 	IdQues varchar(10) not null
 )
 
-<<<<<<< HEAD
 select Id from Exam
 
 =======

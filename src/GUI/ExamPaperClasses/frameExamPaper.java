@@ -240,6 +240,7 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         int_heightFrame = parameterScreen.SCREEN_HEIGHT;
         setSize(int_widthFrame, int_heightFrame);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setTitle("Bài làm");
 
         int_widthPnRoot = this.getWidth();
         int_heightPnRoot = this.getHeight();
