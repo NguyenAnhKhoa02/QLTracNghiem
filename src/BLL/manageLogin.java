@@ -2,8 +2,8 @@ package BLL;
 
 import DAL.connectSQL;
 
-public class manageStudentLogin {
-    public manageStudentLogin(){
+public class manageLogin {
+    public manageLogin(){
         connectSQL = new connectSQL();
     }
 

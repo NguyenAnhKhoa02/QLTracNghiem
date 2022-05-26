@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -50,8 +52,59 @@ public class frameStudents extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource()==buttonDoTest){
-            dispose();
             fep_frameExamPaper = new frameExamPaper(student.getId());
+            if(fep_frameExamPaper.getExam()!=null){
+                setVisible(false);
+                fep_frameExamPaper.addWindowListener((WindowListener) new WindowListener(){
+
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+                        // TODO Auto-generated method stub
+                        
+                    }
+    
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        // TODO Auto-generated method stub
+                        setVisible(true);
+                    }
+    
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        // TODO Auto-generated method stub
+                        
+                    }
+    
+                    @Override
+                    public void windowIconified(WindowEvent e) {
+                        // TODO Auto-generated method stub
+                        
+                    }
+    
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {
+                        // TODO Auto-generated method stub
+                        
+                    }
+    
+                    @Override
+                    public void windowActivated(WindowEvent e) {
+                        // TODO Auto-generated method stub
+                        
+                    }
+    
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {
+                        // TODO Auto-generated method stub
+                        
+                    }
+                    
+                });
+            } else{
+                setVisible(true);
+                JOptionPane.showMessageDialog(this, "Chưa có bài thi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
         }
 
         if(evt.getSource()==buttonLogOut){
@@ -60,10 +113,13 @@ public class frameStudents extends JFrame implements ActionListener {
         }
     }
 
-    public frameStudents(String Id){
+    public frameStudents(Student student){
         super("Thông tin");
+        ms_manageStudent = new manageStudent();
+        this.student = student;
+
         addControls();
-        displayInfoStudent(Id);
+        displayInfoStudent();
         addActionEvent();
     }
 
@@ -78,9 +134,7 @@ public class frameStudents extends JFrame implements ActionListener {
         }
     }
 
-    private void displayInfoStudent(String Id){
-        ms_manageStudent = new manageStudent();
-        student = ms_manageStudent.getStudentById(Id);
+    private void displayInfoStudent(){
 
         JPanel jp_StudentsInfor = new JPanel();
         jp_StudentsInfor.setBackground(Color.white);
@@ -165,12 +219,5 @@ public class frameStudents extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false); //Không thể thay đổi kích cỡ Frame
 
-        }
-
-//   public static void main(String[] args) {
-//       frameStudents s = new frameStudents("456");
-//       s.showWindow();
-//   }
-
-    
+        }    
 }

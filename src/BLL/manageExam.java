@@ -66,7 +66,11 @@ public class manageExam {
     }
 
     public Exam getRandExam() {
+        if(getAllIdExam().size() == 0)
+        return null;
+
         rie_randomIdExam = new randomIdExam(getAllIdExam());
+
         String str_idRand = rie_randomIdExam.getRandExam();
         mte_manageTimeExam = new manageTimeExam();
 

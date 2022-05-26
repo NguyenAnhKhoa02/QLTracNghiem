@@ -31,7 +31,9 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
-import BLL.manageStudentLogin;
+import BLL.manageLecture;
+import BLL.manageLogin;
+import BLL.manageStudent;
 
 
 public class frameLogin extends JFrame implements ActionListener {
@@ -43,8 +45,11 @@ public class frameLogin extends JFrame implements ActionListener {
     private JLabel lb_nameTitle;
     private static JButton buttonLogin;
     private JButton buttonExit;
-    private manageStudentLogin msl_manageStudentLogin;
+    private manageLogin ml_manageLogin;
+    private manageStudent ms_manageStudent;
+    private manageLecture ml_manageLecture;
     private frameStudents fs_frameStudent;
+    private frameLecture fl_frameLecture;
 
     public frameLogin() {
         setTitle("Đăng nhập");
@@ -57,12 +62,23 @@ public class frameLogin extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         // TODO Auto-generated method stub
         if(evt.getSource() == buttonLogin){
-            msl_manageStudentLogin = new manageStudentLogin();
-            String Id = msl_manageStudentLogin.isLogin(tf_inputName.getText(), pf_inputPassword.getText());
+            ml_manageLogin = new manageLogin();
+            String Id = ml_manageLogin.isLogin(tf_inputName.getText(), pf_inputPassword.getText());
+
+            ms_manageStudent = new manageStudent();
+            ml_manageLecture = new manageLecture();
             if(Id != null){
                 dispose();
-                fs_frameStudent = new frameStudents(Id);
-                fs_frameStudent.showWindow();
+
+                if(ms_manageStudent.getStudentById(Id) != null){
+                    fs_frameStudent = new frameStudents(ms_manageStudent.getStudentById(Id));
+                    fs_frameStudent.showWindow();
+                }
+
+                if(ml_manageLecture.getLectureById(Id)!= null){
+                    fl_frameLecture = new frameLecture(ml_manageLecture.getLectureById(Id));
+                    fl_frameLecture.showWindow();
+                }
             }else if(tf_inputName.getText().equals("") && pf_inputPassword.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Vui lòng điền thông tin đăng nhập!", "Lỗi đăng nhập", JOptionPane.ERROR_MESSAGE);
                 tf_inputName.requestFocus();

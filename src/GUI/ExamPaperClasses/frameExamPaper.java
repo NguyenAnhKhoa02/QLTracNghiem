@@ -36,9 +36,11 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         makingRootPane();
         displayInforStudent(IdStudent);
         displayExam();
-        displayButtonAddmitExam();
 
-        setVisible(true);
+        if(exam!=null){
+            displayButtonAddmitExam();
+            setVisible(true);
+        }
     }
 
     private void makingRootPane() {
@@ -92,6 +94,9 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
     private void displayExam() {
         mne_manageExam = new manageExam();
         exam = mne_manageExam.getRandExam();
+
+        if(exam == null)
+        return;
 
         pe_paneExam = new paneExam(exam);
         pe_paneExam.displayPageExam(1, true);
@@ -182,6 +187,10 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         }
 
         return true;
+    }
+
+    public Exam getExam(){
+        return exam;
     }
 
     @Override
@@ -304,6 +313,5 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
     private boolean isAdmit;
 
     // public static void main(String[] args) {
-    //     frameExamPaper f = new frameExamPaper("123");
     // }
 }

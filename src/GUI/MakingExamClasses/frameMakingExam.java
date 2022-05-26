@@ -30,7 +30,7 @@ import GUI.CommonClasses.Parameter;
 import GUI.MakingExamClasses.paneInfoQuestion.recommendPanel;
 
 public class frameMakingExam extends JFrame implements Parameter, ActionListener, KeyListener {
-    frameMakingExam() {
+    public frameMakingExam() {
         parameter();
 
         mnQ_manageQuestion = new manageQuestion();

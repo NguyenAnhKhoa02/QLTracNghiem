@@ -69,6 +69,30 @@ public class manageQuestion {
         return mertArray(pQDTO_optionsQuestion.getOptionsQuestion(), ynQDTO_yesNoQuestion.getYesNoQuestion());
     }
 
+    public Boolean updateYesNoQuestion(YesNoQuestion yNoQuestion, boolean isChange) {
+        return conSQL_question.updateYesNoQuestion(yNoQuestion, isChange);
+    }
+
+    public Boolean updateOptionsQuestion(OptionsQuestion optionsQuestion, boolean isChange) {
+        return conSQL_question.updateOptionsQuestion(optionsQuestion, isChange);
+    }
+
+    public Boolean addYesNoQuestion(YesNoQuestion yNoQuestion) {
+        return conSQL_question.addYesNoQuestion(yNoQuestion, String.valueOf(getAllCountQuestions() + 1));
+    }
+
+    public Boolean addOptionsQuestion(OptionsQuestion optionsQuestion) {
+        return conSQL_question.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions() + 1));
+    }
+
+    public Boolean deleteYesNoQuestion(YesNoQuestion yNoQuestion) {
+        return conSQL_question.deleteYesNoQuestion(yNoQuestion);
+    }
+
+    public Boolean deleteOptionsQuestion(OptionsQuestion optionsQuestion) {
+        return conSQL_question.deleteOptionsQuestion(optionsQuestion);
+    }
+
     public int getCountQuestions(String level) {
         return conSQL_question.getCountQuesionsByLevel(level);
     }
@@ -103,4 +127,5 @@ public class manageQuestion {
     private connectSQL conSQL_question;
     private OptionsQuestionDTO pQDTO_optionsQuestion;
     private YesNoQuestionDTO ynQDTO_yesNoQuestion;
+    private YesNoQuestion yesNoQuestion;
 }

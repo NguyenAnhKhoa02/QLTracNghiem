@@ -15,6 +15,7 @@ import BLL.Exam.DetailExam;
 import BLL.Exam.Exam;
 import BLL.ExamPaper.DetailExamPaper;
 import BLL.ExamPaper.ExamPaper;
+import BLL.Lecture.Lecture;
 import BLL.Question.OptionsQuestion;
 import BLL.Question.Question;
 import BLL.Question.YesNoQuestion;
@@ -29,8 +30,9 @@ public class connectSQL {
 
     // *************************************************************************************************************
     private void connetToSQL() {
+
         String url = "jdbc:sqlserver://" + host_name
-                + ";databaseName=ManageQuiz;encrypt=false;integratedSecurity=true;"
+                + ";databaseName=ManageQuiz;encrypt=false;"
                 + "user=" + user + ";"
                 + "password=" + password + ";";
 
@@ -44,6 +46,7 @@ public class connectSQL {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            System.out.println("ko kết nối sql sever");
         }
     }
 
@@ -128,6 +131,156 @@ public class connectSQL {
         return arrL_tempt;
     }
 
+    public Boolean updateYesNoQuestion(YesNoQuestion yNoQuestion, boolean isChange) {
+        String str_Update = "update Questions "
+                + "set Questions.Content = N'" + yNoQuestion.getContentQuestion() + "' "
+                + ", Questions.LevelQues=N'" + yNoQuestion.getLevelQuestion() + "' "
+                + ", Questions.Answer=N'" + yNoQuestion.getAnswerQuestion() + "' "
+                + ", Questions.TypeQues=N'Yes/No' "
+                + "where Questions.Id=" + yNoQuestion.getIdQuestion() + "";
+        String str_UpdateOp = " update OptionsQuestion "
+                + "set OptionsQuestion.Options=N'a.Đúng b.Sai'";
+        String str_Clear = "Delete from OptionsQuestion where Id=" + yNoQuestion.getIdQuestion();
+        String str_Insert = "insert into YesNoQuestion (Id,Options) values (" + yNoQuestion.getIdQuestion()
+                + ",N'a.Đúng b.Sai')";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            if (isChange) {
+                statement.executeUpdate(str_Clear);
+                statement.executeUpdate(str_Insert);
+            }
+            statement.executeUpdate(str_Update);
+            statement.executeUpdate(str_UpdateOp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+    }
+
+    public Boolean updateOptionsQuestion(OptionsQuestion optionsQuestion, boolean isChange) {
+        String str_Update = "update Questions "
+                + "set Questions.Content = N'" + optionsQuestion.getContentQuestion() + "' "
+                + ", Questions.LevelQues=N'" + optionsQuestion.getLevelQuestion() + "' "
+                + ", Questions.Answer=N'" + optionsQuestion.getAnswerQuestion() + "' "
+                + ", Questions.TypeQues=N'Options' "
+                + "where Questions.Id=" + optionsQuestion.getIdQuestion() + "";
+        String str_UpdateOp = " update OptionsQuestion "
+                + "set OptionsQuestion.Options=N'" + optionsQuestion.getOptionQuestionToSQL() + "'";
+        String str_Clear = "Delete from YesNoQuestion where Id=" + optionsQuestion.getIdQuestion();
+        String str_Insert = "insert into OptionsQuestion (Id,Options) values (" + optionsQuestion.getIdQuestion()
+                + ",N'" + optionsQuestion.getOptionsQuestion()
+                + "')";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            if (isChange) {
+                statement.executeUpdate(str_Clear);
+                statement.executeUpdate(str_Insert);
+            }
+            statement.executeUpdate(str_Update);
+            statement.executeUpdate(str_UpdateOp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+
+    }
+
+    public Boolean addYesNoQuestion(YesNoQuestion yNoQuestion, String id) {
+        String str_InsertQuestion = "insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ("
+                + id + ",'" + yNoQuestion.getLevelQuestion()
+                + "',N'" + yNoQuestion.getContentQuestion()
+                + "','" + yNoQuestion.getAnswerQuestion()
+                + "','" + yNoQuestion.getSubjectQuestion() + "','" + yNoQuestion.getLectureQuestion() + "','Yes/No')";
+        String str_InsertYnQuestion = "insert into YesNoQuestion (Id,Options) values (" + id
+                + ",N'a.Đúng b.Sai')";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+
+            statement.executeUpdate(str_InsertQuestion);
+
+            statement.executeUpdate(str_InsertYnQuestion);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+    }
+
+    public Boolean addOptionsQuestion(OptionsQuestion optionsQuestion, String id) {
+        String str_InsertQuestion = "insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture,TypeQues) values ("
+                + id
+                + ",'" + optionsQuestion.getLevelQuestion()
+                + "',N'" + optionsQuestion.getContentQuestion()
+                + "','" + optionsQuestion.getAnswerQuestion()
+                + "','" + optionsQuestion.getSubjectQuestion()
+                + "','" + optionsQuestion.getLectureQuestion()
+                + "','Options') ";
+
+        String str_InsertOpQuestion = "insert into OptionsQuestion (Id,Options) values ("
+                + id
+                + ",N'" + optionsQuestion.getOptionsQuestion()
+                + "')";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+
+            statement.executeUpdate(str_InsertQuestion);
+
+            statement.executeUpdate(str_InsertOpQuestion);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+
+    }
+
+    public Boolean deleteYesNoQuestion(YesNoQuestion yesNoQuestion) {
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("delete from YesNoQuestion where id='" + yesNoQuestion.getIdQuestion() + "'");
+            statement.executeUpdate("delete from Questions where id='" + yesNoQuestion.getIdQuestion() + "'");
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+
+    }
+
+    public Boolean deleteOptionsQuestion(OptionsQuestion optionsQuestion) {
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("delete from OptionsQuestion where id='" + optionsQuestion.getIdQuestion() + "'");
+            statement.executeUpdate("delete from Questions where id='" + optionsQuestion.getIdQuestion() + "'");
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+
+    }
+
+    // public OptionsQuestion getSearchOptionsQuestion(String Id) {
+    // OptionsQuestion ques = null;
+    // }
     public int getCountQuesionsByLevel(String level) {
         int row = 0;
         String str_query = "select qs.Id "
@@ -137,6 +290,7 @@ public class connectSQL {
         connetToSQL();
         try {
             statement = connection.createStatement();
+
             resultSet = statement.executeQuery(str_query);
 
             while (resultSet.next())
@@ -155,16 +309,23 @@ public class connectSQL {
         return column;
     }
 
-// <<<<<<< HEAD
+
+
     public String isLogin(String username, String pass){
         String str_user = null;
         connetToSQL();
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery( "select * from StudentsLogin where userStudent = '"+username+"' and pass = '"+pass+"'");
-
-            while(resultSet.next())
-                str_user = resultSet.getString(1).trim();
+            for(int i = 0; i < 2; i++){
+                if(i>0 && str_user == null){
+                    resultSet = statement.executeQuery( "select * from LectureLogin where userLecture = '"+username+"' and pass = '"+pass+"'");
+                    while(resultSet.next())
+                        str_user = resultSet.getString(1).trim();
+                }
+                resultSet = statement.executeQuery( "select * from StudentsLogin where userStudent = '"+username+"' and pass = '"+pass+"'");
+                while(resultSet.next())
+                    str_user = resultSet.getString(1).trim();
+            }
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();
@@ -173,6 +334,9 @@ public class connectSQL {
 
         return str_user;
     }
+
+    private PreparedStatement ps = null;
+
 
     public ArrayList<TimeExam> getTimeExam() {
         ArrayList<TimeExam> arL_timeExam = new ArrayList<>();
@@ -211,13 +375,12 @@ public class connectSQL {
 
         } catch (Exception e) {
             // TODO: handle exception
-// >>>>>>> af8d8aeddce60f1fbe5beaf5d3df7101eaab020d
+
             e.printStackTrace();
         }
         closeConnectSQL();
 
-// <<<<<<< HEAD
-// =======
+
         return arL_Subject;
     }
 
@@ -425,7 +588,9 @@ public class connectSQL {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(str_query);
 
-            resultSet.next();
+            if(!resultSet.next())
+                return null;
+                
             student = new Student(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
                     resultSet.getString(4));
         } catch (Exception e) {
@@ -541,7 +706,39 @@ public class connectSQL {
         }
 
         return arL_String;
-// >>>>>>> af8d8aeddce60f1fbe5beaf5d3df7101eaab020d
+    }
+
+    public String getNameLectureById(String Id) {
+        String str_name = "";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select FullName from Lectures where Id='" + Id + "'");
+
+            resultSet.next();
+            str_name = resultSet.getNString(1);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        closeConnectSQL();
+        return str_name;
+    }
+
+    public Lecture getLectureById (String Id){
+        
+        Lecture l = null;
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select * from Lectures where Id='" + Id + "'");
+            resultSet.next();
+            l = new Lecture(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        closeConnectSQL();
+
+        return l;
     }
 
     private Connection connection = null;
@@ -553,9 +750,10 @@ public class connectSQL {
     /*
      * ******************
      * Setting sql sever*
-     * ******************
+     * *****************
      */
     private String host_name = "LAPTOP-9Q1U79UH\\THANHLUC";
     private String user = "sa";
     private String password = "123";
+
 }

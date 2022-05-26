@@ -12,8 +12,11 @@ public class Question {
         str_Type = Type;
     }
 
-    public Question(String Content) {
+    public Question (String Content) {
         str_Content = Content;
+    }
+
+        public Question() {
     }
 
     public String getIdQuestion() {
@@ -42,6 +45,34 @@ public class Question {
 
     public String getTypeQuestion() {
         return str_Type;
+    }
+
+    public void setStr_Answer(String str_Answer) {
+        this.str_Answer = str_Answer;
+    }
+
+    public void setStr_Content(String str_Content) {
+        this.str_Content = str_Content;
+    }
+
+    public void setStr_Id(String str_Id) {
+        this.str_Id = str_Id;
+    }
+
+    public void setStr_Lecture(String str_Lecture) {
+        this.str_Lecture = str_Lecture;
+    }
+
+    public void setStr_Level(String str_Level) {
+        this.str_Level = str_Level;
+    }
+
+    public void setStr_Subject(String str_Subject) {
+        this.str_Subject = str_Subject;
+    }
+
+    public void setStr_Type(String str_Type) {
+        this.str_Type = str_Type;
     }
 
     private String str_Id;
