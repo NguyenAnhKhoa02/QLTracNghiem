@@ -82,6 +82,8 @@ create table Questions(
 	TypeQues varchar(100),
 )
 
+select TypeQues from Questions where Id  = '1'
+
 select qs.Id
 from Questions qs, Levels lv
 where lv.LvName = N'Nhận biết' and lv.Id = qs.LevelQues
@@ -187,7 +189,9 @@ create table LectureLogin(
 alter table LectureLogin add constraint PK_LectureLogin primary key(userLecture)
 alter table LectureLogin add constraint FK_LectureLogon_Lecture foreign key (userLecture) references Lectures(Id)
 
-
+insert into LectureLogin(userLecture,pass) values ('1','123')
+insert into LectureLogin(userLecture,pass) values ('2','123')
+insert into LectureLogin(userLecture,pass) values ('3','123')
 
 
 create table YesNoQuestion(
@@ -271,14 +275,14 @@ create table Exam(
 	Id nvarchar(10) not null,
 	TimeName nvarchar(500) not null
 )
-
+select * from Exam
 alter table Exam add constraint PK_Exam primary key(Id)
 alter table Exam add constraint FK_Exam_TimeExam foreign key (TimeName) references TimeExam(IdName)
 
 insert into Exam (Id,TimeName) values (123,N'Kì thi kết thúc học phần 2022 - 2023')
 select Id 
 from Exam
-
+delete from DetailExam
 delete from Exam
 where Id = '886'
 
@@ -289,7 +293,7 @@ create table DetailExam(
 
 <<<<<<< HEAD
 select Id from Exam
-
+delete from DetailExam
 =======
 alter table DetailExam add constraint PK_IdDetailExam primary key (Id,IdQues)
 >>>>>>> 8da57441668ab3ef1ad7f3f1a5af2db212caca59
@@ -328,7 +332,7 @@ create table ExamPapers(
 	NumberWrong int,
 	Mark float
 )
-
+delete from ExamPapers
 alter table ExamPapers add constraint PK_ExamPapers primary key (Id)
 alter table ExamPapers add constraint FK_ExamPapers_Exam foreign key (IdExam) references Exam(Id)
 alter table ExamPapers add constraint FK_ExamPapers_Students foreign key (IdStudent) references Students (Id)
