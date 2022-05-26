@@ -65,9 +65,13 @@ public class manageExam {
         return connectSQL.getAllIdExam();
     }
 
+    public Exam getExamById(String Id) {
+        return connectSQL.getExamById(Id);
+    }
+
     public Exam getRandExam() {
-        if(getAllIdExam().size() == 0)
-        return null;
+        if (getAllIdExam().size() == 0)
+            return null;
 
         rie_randomIdExam = new randomIdExam(getAllIdExam());
 

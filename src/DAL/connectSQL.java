@@ -354,8 +354,6 @@ public class connectSQL {
             e.printStackTrace();
         }
 
-        closeConnectSQL();
-
         return arL_timeExam;
     }
 
@@ -740,6 +738,27 @@ public class connectSQL {
         return l;
     }
 
+    public Exam getExamById(String Id) {
+        Exam exam = null;
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select * from Exam where Id='" + Id + "'");
+
+            while (resultSet.next()) {
+                String id = resultSet.getString(1);
+                exam = new Exam(id, getTimeExam().get(0),
+                        getAllDetailExamById(id));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        closeConnectSQL();
+
+        return exam;
+    }
+
     private Connection connection = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
@@ -751,8 +770,8 @@ public class connectSQL {
      * Setting sql sever*
      * *****************
      */
-    private String host_name = "QUYQUY\\AO";
+    private String host_name = "DESKTOP-F7JKQMS\\SQLEXPRESS";
     private String user = "sa";
-    private String password = "0977";
+    private String password = "admin";
 
 }

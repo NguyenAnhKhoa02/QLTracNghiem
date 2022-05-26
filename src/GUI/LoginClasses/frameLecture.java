@@ -33,6 +33,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
+import BLL.manageExam;
 import BLL.manageLecture;
 import BLL.Lecture.Lecture;
 import GUI.frameListQuestion;
@@ -44,11 +45,12 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
     private JLabel lb_LectureTitle, lb_LectureId, lb_LectureFullName, lb_LecturePosition, lb_LectureIdField;
     private JLabel lb_Images;
     private JTextField jt_LectureId, jt_LectureFullName, jt_LecturePosition, jt_LectureIdField;
-    private JButton buttonDoTest, buttonLogOut, buttonMakingExam;
+    private JButton buttonDoTest, buttonLogOut, buttonMakingExam, buttonViewExamPaper;
     private Lecture lecture;
     private manageLecture ms_managelecture;
     private frameListQuestion flq_frameListQuestion;
     private frameMakingExam fme_frameMakingExam;
+    private frameExamPaper fep_frameExamPaper;
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -63,6 +65,10 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
                 setVisible(false);
                 fme_frameMakingExam = new frameMakingExam();
                 fme_frameMakingExam.addWindowListener(this);
+            }
+
+            if (evt.getSource() == buttonViewExamPaper) {
+                fep_frameExamPaper = new frameExamPaper();
             }
         }
 
@@ -141,7 +147,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
         JPanel jp_Images = new JPanel();
         jp_Images.setBackground(Color.white);
         ImageIcon img_Infor = new ImageIcon(
-                "C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\studentsinfor.png");
+                "..\\QLTracNghiem\\src\\images\\studentsinfor.png");
         jp_Images.add(lb_Images = new JLabel(img_Infor));
         add(jp_Images, BorderLayout.WEST);
 
@@ -153,13 +159,17 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
             buttonMakingExam = new JButton("Ra đề thi");
             buttonMakingExam.addActionListener(this);
             jp_DoTest.add(buttonMakingExam);
+
+            buttonViewExamPaper = new JButton("Xem đề thi");
+            buttonViewExamPaper.addActionListener(this);
+            jp_DoTest.add(buttonViewExamPaper);
         }
 
         buttonLogOut = new JButton("Đăng xuất");
         ImageIcon img_DoTest = new ImageIcon(
-                "C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\dotest.png");
+                "..\\QLTracNghiem\\src\\images\\dotest.png");
         ImageIcon img_LogOut = new ImageIcon(
-                "C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\logout.png");
+                "..\\QLTracNghiem\\src\\images\\logout.png");
         buttonLogOut.setIcon(img_LogOut);
         buttonDoTest.setIcon(img_DoTest);
         buttonLogOut.setFont(new Font("Times New Roman", Font.BOLD, 12));

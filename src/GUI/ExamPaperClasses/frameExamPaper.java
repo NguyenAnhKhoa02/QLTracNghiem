@@ -35,12 +35,49 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
 
         makingRootPane();
         displayInforStudent(IdStudent);
-        displayExam();
+        mne_manageExam = new manageExam();
+        exam = mne_manageExam.getRandExam();
 
-        if(exam!=null){
+        if (exam == null)
+            return;
+        displayExam();
+        displayCheckBoxAnswer();
+
+        if (exam != null) {
             displayButtonAddmitExam();
             setVisible(true);
         }
+    }
+
+    public frameExamPaper() {
+        parameter();
+        mne_manageExam = new manageExam();
+        ArrayList<String> arL_exam = mne_manageExam.getAllIdExam();
+        int_heightPane1 = arL_exam.size() * 1100;
+        int_heightPnDisplay = int_heightPane1;
+        makingRootPane();
+
+        int y = 0;
+        int index = 0;
+        peArr_paneExam = new paneExam[arL_exam.size()];
+        for (String e : arL_exam) {
+            exam = mne_manageExam.getExamById(e);
+
+            peArr_paneExam[index] = new paneExam(exam);
+            peArr_paneExam[index].displayPageExam(1, true);
+            peArr_paneExam[index].setOpaque(true);
+            peArr_paneExam[index].setBackground(Color.white);
+            pn_display.add(peArr_paneExam[index]);
+
+            for (JButton btn : peArr_paneExam[index].getAllButton())
+                btn.addActionListener(this);
+            posInScreen.CENTER_CUSTOM_Y_CHILDREN_PARENT_ARRAY_COMPONENT(peArr_paneExam[index], pn_display, y);
+
+            index++;
+            y += 100 / arL_exam.size();
+        }
+
+        setVisible(true);
     }
 
     private void makingRootPane() {
@@ -92,12 +129,6 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
     }
 
     private void displayExam() {
-        mne_manageExam = new manageExam();
-        exam = mne_manageExam.getRandExam();
-
-        if(exam == null)
-        return;
-
         pe_paneExam = new paneExam(exam);
         pe_paneExam.displayPageExam(1, true);
         pe_paneExam.setOpaque(true);
@@ -105,6 +136,11 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         posInScreen.CENTER_CUSTOM_Y_CHILDREN_PARENT_ARRAY_COMPONENT(pe_paneExam, pn_display, 5);
         pn_display.add(pe_paneExam);
 
+        for (JButton btn : pe_paneExam.getAllButton())
+            btn.addActionListener(this);
+    }
+
+    private void displayCheckBoxAnswer() {
         for (JButton btn : pe_paneExam.getAllButton()) {
             btn.addActionListener(this);
         }
@@ -189,7 +225,7 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         return true;
     }
 
-    public Exam getExam(){
+    public Exam getExam() {
         return exam;
     }
 
@@ -254,6 +290,16 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
                 isAdmit = true;
             }
         }
+
+        if (peArr_paneExam != null) {
+            for (paneExam p : peArr_paneExam) {
+                for (JButton btn : p.getAllButton()) {
+                    if (e.getSource() == btn) {
+                        p.displayPageExam(Integer.valueOf(btn.getText()), true);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -310,8 +356,12 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
     private HashMap<String, String> hm_getAnswer;
     private paneResult pr_paneResule;
 
+    private paneExam[] peArr_paneExam;
+
     private boolean isAdmit;
 
     // public static void main(String[] args) {
+    // String[] a = { "1" };
+    // frameExamPaper f = new frameExamPaper(a);
     // }
 }
