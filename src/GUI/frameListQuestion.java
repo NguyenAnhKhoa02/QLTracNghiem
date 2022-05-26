@@ -138,7 +138,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
     }
 
-    public static void main(String[] args) {
-        frameListQuestion a = new frameListQuestion();
-    }
+    // public static void main(String[] args) {
+    // frameListQuestion a = new frameListQuestion();
+    // }
 }

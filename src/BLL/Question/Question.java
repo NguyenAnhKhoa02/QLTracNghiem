@@ -12,6 +12,10 @@ public class Question {
         str_Type = Type;
     }
 
+    public Question(String Content) {
+        str_Content = Content;
+    }
+
     public String getIdQuestion() {
         return str_Id;
     }
