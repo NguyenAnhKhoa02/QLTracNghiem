@@ -8,15 +8,16 @@ import javax.lang.model.util.ElementScanner14;
 import BLL.Exam.Exam;
 import BLL.ExamPaper.ExamPaper;
 import DAL.connectSQL;
+import DAL.manageExamPaperDAL;
 
 public class manageExamPaper {
     public manageExamPaper() {
         mnq_manageQuestion = new manageQuestion();
-        connectSQL = new connectSQL();
+        mepd_manageExamPaperDAL = new manageExamPaperDAL();
     }
 
     public ArrayList<String> getAllIdExamPaper() {
-        return connectSQL.getAllIdExamPaper();
+        return mepd_manageExamPaperDAL.getAllIdExamPaper();
     }
 
     private void checkMark(Exam exam, HashMap<String, String> answer) {
@@ -39,7 +40,7 @@ public class manageExamPaper {
         checkMark(exam, answer);
         riep_randomIdExamPaper = new randomIdExamPaper();
         str_idExamPaper = riep_randomIdExamPaper.getRandomIdExamPaper();
-        connectSQL.SaveExamPaper(
+        mepd_manageExamPaperDAL.SaveExamPaper(
                 new ExamPaper(IdStudent, exam.getID(), str_idExamPaper, int_rightQuestion,
                         int_wrongQuestion, float_mark));
 
@@ -53,14 +54,15 @@ public class manageExamPaper {
     }
 
     public ExamPaper getExamPaperById(String Id) {
-        return connectSQL.getExamPaperById(Id);
+        return mepd_manageExamPaperDAL.getExamPaperById(Id);
     }
 
-    private connectSQL connectSQL;
     private int int_rightQuestion, int_wrongQuestion;
     private float float_mark;
     private manageQuestion mnq_manageQuestion;
     private manageDetailExamPaper mdep_manageDetailPaper;
     private randomIdExamPaper riep_randomIdExamPaper;
     private String str_idExamPaper;
+
+    private manageExamPaperDAL mepd_manageExamPaperDAL;
 }

@@ -3,19 +3,20 @@ package BLL;
 import BLL.DTO.SubjectDTO;
 import BLL.Subject.Subject;
 import DAL.connectSQL;
+import DAL.manageSubjectDAL;
 
 public class manageSubject {
     public manageSubject() {
-        conSQL_cConnectSQL = new connectSQL();
+        msd_manageSubjectDAL = new manageSubjectDAL();
     }
 
     public String[] getStrArrSubject() {
-        return new SubjectDTO(conSQL_cConnectSQL.getSubject()).getStrArrSubject();
+        return new SubjectDTO(msd_manageSubjectDAL.getSubject()).getStrArrSubject();
     }
 
     public Subject getSubjectByQuestion(String Id) {
-        return conSQL_cConnectSQL.getSubjectByQuestion(Id);
+        return msd_manageSubjectDAL.getSubjectByQuestion(Id);
     }
 
-    private connectSQL conSQL_cConnectSQL;
+    private manageSubjectDAL msd_manageSubjectDAL;
 }

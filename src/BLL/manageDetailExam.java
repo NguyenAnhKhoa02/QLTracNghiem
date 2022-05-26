@@ -3,14 +3,15 @@ package BLL;
 import java.util.ArrayList;
 import BLL.Exam.DetailExam;
 import DAL.connectSQL;
+import DAL.manageDetailExamDAL;
 
 public class manageDetailExam {
     public manageDetailExam() {
-        connectSQL = new connectSQL();
+        mded_manageDetailExamDAL = new manageDetailExamDAL();
     }
 
     public ArrayList<DetailExam> getAllDetailExam(String Id[], String TypeQues[]) {
-        return connectSQL.getAllDetailExam(Id, TypeQues);
+        return mded_manageDetailExamDAL.getAllDetailExam(Id, TypeQues);
     }
 
     public ArrayList<DetailExam> getAllDetailExam(String IdExam, String ID[]) {
@@ -24,13 +25,14 @@ public class manageDetailExam {
     }
 
     public ArrayList<DetailExam> getAllDetailExamById(String Id) {
-        return connectSQL.getAllDetailExamById(Id);
+        return mded_manageDetailExamDAL.getAllDetailExamById(Id);
     }
 
     public ArrayList<String> getAllAnswerDetailExamById(String Id) {
-        return connectSQL.getAnswerQuesById(Id);
+        return mded_manageDetailExamDAL.getAnswerQuesById(Id);
     }
 
-    private connectSQL connectSQL;
+    private manageDetailExamDAL mded_manageDetailExamDAL;
     private DetailExam de_detailExam;
+    private ArrayList<DetailExam> arL_detalExam;
 }

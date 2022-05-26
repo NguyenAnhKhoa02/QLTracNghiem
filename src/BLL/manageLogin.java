@@ -1,15 +1,15 @@
 package BLL;
 
-import DAL.connectSQL;
+import DAL.manageLoginDAL;
 
 public class manageLogin {
-    public manageLogin(){
-        connectSQL = new connectSQL();
+    public manageLogin() {
+        mld_manageLoginDAL = new manageLoginDAL();
     }
 
-    public String isLogin(String username, String pass){
-        return connectSQL.isLogin(username, pass);
+    public String isLogin(String username, String pass) {
+        return mld_manageLoginDAL.isLogin(username, pass);
     }
 
-    private connectSQL connectSQL;
+    private manageLoginDAL mld_manageLoginDAL;
 }

@@ -53,6 +53,10 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         parameter();
         mne_manageExam = new manageExam();
         ArrayList<String> arL_exam = mne_manageExam.getAllIdExam();
+
+        if (arL_exam.size() == 0) {
+            return;
+        }
         int_heightPane1 = arL_exam.size() * 1100;
         int_heightPnDisplay = int_heightPane1;
         makingRootPane();

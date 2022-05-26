@@ -3,15 +3,16 @@ package BLL;
 import BLL.DTO.TimeExamDTO;
 import BLL.TimeExam.TimeExam;
 import DAL.connectSQL;
+import DAL.manageTimeExamDAL;
 
 public class manageTimeExam {
     public manageTimeExam() {
-        connectSQL = new connectSQL();
-        ted_timeExamDTO = new TimeExamDTO(connectSQL.getTimeExam());
+        mted_manageTimeExamDAL = new manageTimeExamDAL();
+        ted_timeExamDTO = new TimeExamDTO(mted_manageTimeExamDAL.getTimeExam());
     }
 
     public TimeExam getTimeExamObject() {
-        return connectSQL.getTimeExam().get(0);
+        return mted_manageTimeExamDAL.getTimeExam().get(0);
     }
 
     public String[] getTimeExam() {
@@ -26,6 +27,6 @@ public class manageTimeExam {
         return ted_timeExamDTO.getStrArrTimeName();
     }
 
-    private connectSQL connectSQL;
     private TimeExamDTO ted_timeExamDTO;
+    private manageTimeExamDAL mted_manageTimeExamDAL;
 }

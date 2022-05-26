@@ -239,12 +239,15 @@ public class paneExam extends JPanel implements Parameter {
             displayQuestionNumber();
         }
 
-        private int getNumberOptions(JLabel option) {
-            return option.getText().split("<br/>").length - 1;
+        private int getNumberOptions(String Idques) {
+            if (new manageQuestion().getTypeById(Idques).equalsIgnoreCase("Options"))
+                return 4;
+            return 2;
         }
 
         private void displayQuestionNumber() {
-            lb_questionNumber = new JLabel[lb_contentExam.length];
+            int lenght = exam.getDetailExams().size();
+            lb_questionNumber = new JLabel[lenght];
             int y = 6;
             for (int i = 0; i < lb_questionNumber.length; i++) {
                 lb_questionNumber[i] = new JLabel(String.valueOf(i + 1) + ":");
@@ -262,12 +265,12 @@ public class paneExam extends JPanel implements Parameter {
                 x += 15;
             }
 
-            cb_optionAnswer = new Checkbox[lb_contentExam.length][lb_optionsAnswer.length];
-            cbg_checkBoxGroup = new CheckboxGroup[lb_contentExam.length];
+            cb_optionAnswer = new Checkbox[lenght][lb_optionsAnswer.length];
+            cbg_checkBoxGroup = new CheckboxGroup[lenght];
             y = 6;
-            for (int i = 0; i < lb_contentExam.length; i++) {
+            for (int i = 0; i < lenght; i++) {
                 x = 18;
-                cb_optionAnswer[i] = new Checkbox[getNumberOptions(lb_optionsExam[i])];
+                cb_optionAnswer[i] = new Checkbox[getNumberOptions(exam.getDetailExams().get(i).getIdQuestion())];
                 cbg_checkBoxGroup[i] = new CheckboxGroup();
                 int index = 0;
                 for (Checkbox c : cb_optionAnswer[i]) {

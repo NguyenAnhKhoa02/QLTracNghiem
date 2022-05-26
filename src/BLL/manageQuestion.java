@@ -6,10 +6,11 @@ import BLL.DTO.YesNoQuestionDTO;
 import BLL.Question.OptionsQuestion;
 import BLL.Question.YesNoQuestion;
 import DAL.connectSQL;
+import DAL.manageQuestionDAL;
 
 public class manageQuestion {
     public manageQuestion() {
-        conSQL_question = new connectSQL();
+        mqd_manageQuestion = new manageQuestionDAL();
     }
 
     private void sortQuestion(String[][] str_data, int row, int column) {
@@ -62,39 +63,40 @@ public class manageQuestion {
     }
 
     public String[][] getAllQuestions() {
-        pQDTO_optionsQuestion = new OptionsQuestionDTO(conSQL_question.getOptionsQuestion(),
-                conSQL_question.getColumn());
-        ynQDTO_yesNoQuestion = new YesNoQuestionDTO(conSQL_question.getYesNoQuestion(), conSQL_question.getColumn());
+        pQDTO_optionsQuestion = new OptionsQuestionDTO(mqd_manageQuestion.getOptionsQuestion(),
+                mqd_manageQuestion.getColumn());
+        ynQDTO_yesNoQuestion = new YesNoQuestionDTO(mqd_manageQuestion.getYesNoQuestion(),
+                mqd_manageQuestion.getColumn());
 
         return mertArray(pQDTO_optionsQuestion.getOptionsQuestion(), ynQDTO_yesNoQuestion.getYesNoQuestion());
     }
 
     public Boolean updateYesNoQuestion(YesNoQuestion yNoQuestion, boolean isChange) {
-        return conSQL_question.updateYesNoQuestion(yNoQuestion, isChange);
+        return mqd_manageQuestion.updateYesNoQuestion(yNoQuestion, isChange);
     }
 
     public Boolean updateOptionsQuestion(OptionsQuestion optionsQuestion, boolean isChange) {
-        return conSQL_question.updateOptionsQuestion(optionsQuestion, isChange);
+        return mqd_manageQuestion.updateOptionsQuestion(optionsQuestion, isChange);
     }
 
     public Boolean addYesNoQuestion(YesNoQuestion yNoQuestion) {
-        return conSQL_question.addYesNoQuestion(yNoQuestion, String.valueOf(getAllCountQuestions() + 1));
+        return mqd_manageQuestion.addYesNoQuestion(yNoQuestion, String.valueOf(getAllCountQuestions() + 1));
     }
 
     public Boolean addOptionsQuestion(OptionsQuestion optionsQuestion) {
-        return conSQL_question.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions() + 1));
+        return mqd_manageQuestion.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions() + 1));
     }
 
     public Boolean deleteYesNoQuestion(YesNoQuestion yNoQuestion) {
-        return conSQL_question.deleteYesNoQuestion(yNoQuestion);
+        return mqd_manageQuestion.deleteYesNoQuestion(yNoQuestion);
     }
 
     public Boolean deleteOptionsQuestion(OptionsQuestion optionsQuestion) {
-        return conSQL_question.deleteOptionsQuestion(optionsQuestion);
+        return mqd_manageQuestion.deleteOptionsQuestion(optionsQuestion);
     }
 
     public int getCountQuestions(String level) {
-        return conSQL_question.getCountQuesionsByLevel(level);
+        return mqd_manageQuestion.getCountQuesionsByLevel(level);
     }
 
     public int getAllCountQuestions() {
@@ -109,23 +111,27 @@ public class manageQuestion {
     }
 
     public String[] getAllIdQuestion(String lv) {
-        return new QuestionDTO(conSQL_question.getAllIdQuestion(lv)).getStrArrQuestion();
+        return new QuestionDTO(mqd_manageQuestion.getAllIdQuestion(lv)).getStrArrQuestion();
     }
 
     public String getAnswer(String Id) {
-        return conSQL_question.getAnswer(Id);
+        return mqd_manageQuestion.getAnswer(Id);
     }
 
     public OptionsQuestion getOptionsQuestionById(String Id) {
-        return conSQL_question.getOptionQuestionByID(Id);
+        return mqd_manageQuestion.getOptionQuestionByID(Id);
     }
 
     public YesNoQuestion getYesNoQuestionById(String Id) {
-        return conSQL_question.getYesNoQuestionById(Id);
+        return mqd_manageQuestion.getYesNoQuestionById(Id);
     }
 
-    private connectSQL conSQL_question;
+    public String getTypeById(String Id) {
+        return mqd_manageQuestion.getTypeById(Id);
+    }
+
     private OptionsQuestionDTO pQDTO_optionsQuestion;
     private YesNoQuestionDTO ynQDTO_yesNoQuestion;
     private YesNoQuestion yesNoQuestion;
+    private manageQuestionDAL mqd_manageQuestion;
 }

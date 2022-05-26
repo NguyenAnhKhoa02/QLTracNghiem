@@ -6,12 +6,13 @@ import BLL.DTO.ExamDTO;
 import BLL.Exam.DetailExam;
 import BLL.Exam.Exam;
 import BLL.TimeExam.TimeExam;
-import DAL.connectSQL;
+import DAL.manageExamDAL;
 
 public class manageExam {
     public manageExam() {
         mnde_manageDetailExam = new manageDetailExam();
-        connectSQL = new connectSQL();
+        ;
+        med_manageExamDAL = new manageExamDAL();
     }
 
     private String[] mergeStrArrQuestion(String[]... strArr) {
@@ -50,11 +51,11 @@ public class manageExam {
     }
 
     public void saveToSql(String IdExam, ArrayList<DetailExam> detailExams, String TimeName) {
-        connectSQL.saveExam(IdExam, detailExams, TimeName);
+        med_manageExamDAL.saveExam(IdExam, detailExams, TimeName);
     }
 
     public void saveToSql(ArrayList<Exam> exam) {
-        connectSQL.saveExam(exam);
+        med_manageExamDAL.saveExam(exam);
     }
 
     public ArrayList<Exam> getAllExam() {
@@ -62,11 +63,11 @@ public class manageExam {
     }
 
     public ArrayList<String> getAllIdExam() {
-        return connectSQL.getAllIdExam();
+        return med_manageExamDAL.getAllIdExam();
     }
 
     public Exam getExamById(String Id) {
-        return connectSQL.getExamById(Id);
+        return med_manageExamDAL.getExamById(Id);
     }
 
     public Exam getRandExam() {
@@ -85,11 +86,11 @@ public class manageExam {
     private randomQuestion rQ_randomQuestion;
     private randomIdExam rie_randomIdExam;
     private Exam exam;
-    private connectSQL connectSQL;
     private manageDetailExam mnde_manageDetailExam;
     private ExamDTO edto_examDTO;
     private String[] strArr_strRand;
     private ArrayList<Exam> arL_exam;
 
     private manageTimeExam mte_manageTimeExam;
+    private manageExamDAL med_manageExamDAL;
 }

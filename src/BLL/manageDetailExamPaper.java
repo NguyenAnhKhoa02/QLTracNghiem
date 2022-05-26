@@ -5,10 +5,11 @@ import java.util.HashMap;
 
 import BLL.ExamPaper.DetailExamPaper;
 import DAL.connectSQL;
+import DAL.manageDetailExamPaperDAL;
 
 public class manageDetailExamPaper {
     public manageDetailExamPaper() {
-        connectSQL = new connectSQL();
+        mdep_manageDetailExamDAL = new manageDetailExamPaperDAL();
     }
 
     public void createArLDetailExamPaper(String Id, HashMap<String, String> answer) {
@@ -20,9 +21,9 @@ public class manageDetailExamPaper {
     }
 
     public void SaveToSql() {
-        connectSQL.SaveDetailExamPaper(arL_detailExamPapers);
+        mdep_manageDetailExamDAL.SaveDetailExamPaper(arL_detailExamPapers);
     }
 
-    private connectSQL connectSQL;
+    private manageDetailExamPaperDAL mdep_manageDetailExamDAL;
     private ArrayList<DetailExamPaper> arL_detailExamPapers;
 }

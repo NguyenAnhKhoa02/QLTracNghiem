@@ -69,6 +69,13 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
 
             if (evt.getSource() == buttonViewExamPaper) {
                 fep_frameExamPaper = new frameExamPaper();
+                if (fep_frameExamPaper.getExam() != null) {
+                    setVisible(false);
+                    fep_frameExamPaper.addWindowListener(this);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không có đề thi nào được tạo", "Thông báo",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
 
@@ -206,6 +213,10 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
         }
 
         if (e.getSource() == fme_frameMakingExam) {
+            setVisible(true);
+        }
+
+        if (e.getSource() == fep_frameExamPaper) {
             setVisible(true);
         }
     }
