@@ -85,6 +85,14 @@ public class manageQuestion {
         return conSQL_question.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions() + 1));
     }
 
+    public Boolean deleteYesNoQuestion(YesNoQuestion yNoQuestion) {
+        return conSQL_question.deleteYesNoQuestion(yNoQuestion);
+    }
+
+    public Boolean deleteOptionsQuestion(OptionsQuestion optionsQuestion) {
+        return conSQL_question.deleteOptionsQuestion(optionsQuestion);
+    }
+
     public int getCountQuestions(String level) {
         return conSQL_question.getCountQuesionsByLevel(level);
     }

@@ -39,6 +39,10 @@ create table Lectures(
 alter table Lectures add constraint PK_Lectures primary key (Id)
 alter table Lectures add constraint FK_Lectures_Fields foreign key (IdField) references Fields(Id)
 
+select FullName 
+from Lectures
+where Id=1
+
 insert into Lectures (Id,FullName,IdField,Position) values('1',N'Trần Văn A','CNTT',N'Giảng viên');
 insert into Lectures (Id,FullName,IdField,Position) values('2',N'Lê Văn B','CNTT',N'Giảng viên');
 insert into Lectures (Id,FullName,IdField,Position) values('3',N'Nguyễn Văn C','CNTT',N'Trưởng khoa');
@@ -111,6 +115,8 @@ insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues)
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values (38,'4',N'Để đảo giá trị của một biến boolean, ta dùng toán tử nào?','a','LTJV','2','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values (39,'4',N'Nếu không khai báo từ khóa chỉ phạm vi truy cập, phạm vi truy cập của đối tượng là gì?','a','LTJV','2','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values (40,'4',N'Trong Java, kiểu char biểu diễn bộ mã code nào dưới đây?','b','LTJV','2','Options')
+select * from Questions where Id=41
+delete from Questions where Id=42
 
 select Answer 
 from Questions
@@ -172,7 +178,7 @@ insert into YesNoQuestion(Id,Options) values (32,N'a.Đúng b.Sai')
 insert into YesNoQuestion(Id,Options) values (35,N'a.Đúng b.Sai')
 insert into YesNoQuestion(Id,Options) values (36,N'a.Đúng b.Sai')
 
-
+delete from YesNoQuestion
 create table OptionsQuestion(
 	Id varchar(10) not null,
 	Options nvarchar(MAX)
@@ -213,8 +219,8 @@ insert into OptionsQuestion (Id,Options) values (37,N'a. Nếu condition là tru
 insert into OptionsQuestion (Id,Options) values (38,N'a. ! b. >> c. << d. !!')
 insert into OptionsQuestion (Id,Options) values (39,N'a. Có thể truy cập các lớp từ trong cùng package b. Có thể truy cập đối tượng từ các lớp trong cùng package và lớp con nằm trong package c. Có thể truy cập đối tượng từ các phương thức khác trong lớp đó d. Có thể truy cập đối tượng từ bất kì vị trí nào của chương trình')
 insert into OptionsQuestion (Id,Options) values (40,N'a. UTF-8 b. UTF-16 c. UTF-32 d. Tất cả đều sai')
-
-
+select * from OptionsQuestion where Id =42
+delete from OptionsQuestion where Id=42
 
 delete from OptionsQuestion
 update OptionsQuestion
@@ -281,19 +287,7 @@ alter table ExamPapers add constraint FK_ExamPapers_Students foreign key (IdStud
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('123','103','32',3,7,8)
 select * from ExamPapers
 
-
-create table DetailExamPaper(
-	Id nvarchar(10) not null,
-	IdQues nvarchar(10),
-	Answer nvarchar,
-)
-
-select IdQues from DetailExamPaper 
-
-delete from DetailExamPaper
-delete from ExamPapers
-
-alter table DetailExamPaper add constraint FK_DetailExamPaper_ExamPapaers foreign key (Id) references ExamPapers(Id)
+ 
 
 alter table DetailExamPaper drop constraint PK_DetailExamPaper
 

@@ -79,6 +79,7 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         return pDQ_detailQuestion;
     }
 
+    // Phương thức vĩ đại
     public void updateSQL(String Id) {
         if (pDQ_detailQuestion.getType().getSelectedIndex() == initialize_type)
             isChange = false;
@@ -106,12 +107,12 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
             }
 
             optionsQuestion.setStr_options(pDQ_detailQuestion.getOptions().getText());
-            if (Id == null) {
+            if (btn_Controller.getText().equals("Sửa")) {
                 manageQuestion.updateOptionsQuestion(optionsQuestion, isChange);
-            }
-
-            else {
+            } else if (btn_Controller.getText().equals("Thêm")) {
                 manageQuestion.addOptionsQuestion(optionsQuestion);
+            } else {
+                manageQuestion.deleteOptionsQuestion(optionsQuestion);
             }
         }
         if (pDQ_detailQuestion.getType().getSelectedIndex() == 1) {
@@ -134,12 +135,12 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
             }
 
             yesNoQuestion.getOptionsQuestion().toString();
-            if (Id == null) {
+            if (btn_Controller.getText().equals("Sửa")) {
                 manageQuestion.updateYesNoQuestion(yesNoQuestion, isChange);
-            }
-
-            else {
+            } else if (btn_Controller.getText().equals("Thêm")) {
                 manageQuestion.addYesNoQuestion(yesNoQuestion);
+            } else {
+                manageQuestion.deleteYesNoQuestion(yesNoQuestion);
             }
         }
     }

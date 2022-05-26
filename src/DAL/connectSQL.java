@@ -250,6 +250,38 @@ public class connectSQL {
 
     }
 
+    public Boolean deleteYesNoQuestion(YesNoQuestion yesNoQuestion) {
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("delete from YesNoQuestion where id='" + yesNoQuestion.getIdQuestion() + "'");
+            statement.executeUpdate("delete from Questions where id='" + yesNoQuestion.getIdQuestion() + "'");
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+
+    }
+
+    public Boolean deleteOptionsQuestion(OptionsQuestion optionsQuestion) {
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("delete from OptionsQuestion where id='" + optionsQuestion.getIdQuestion() + "'");
+            statement.executeUpdate("delete from Questions where id='" + optionsQuestion.getIdQuestion() + "'");
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return false;
+        }
+        closeConnectSQL();
+        return true;
+
+    }
+
     // public OptionsQuestion getSearchOptionsQuestion(String Id) {
     // OptionsQuestion ques = null;
     // }

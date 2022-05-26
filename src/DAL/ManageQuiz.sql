@@ -116,7 +116,7 @@ insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues)
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values (39,'4',N'Nếu không khai báo từ khóa chỉ phạm vi truy cập, phạm vi truy cập của đối tượng là gì?','a','LTJV','2','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values (40,'4',N'Trong Java, kiểu char biểu diễn bộ mã code nào dưới đây?','b','LTJV','2','Options')
 select * from Questions where Id=41
-delete from Questions where Id=41
+delete from Questions where Id=42
 
 select Answer 
 from Questions
@@ -219,8 +219,8 @@ insert into OptionsQuestion (Id,Options) values (37,N'a. Nếu condition là tru
 insert into OptionsQuestion (Id,Options) values (38,N'a. ! b. >> c. << d. !!')
 insert into OptionsQuestion (Id,Options) values (39,N'a. Có thể truy cập các lớp từ trong cùng package b. Có thể truy cập đối tượng từ các lớp trong cùng package và lớp con nằm trong package c. Có thể truy cập đối tượng từ các phương thức khác trong lớp đó d. Có thể truy cập đối tượng từ bất kì vị trí nào của chương trình')
 insert into OptionsQuestion (Id,Options) values (40,N'a. UTF-8 b. UTF-16 c. UTF-32 d. Tất cả đều sai')
-select * from OptionsQuestion where Id =41
-delete from OptionsQuestion where Id=41
+select * from OptionsQuestion where Id =42
+delete from OptionsQuestion where Id=42
 
 delete from OptionsQuestion
 update OptionsQuestion
