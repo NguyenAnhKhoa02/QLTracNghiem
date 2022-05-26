@@ -139,7 +139,7 @@ public class frameLecture extends JFrame implements ActionListener,WindowListene
 
         JPanel jp_Images = new JPanel();
         jp_Images.setBackground(Color.white);
-        ImageIcon img_Infor = new ImageIcon("..\\QLTracNghiem\\src\\images\\studentsinfor.png");
+        ImageIcon img_Infor = new ImageIcon("..\\QLTracNghiem\\src\\images\\lectureinfor.png");
         jp_Images.add(lb_Images = new JLabel(img_Infor));
         add(jp_Images, BorderLayout.WEST);
 
