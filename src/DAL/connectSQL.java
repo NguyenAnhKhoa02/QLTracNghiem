@@ -76,8 +76,8 @@ public class connectSQL {
      * Setting sql sever*
      * *****************
      */
-    private String host_name = "DESKTOP-F7JKQMS\\SQLEXPRESS";
+    private String host_name = "QUYQUY\\AO";
     private String user = "sa";
-    private String password = "admin";
+    private String password = "0977";
 
 }
