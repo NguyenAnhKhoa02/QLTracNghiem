@@ -140,8 +140,9 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
 
         JPanel jp_Images = new JPanel();
         jp_Images.setBackground(Color.white);
-        ImageIcon img_Infor = new ImageIcon(
-                "C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\studentsinfor.png");
+
+        ImageIcon img_Infor = new ImageIcon("..\\QLTracNghiem\\src\\images\\lectureinfor.png");
+
         jp_Images.add(lb_Images = new JLabel(img_Infor));
         add(jp_Images, BorderLayout.WEST);
 
@@ -157,9 +158,9 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
 
         buttonLogOut = new JButton("Đăng xuất");
         ImageIcon img_DoTest = new ImageIcon(
-                "C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\dotest.png");
+                "..\\QLTracNghiem\\src\\images\\dotest.png");
         ImageIcon img_LogOut = new ImageIcon(
-                "C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\logout.png");
+                "..\\QLTracNghiem\\src\\images\\logout.png");
         buttonLogOut.setIcon(img_LogOut);
         buttonDoTest.setIcon(img_DoTest);
         buttonLogOut.setFont(new Font("Times New Roman", Font.BOLD, 12));
