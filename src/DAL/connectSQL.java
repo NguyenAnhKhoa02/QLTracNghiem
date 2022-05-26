@@ -309,34 +309,33 @@ public class connectSQL {
         return column;
     }
 
-
-
-    public String isLogin(String username, String pass){
+    public String isLogin(String username, String pass) {
         String str_user = null;
         connetToSQL();
         try {
             statement = connection.createStatement();
-            for(int i = 0; i < 2; i++){
-                if(i>0 && str_user == null){
-                    resultSet = statement.executeQuery( "select * from LectureLogin where userLecture = '"+username+"' and pass = '"+pass+"'");
-                    while(resultSet.next())
+            for (int i = 0; i < 2; i++) {
+                if (i > 0 && str_user == null) {
+                    resultSet = statement.executeQuery("select * from LectureLogin where userLecture = '" + username
+                            + "' and pass = '" + pass + "'");
+                    while (resultSet.next())
                         str_user = resultSet.getString(1).trim();
                 }
-                resultSet = statement.executeQuery( "select * from StudentsLogin where userStudent = '"+username+"' and pass = '"+pass+"'");
-                while(resultSet.next())
+                resultSet = statement.executeQuery(
+                        "select * from StudentsLogin where userStudent = '" + username + "' and pass = '" + pass + "'");
+                while (resultSet.next())
                     str_user = resultSet.getString(1).trim();
             }
         } catch (Exception e) {
-            //TODO: handle exception
+            // TODO: handle exception
             e.printStackTrace();
-            
+
         }
 
         return str_user;
     }
 
     private PreparedStatement ps = null;
-
 
     public ArrayList<TimeExam> getTimeExam() {
         ArrayList<TimeExam> arL_timeExam = new ArrayList<>();
@@ -379,7 +378,6 @@ public class connectSQL {
             e.printStackTrace();
         }
         closeConnectSQL();
-
 
         return arL_Subject;
     }
@@ -588,9 +586,9 @@ public class connectSQL {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(str_query);
 
-            if(!resultSet.next())
+            if (!resultSet.next())
                 return null;
-                
+
             student = new Student(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
                     resultSet.getString(4));
         } catch (Exception e) {
@@ -724,17 +722,18 @@ public class connectSQL {
         return str_name;
     }
 
-    public Lecture getLectureById (String Id){
-        
+    public Lecture getLectureById(String Id) {
+
         Lecture l = null;
         connetToSQL();
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("select * from Lectures where Id='" + Id + "'");
             resultSet.next();
-            l = new Lecture(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
+            l = new Lecture(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
+                    resultSet.getString(4));
         } catch (Exception e) {
-            //TODO: handle exception
+            // TODO: handle exception
         }
         closeConnectSQL();
 
@@ -752,8 +751,8 @@ public class connectSQL {
      * Setting sql sever*
      * *****************
      */
-    private String host_name = "LAPTOP-9Q1U79UH\\THANHLUC";
+    private String host_name = "QUYQUY\\AO";
     private String user = "sa";
-    private String password = "123";
+    private String password = "0977";
 
 }
