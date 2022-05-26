@@ -129,7 +129,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
         jt_LecturePosition.setText(lecture.getStr_Position());
         jp_LectureInfor.add(jt_LecturePosition);
 
-        jp_LectureInfor.add(lb_LectureIdField = new JLabel("Ngành: "));
+        jp_LectureInfor.add(lb_LectureIdField = new JLabel("Khoa: "));
         lb_LectureIdField.setFont(new Font("Times New Roman", Font.BOLD, 14));
         jt_LectureIdField = new JTextField(20);
         jt_LectureIdField.setText(lecture.getStr_Filed());
@@ -154,7 +154,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
         JPanel jp_Images = new JPanel();
         jp_Images.setBackground(Color.white);
         ImageIcon img_Infor = new ImageIcon(
-                "..\\QLTracNghiem\\src\\images\\studentsinfor.png");
+                "..\\QLTracNghiem\\src\\images\\lectureinfor.png");
         jp_Images.add(lb_Images = new JLabel(img_Infor));
         add(jp_Images, BorderLayout.WEST);
 
@@ -164,10 +164,18 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
         buttonDoTest = new JButton("Quản lý câu hỏi");
         if (lecture.getStr_Position().equals("Trưởng khoa")) {
             buttonMakingExam = new JButton("Ra đề thi");
+            ImageIcon img_MakingExam = new ImageIcon(
+                    "..\\QLTracNghiem\\src\\images\\makingexam.png");
+            buttonMakingExam.setIcon(img_MakingExam);
+            buttonMakingExam.setFont(new Font("Times New Roman", Font.BOLD, 12));
             buttonMakingExam.addActionListener(this);
             jp_DoTest.add(buttonMakingExam);
 
             buttonViewExamPaper = new JButton("Xem đề thi");
+            ImageIcon img_ViewTest = new ImageIcon(
+                    "..\\QLTracNghiem\\src\\images\\viewtest.png");
+            buttonViewExamPaper.setIcon(img_ViewTest);
+            buttonViewExamPaper.setFont(new Font("Times New Roman", Font.BOLD, 12));
             buttonViewExamPaper.addActionListener(this);
             jp_DoTest.add(buttonViewExamPaper);
         }
