@@ -139,7 +139,7 @@ public class frameLecture extends JFrame implements ActionListener,WindowListene
 
         JPanel jp_Images = new JPanel();
         jp_Images.setBackground(Color.white);
-        ImageIcon img_Infor = new ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\studentsinfor.png");
+        ImageIcon img_Infor = new ImageIcon("..\\QLTracNghiem\\src\\images\\studentsinfor.png");
         jp_Images.add(lb_Images = new JLabel(img_Infor));
         add(jp_Images, BorderLayout.WEST);
 
@@ -149,13 +149,16 @@ public class frameLecture extends JFrame implements ActionListener,WindowListene
         buttonDoTest = new JButton("Quản lý câu hỏi");
         if(lecture.getStr_Position().equals("Trưởng khoa")){
             buttonMakingExam = new JButton("Ra đề thi");
+            ImageIcon img_MakingExam = new ImageIcon("..\\QLTracNghiem\\src\\images\\makingexam.png");
+            buttonMakingExam.setIcon(img_MakingExam);
+            buttonMakingExam.setFont(new Font("Times New Roman", Font.BOLD,	12));
             buttonMakingExam.addActionListener(this);
             jp_DoTest.add(buttonMakingExam);
         }
 
         buttonLogOut = new JButton("Đăng xuất");  
-        ImageIcon img_DoTest = new ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\dotest.png");
-        ImageIcon img_LogOut = new ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\logout.png");
+        ImageIcon img_DoTest = new ImageIcon("..\\QLTracNghiem\\src\\images\\dotest.png");
+        ImageIcon img_LogOut = new ImageIcon("..\\QLTracNghiem\\src\\images\\logout.png");
         buttonLogOut.setIcon(img_LogOut);
         buttonDoTest.setIcon(img_DoTest);
         buttonLogOut.setFont(new Font("Times New Roman", Font.BOLD,	12));

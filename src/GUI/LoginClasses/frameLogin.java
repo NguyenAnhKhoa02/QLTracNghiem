@@ -123,7 +123,7 @@ public class frameLogin extends JFrame implements ActionListener {
 
         JPanel jpLeft = new JPanel();
     //    jpLeft.setBorder(BorderFactory.createLineBorder(Color.red));
-        ImageIcon imageLeft = new ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\account.png");
+        ImageIcon imageLeft = new ImageIcon("..\\QLTracNghiem\\src\\images\\account.png");
         jpLeft.add(new JLabel(imageLeft));
         add(jpLeft, BorderLayout.WEST); //Căn ảnh bên trái (WEST: phía Tây)
 
@@ -131,8 +131,8 @@ public class frameLogin extends JFrame implements ActionListener {
         jpBottom.setBorder(BorderFactory.createLineBorder(Color.gray));
         buttonLogin = new JButton("Đăng nhập");
         buttonExit = new JButton("Thoát");
-        ImageIcon imageLogin = new ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\login.png");
-        ImageIcon imageExit = new ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\QLTracNghiem\\src\\images\\exit.png");
+        ImageIcon imageLogin = new ImageIcon("..\\QLTracNghiem\\src\\images\\login.png");
+        ImageIcon imageExit = new ImageIcon("..\\QLTracNghiem\\src\\images\\exit.png");
         buttonLogin.setIcon(imageLogin);
         buttonExit.setIcon(imageExit);
         buttonLogin.setFont(new Font("Times New Roman",	Font.BOLD,	12));
