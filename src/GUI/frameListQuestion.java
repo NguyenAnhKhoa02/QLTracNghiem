@@ -7,8 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,7 +27,8 @@ import BLL.manageQuestion;
 import BLL.Question.Question;
 import GUI.CommonClasses.*;
 
-public class frameListQuestion extends JFrame implements Parameter, MouseListener, ActionListener, KeyListener {
+public class frameListQuestion extends JFrame
+        implements Parameter, MouseListener, ActionListener, KeyListener, WindowListener {
     public frameListQuestion(String IdLecture) {
         parameter();
         str_idLecture = IdLecture;
@@ -194,6 +198,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
             fDQ_detaulQuestion.getControllerButton().setText("Sửa");
             fDQ_detaulQuestion.getControllerButton().addActionListener(this);
+            fDQ_detaulQuestion.addWindowListener(this);
         }
 
         if (SwingUtilities.isRightMouseButton(e) && e.getSource() == tb_listQuestion) {
@@ -226,6 +231,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
             fDQ_detaulQuestion.getControllerButton().setText("Xóa");
             fDQ_detaulQuestion.getControllerButton().addActionListener(this);
+            fDQ_detaulQuestion.addWindowListener(this);
         }
     }
 
@@ -233,9 +239,11 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if (fDQ_detaulQuestion != null) {
+
             if (fDQ_detaulQuestion.getControllerButton().getText().equals("Sửa")) {
                 fDQ_detaulQuestion.updateSQL(null);
                 fDQ_detaulQuestion.dispose();
+                fDQ_detaulQuestion.addWindowListener(this);
                 getContentPane().remove(scrollPane);
                 repaint();
                 makingTable();
@@ -244,6 +252,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
             if (fDQ_detaulQuestion.getControllerButton().getText().equals("Thêm")) {
                 fDQ_detaulQuestion.updateSQL(str_idLecture);
                 fDQ_detaulQuestion.dispose();
+                fDQ_detaulQuestion.addWindowListener(this);
                 getContentPane().remove(scrollPane);
                 repaint();
                 makingTable();
@@ -252,16 +261,17 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
             if (fDQ_detaulQuestion.getControllerButton().getText().equals("Xóa")) {
                 fDQ_detaulQuestion.updateSQL(null);
                 fDQ_detaulQuestion.dispose();
+                fDQ_detaulQuestion.addWindowListener(this);
                 getContentPane().remove(scrollPane);
                 repaint();
                 makingTable();
             }
-            fDQ_detaulQuestion = null;
+
         }
 
-        if (e.getSource() == btn_AddQuestion)
+        if (e.getSource() == btn_AddQuestion) {
+            tb_listQuestion.getSelectionModel().clearSelection();
 
-        {
             fDQ_detaulQuestion = new frameDetailQuestion();
             fDQ_detaulQuestion.getControllerButton().setText("Thêm");
             fDQ_detaulQuestion.getControllerButton().addActionListener(this);
@@ -269,6 +279,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
             fDQ_detaulQuestion.getPanelDetailQuestion().getLecture()
                     .setText(new manageLecture().getNameLectureById(str_idLecture));
             fDQ_detaulQuestion.getPanelDetailQuestion().getLecture().setEditable(false);
+            fDQ_detaulQuestion.addWindowListener(this);
         }
     }
 
@@ -338,6 +349,49 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        // TODO Auto-generated method stub
+        if (e.getSource() == fDQ_detaulQuestion)
+            fDQ_detaulQuestion = null;
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
         // TODO Auto-generated method stub
 
     }

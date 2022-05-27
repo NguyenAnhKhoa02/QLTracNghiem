@@ -300,7 +300,7 @@ create table DetailExam(
 	Id nvarchar(10) not null,
 	IdQues varchar(10) not null
 )
-
+select * from DetailExam
 select Id from Exam
 
 =======
@@ -349,7 +349,7 @@ alter table ExamPapers add constraint FK_ExamPapers_Students foreign key (IdStud
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('123','103','32',3,7,8)
 <<<<<<< HEAD
 
-
+select * from ExamPapers
 create table DetailExamPaper(
 	Id nvarchar(10) not null,
 	IdQues varchar(10),
