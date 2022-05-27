@@ -188,6 +188,7 @@ alter table LectureLogin add constraint PK_LectureLogin primary key(userLecture)
 alter table LectureLogin add constraint FK_LectureLogon_Lecture foreign key (userLecture) references Lectures(Id)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 insert into LectureLogin(userLecture,pass) values ('1','123')
 insert into LectureLogin(userLecture,pass) values ('2','123')
 insert into LectureLogin(userLecture,pass) values ('3','123')
@@ -198,6 +199,11 @@ insert into LectureLogin(userLecture,pass) values ('3','123')
 
 =======
 >>>>>>> d5116cc3c2211cfa8373b0cfdfc8784c57862ad7
+=======
+insert into LectureLogin(userLecture,pass) values ('1','123')
+insert into LectureLogin(userLecture,pass) values ('2','123')
+insert into LectureLogin(userLecture,pass) values ('3','123')
+>>>>>>> c9c5342bdb7574cbfd9c0d485704e22dc57f1a23
 
 create table YesNoQuestion(
 	Id varchar(10) not null,
@@ -286,7 +292,7 @@ alter table Exam add constraint FK_Exam_TimeExam foreign key (TimeName) referenc
 insert into Exam (Id,TimeName) values (123,N'Kì thi kết thúc học phần 2022 - 2023')
 select Id 
 from Exam
-
+delete from DetailExam
 delete from Exam
 where Id = '886'
 

@@ -285,6 +285,12 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
                 JOptionPane.showMessageDialog(this, "Đã nộp bài", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 
             if (isDone() && !isAdmit) {
+                for (int row = 0; row < cba_checkBoxAnswer.getAllCheckBox().length; row++) {
+                    for (Checkbox b : cba_checkBoxAnswer.getAllCheckBox()[row]) {
+                        b.setEnabled(false);
+                    }
+                }
+
                 mep_manageExamPaper = new manageExamPaper();
                 mep_manageExamPaper.makingExamPaper(exam, convertAnswer(), student.getId());
 

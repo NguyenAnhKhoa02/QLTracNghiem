@@ -55,7 +55,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
         int_widthLbTitleFrame = parameterScreen.SCREEN_WIDTH;
         int_heightLbTitleFrame = 100;
 
-        int_widthBtnAddQuestion = 100;
+        int_widthBtnAddQuestion = 150;
         int_heightBtnAddQuestion = 50;
 
         int_widthLbSearch = 75;
@@ -90,9 +90,9 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     }
 
     private void displayAddButton() {
-        btn_AddQuestion = new JButton("Thêm");
+        btn_AddQuestion = new JButton("Thêm câu hỏi");
         btn_AddQuestion.setSize(int_widthBtnAddQuestion, int_heightBtnAddQuestion);
-        posInScreen.CUSTOM_WITH_PERCENT(btn_AddQuestion, 90, 18);
+        posInScreen.CUSTOM_WITH_PERCENT(btn_AddQuestion, 87, 18);
         this.add(btn_AddQuestion);
         btn_AddQuestion.addActionListener(this);
     }
@@ -256,6 +256,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
                 repaint();
                 makingTable();
             }
+            fDQ_detaulQuestion = null;
         }
 
         if (e.getSource() == btn_AddQuestion)
@@ -288,7 +289,6 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
         // TODO Auto-generated method stub
 
     }
-
 
     // public static void main(String[] args) {
     // frameListQuestion a = new frameListQuestion();
@@ -343,7 +343,7 @@ public class frameListQuestion extends JFrame implements Parameter, MouseListene
     }
 
     // public static void main(String[] args) {
-    //     frameListQuestion a = new frameListQuestion("1");
+    // frameListQuestion a = new frameListQuestion("1");
     // }
 
 }

@@ -1,5 +1,3 @@
-package GUI;
-
 import GUI.LoginClasses.frameLogin;
 
 public class main {

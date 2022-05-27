@@ -236,6 +236,11 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
     }
 
     private void showAllButtonIDExam() {
+        if (btn_numberExam != null) {
+            for (JButton btn : btn_numberExam)
+                jlp_paneDisplay.remove(btn);
+        }
+
         btn_numberExam = new JButton[mnE_manageExam.getAllExam().size()];
         for (int i = 0; i < mnE_manageExam.getAllExam().size(); i++) {
             btn_numberExam[i] = new JButton(String.valueOf(i + 1));
@@ -251,6 +256,9 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
     }
 
     private void showButtonSave() {
+        if (btn_Save != null) {
+            jlp_paneDisplay.remove(btn_Save);
+        }
         btn_Save = new JButton("SaveAll");
         btn_Save.setSize(int_widthBtnSave, int_heightBtnSave);
         posInScreen.CENTER_CUSTOM_Y_CHILDREN_PARENT_ARRAY_COMPONENT(btn_Save, jlp_paneDisplay, 68);
@@ -378,15 +386,15 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
             if (e.getSource() == btn_Save) {
                 mnE_manageExam.saveToSql(mnE_manageExam.getAllExam());
 
-                for (boolean b : isSaveIdExam) {
-                    b = true;
+                for (int i = 0; i < isSaveIdExam.length; i++) {
+                    isSaveIdExam[i] = true;
                 }
-
+                isSave = true;
+                jlp_paneDisplay.remove(pe_paneExam);
                 panePageExam(int_indexIdExam + 1);
 
                 jlp_paneDisplay.remove(btn_Save);
                 jlp_paneDisplay.repaint();
-                isSave = true;
 
                 btn_Save = null;
             }

@@ -166,6 +166,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
             buttonMakingExam = new JButton("Ra đề thi");
             ImageIcon img_MakingExam = new ImageIcon(
                     "..\\QLTracNghiem\\src\\images\\makingexam.png");
+
             buttonMakingExam.setIcon(img_MakingExam);
             buttonMakingExam.setFont(new Font("Times New Roman", Font.BOLD, 12));
             buttonMakingExam.addActionListener(this);
@@ -174,6 +175,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
             buttonViewExamPaper = new JButton("Xem đề thi");
             ImageIcon img_ViewTest = new ImageIcon(
                     "..\\QLTracNghiem\\src\\images\\viewtest.png");
+
             buttonViewExamPaper.setIcon(img_ViewTest);
             buttonViewExamPaper.setFont(new Font("Times New Roman", Font.BOLD, 12));
             buttonViewExamPaper.addActionListener(this);

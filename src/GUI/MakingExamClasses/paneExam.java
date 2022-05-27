@@ -89,6 +89,8 @@ public class paneExam extends JPanel implements Parameter {
 
     private void devidePage() {
         int page = exam.getDetailExams().size() / 10;
+        if (page == 0)
+            page = 1;
         pn_page = new JPanel[page];
         btn_Page = new JButton[page];
         for (int i_page = 0; i_page < page; i_page++) {
@@ -156,7 +158,7 @@ public class paneExam extends JPanel implements Parameter {
         int i_start = i_end - 10 - 1;
 
         if (i_end > exam.getDetailExams().size()) {
-            i_end -= 1;
+            i_end = exam.getDetailExams().size();
         }
 
         lb_contentExam = new JLabel[i_end];

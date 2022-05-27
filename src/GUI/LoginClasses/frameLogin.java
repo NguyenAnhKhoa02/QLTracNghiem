@@ -14,6 +14,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -36,7 +37,7 @@ import BLL.manageLecture;
 import BLL.manageLogin;
 import BLL.manageStudent;
 
-public class frameLogin extends JFrame implements ActionListener {
+public class frameLogin extends JFrame implements ActionListener, KeyListener {
 
     private JTextField tf_inputName;
     private JPasswordField pf_inputPassword;
@@ -62,32 +63,7 @@ public class frameLogin extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         // TODO Auto-generated method stub
         if (evt.getSource() == buttonLogin) {
-            ml_manageLogin = new manageLogin();
-            String Id = ml_manageLogin.isLogin(tf_inputName.getText(), pf_inputPassword.getText());
-
-            ms_manageStudent = new manageStudent();
-            ml_manageLecture = new manageLecture();
-            if (Id != null) {
-                dispose();
-
-                if (ms_manageStudent.getStudentById(Id) != null) {
-                    fs_frameStudent = new frameStudents(ms_manageStudent.getStudentById(Id));
-                    fs_frameStudent.showWindow();
-                }
-
-                if (ml_manageLecture.getLectureById(Id) != null) {
-                    fl_frameLecture = new frameLecture(ml_manageLecture.getLectureById(Id));
-                    fl_frameLecture.showWindow();
-                }
-            } else if (tf_inputName.getText().equals("") && pf_inputPassword.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Vui lòng điền thông tin đăng nhập!", "Lỗi đăng nhập",
-                        JOptionPane.ERROR_MESSAGE);
-                tf_inputName.requestFocus();
-            } else {
-                JOptionPane.showMessageDialog(this, "Sai tên đăng nhập hoặc mật khẩu!", "Lỗi đăng nhập",
-                        JOptionPane.ERROR_MESSAGE);
-                tf_inputName.requestFocus();
-            }
+            accessLogin();
         }
 
         if (evt.getSource() == showPassword) {
@@ -117,11 +93,11 @@ public class frameLogin extends JFrame implements ActionListener {
 
         JPanel jpTitle = new JPanel();
         jpTitle.setBackground(Color.white);
-    //    jpTitle.setBorder(BorderFactory.createLineBorder(Color.red)); //Tạo viền bảng
+        // jpTitle.setBorder(BorderFactory.createLineBorder(Color.red)); //Tạo viền bảng
         jpTitle.add(lb_nameTitle = new JLabel("ĐĂNG NHẬP", JLabel.CENTER));
         lb_nameTitle.setFont(new Font("Times New Roman", Font.BOLD, 30));
         lb_nameTitle.setForeground(Color.BLUE);
-        add(jpTitle, BorderLayout.NORTH); //Căn tiêu đề phía trên cùng (NORTH : Phía bắc)
+        add(jpTitle, BorderLayout.NORTH); // Căn tiêu đề phía trên cùng (NORTH : Phía bắc)
 
         JPanel jpLeft = new JPanel();
         jpLeft.setBackground(Color.white);
@@ -141,23 +117,75 @@ public class frameLogin extends JFrame implements ActionListener {
         buttonExit.setIcon(imageExit);
         buttonLogin.setFont(new Font("Times New Roman", Font.BOLD, 12));
         buttonExit.setFont(new Font("Times New Roman", Font.BOLD, 12));
-        buttonLogin.setMnemonic(KeyEvent.VK_ENTER); // Nhấn phím Alt + Enter để đăng nhập thay cho thao tác Click chuột
+        // buttonLogin.setMnemonic(KeyEvent.VK_ENTER); // Nhấn phím Alt + Enter để đăng
+        // nhập thay cho thao tác Click chuột
         jpBottom.add(buttonLogin);
         jpBottom.add(buttonExit);
         add(jpBottom, BorderLayout.SOUTH);
 
         JPanel jpCenter = new JPanel();
         jpCenter.setBackground(Color.white);
-        jpCenter.add(lb_User=new JLabel("Tên đăng nhập"));
-        lb_User.setFont(new Font("Times New Roman",	Font.BOLD,	14));
-        jpCenter.add(tf_inputName=new JTextField(20));
-        jpCenter.add(lb_Password=new JLabel("Mật khẩu"));
+        jpCenter.add(lb_User = new JLabel("Tên đăng nhập"));
+        lb_User.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        jpCenter.add(tf_inputName = new JTextField(20));
+        tf_inputName.addKeyListener(this);
+        jpCenter.add(lb_Password = new JLabel("Mật khẩu"));
         lb_Password.setFont(new Font("Times New Roman", Font.BOLD, 14));
         jpCenter.add(pf_inputPassword = new JPasswordField(20));
+        pf_inputPassword.addKeyListener(this);
         jpCenter.add(showPassword = new JCheckBox("Hiển thị mật khẩu"));
         showPassword.setFont(new Font("Times New Roman", Font.BOLD, 12));
         lb_Password.setPreferredSize(lb_User.getPreferredSize());
         add(jpCenter, BorderLayout.CENTER);
+    }
+
+    private void accessLogin() {
+        ml_manageLogin = new manageLogin();
+        String Id = ml_manageLogin.isLogin(tf_inputName.getText(), pf_inputPassword.getText());
+
+        ms_manageStudent = new manageStudent();
+        ml_manageLecture = new manageLecture();
+        if (Id != null) {
+            dispose();
+
+            if (ms_manageStudent.getStudentById(Id) != null) {
+                fs_frameStudent = new frameStudents(ms_manageStudent.getStudentById(Id));
+                fs_frameStudent.showWindow();
+            }
+
+            if (ml_manageLecture.getLectureById(Id) != null) {
+                fl_frameLecture = new frameLecture(ml_manageLecture.getLectureById(Id));
+                fl_frameLecture.showWindow();
+            }
+        } else if (tf_inputName.getText().equals("") && pf_inputPassword.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền thông tin đăng nhập!", "Lỗi đăng nhập",
+                    JOptionPane.ERROR_MESSAGE);
+            tf_inputName.requestFocus();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sai tên đăng nhập hoặc mật khẩu!", "Lỗi đăng nhập",
+                    JOptionPane.ERROR_MESSAGE);
+            tf_inputName.requestFocus();
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+        if (e.getKeyChar() == 10) {
+            accessLogin();
+        }
     }
 
     public void showWindow() {
