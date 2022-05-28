@@ -11,7 +11,7 @@ public class manageTimeExamDAL extends connectSQL {
 
     public ArrayList<TimeExam> getTimeExam() {
         ArrayList<TimeExam> arL_timeExam = new ArrayList<>();
-        String str_query = "select * from TimeExam";
+        String str_query = "select * from TimeExam where TimeName='HKII'";
 
         connetToSQL();
         try {
@@ -30,5 +30,4 @@ public class manageTimeExamDAL extends connectSQL {
 
         return arL_timeExam;
     }
-
 }

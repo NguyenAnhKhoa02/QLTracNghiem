@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.lang.model.util.ElementScanner14;
 
+import BLL.DTO.ExamPaperDTO;
 import BLL.Exam.Exam;
 import BLL.ExamPaper.ExamPaper;
 import DAL.connectSQL;
@@ -55,6 +56,19 @@ public class manageExamPaper {
 
     public ExamPaper getExamPaperById(String Id) {
         return mepd_manageExamPaperDAL.getExamPaperById(Id);
+    }
+
+    public boolean isDoExam(String IdStudent, String subject) {
+        return mepd_manageExamPaperDAL.isDoExam(IdStudent, subject);
+    }
+
+    public int getAverageMark(String idStudent, String Semester) {
+        return mepd_manageExamPaperDAL.getAverageMart(idStudent, Semester);
+    }
+
+    public String[][] getArrStastic(String Semester) {
+
+        return new ExamPaperDTO().getStringArrStatic(Semester);
     }
 
     private int int_rightQuestion, int_wrongQuestion;

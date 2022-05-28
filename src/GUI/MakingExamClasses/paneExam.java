@@ -132,7 +132,7 @@ public class paneExam extends JPanel implements Parameter {
         Subject sj_subjecTest = mns_manageSubject.getSubjectByQuestion(exam.getDetailExams().get(0).getIdQuestion());
         lb_Subject = new JLabel("Môn: " + sj_subjecTest.getName());
         lb_Subject.setSize(int_widthLbSubject, int_heightLbSubject);
-        posInScreen.CUSTOM_CHILD_PARENT(lb_Subject, this, 25, 5);
+        posInScreen.CUSTOM_CHILD_PARENT(lb_Subject, this, 10, 5);
         this.add(lb_Subject);
 
         lb_Credit = new JLabel("Số tín chỉ: " + String.valueOf(sj_subjecTest.getCredit()));
@@ -192,6 +192,7 @@ public class paneExam extends JPanel implements Parameter {
                 posInScreen.CUSTOM_CHILD_PARENT(lb_contentExam[i_start], pn_page[index - 1], 0, y);
                 posInScreen.PARENT_CHILD_VERTICAL(lb_optionsExam[i_start], lb_contentExam[i_start], 80);
             }
+            // System.out.println(pn_page[index - 1]);
             pn_page[index - 1].add(lb_contentExam[i_start]);
             pn_page[index - 1].add(lb_optionsExam[i_start]);
         }

@@ -12,8 +12,9 @@ import BLL.manageQuestion;
 import GUI.CommonClasses.Parameter;
 
 public class paneInfoQuestion extends JLayeredPane implements Parameter {
-    paneInfoQuestion(manageQuestion manageQuestion) {
+    paneInfoQuestion(manageQuestion manageQuestion, String Subject) {
         this.mnQ_manageQuestion = manageQuestion;
+        this.str_Subject = Subject;
         parameter();
         makingTitle();
         makingInfo();
@@ -30,25 +31,27 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
 
     private void makingInfo() {
         String str_tempt;
-        str_tempt = "Nhận biết: " + mnQ_manageQuestion.getCountQuestions("Nhận biết");
+        str_tempt = "Nhận biết: " + mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Nhận biết", str_Subject);
         jlb_Level1 = new JLabel(str_tempt);
         jlb_Level1.setSize(int_widthJlbLevel, int_heightJlbLevel);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Level1, this, 5, 15);
         add(jlb_Level1);
 
-        str_tempt = "Thông hiểu: " + mnQ_manageQuestion.getCountQuestions("Thông hiểu");
+        str_tempt = "Thông hiểu: " + mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Thông hiểu", str_Subject);
         jlb_Level2 = new JLabel(str_tempt);
         jlb_Level2.setSize(int_widthJlbLevel, int_heightJlbLevel);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Level2, this, 5, 35);
         add(jlb_Level2);
 
-        str_tempt = "Vận dụng thấp: " + mnQ_manageQuestion.getCountQuestions("Vận dụng thấp");
+        str_tempt = "Vận dụng thấp: "
+                + mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Vận dụng thấp", str_Subject);
         jlb_Level3 = new JLabel(str_tempt);
         jlb_Level3.setSize(int_widthJlbLevel, int_heightJlbLevel);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Level3, this, 5, 55);
         add(jlb_Level3);
 
-        str_tempt = "Vận dụng cao: " + mnQ_manageQuestion.getCountQuestions("Vận dụng cao");
+        str_tempt = "Vận dụng cao: "
+                + mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Vận dụng cao", str_Subject);
         jlb_Level4 = new JLabel(str_tempt);
         jlb_Level4.setSize(int_widthJlbLevel, int_heightJlbLevel);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Level4, this, 5, 75);
@@ -68,16 +71,20 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
     }
 
     public boolean isCountQuestion(int numberQues, int... rateLV) {
-        if (rateLV[0] * numberQues / 100 > mnQ_manageQuestion.getCountQuestions("Nhận biết"))
+        if (rateLV[0] * numberQues / 100 > mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Nhận biết",
+                str_Subject))
             return false;
 
-        if (rateLV[1] * numberQues / 100 > mnQ_manageQuestion.getCountQuestions("Thông hiểu"))
+        if (rateLV[1] * numberQues / 100 > mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Thông hiểu",
+                str_Subject))
             return false;
 
-        if (rateLV[2] * numberQues / 100 > mnQ_manageQuestion.getCountQuestions("Vận dụng thấp"))
+        if (rateLV[2] * numberQues / 100 > mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Vận dụng thấp",
+                str_Subject))
             return false;
 
-        if (rateLV[3] * numberQues / 100 > mnQ_manageQuestion.getCountQuestions("Vận dụng cao"))
+        if (rateLV[3] * numberQues / 100 > mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Vận dụng cao",
+                str_Subject))
             return false;
 
         return true;
@@ -131,7 +138,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
         }
 
         private void disPlayNumberRecommend() {
-            int_numberQuestion = mnQ_manageQuestion.getAllCountQuestions();
+            int_numberQuestion = mnQ_manageQuestion.getAllCountQuestions(str_Subject);
             int_numberQuestion = int_numberQuestion - int_numberQuestion % 10;
             lb_maxQuestions = new JLabel("Số câu hỏi: " + int_numberQuestion);
             lb_maxQuestions.setSize(int_widthLbMaxQuestions, int_heightLbMaxQuestion);
@@ -140,21 +147,24 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
         }
 
         private void displayPercentRecommend() {
-            int_percentLevel1 = (int) ((float) mnQ_manageQuestion.getCountQuestions("Nhận biết")
+            int_percentLevel1 = (int) ((float) mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Nhận biết",
+                    str_Subject)
                     / (float) int_numberQuestion * 100);
             lb_PercentLevel1 = new JLabel("Nhận biết: " + int_percentLevel1 + "%");
             lb_PercentLevel1.setSize(int_widthLbPercentLevel, int_heightLbPercentLevel);
             posInScreen.CUSTOM_CHILD_PARENT(lb_PercentLevel1, this, 0, 10);
             add(lb_PercentLevel1);
 
-            int_percentLevel2 = (int) ((float) mnQ_manageQuestion.getCountQuestions("Thông hiểu")
+            int_percentLevel2 = (int) ((float) mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Thông hiểu",
+                    str_Subject)
                     / (float) int_numberQuestion * 100);
             lb_PercentLevel2 = new JLabel("Thông hiểu: " + int_percentLevel2 + "%");
             lb_PercentLevel2.setSize(int_widthLbPercentLevel, int_heightLbPercentLevel);
             posInScreen.CUSTOM_CHILD_PARENT(lb_PercentLevel2, this, 0, 30);
             add(lb_PercentLevel2);
 
-            int_percentLevel3 = (int) ((float) mnQ_manageQuestion.getCountQuestions("Vận dụng thấp")
+            int_percentLevel3 = (int) ((float) mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Vận dụng thấp",
+                    str_Subject)
                     / (float) int_numberQuestion * 100);
             lb_PercentLevel3 = new JLabel("Vận dụng thấp: " + int_percentLevel3 + "%");
             lb_PercentLevel3.setSize(int_widthLbPercentLevel, int_heightLbPercentLevel);
@@ -235,4 +245,6 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
     private int int_heightBtnRecommendPane;
 
     private manageQuestion mnQ_manageQuestion;
+
+    private String str_Subject;
 }

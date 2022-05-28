@@ -182,6 +182,30 @@ public class manageQuestionDAL extends connectSQL {
         return row;
     }
 
+    public int getCountQuesionsByLevelAndSubject(String level, String subject) {
+        int row = 0;
+        String str_query = "select qs.Id "
+                + "from Questions qs, Levels lv "
+                + "where qs.IdSubject = '" + subject + "' and lv.LvName=N'" + level + "' and qs.LevelQues = lv.Id";
+
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(str_query);
+
+            while (resultSet.next())
+                row++;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
+        closeConnectSQL();
+
+        return row;
+    }
+
     public String getAnswer(String Id) {
         String str = null;
         connetToSQL();
@@ -250,13 +274,14 @@ public class manageQuestionDAL extends connectSQL {
         connetToSQL();
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("select TypeQues from Questions where Id  = " + Id + "");
+            resultSet = statement.executeQuery("select TypeQues from Questions where Id  = '" + Id + "'");
 
             resultSet.next();
             str = resultSet.getString(1);
         } catch (Exception e) {
             // TODO: handle exception
         }
+        closeConnectSQL();
 
         return str;
     }
@@ -333,11 +358,11 @@ public class manageQuestionDAL extends connectSQL {
         return arrL_tempt;
     }
 
-    public ArrayList<String> getAllIdQuestion(String lv) {
+    public ArrayList<String> getAllIdQuestion(String lv, String subject) {
         ArrayList<String> arrL_Id = new ArrayList<>();
         String str_query = "select qs.Id, qs.TypeQues "
                 + "from Questions qs, Levels lv "
-                + "where lv.LvName = N'" + lv + "' and qs.LevelQues = lv.Id";
+                + "where qs.IdSubject = '" + subject + "' and lv.LvName=N'" + lv + "' and qs.LevelQues = lv.Id";
 
         connetToSQL();
         try {

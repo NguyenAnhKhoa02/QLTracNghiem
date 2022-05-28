@@ -34,13 +34,14 @@ public class manageExam {
     }
 
     public void makingNewExam(int RateLV1, int RateLV2, int RateLV3, int RateLV4, int numberQuestion, int numberId,
-            TimeExam timeExam) {
+            TimeExam timeExam, String subject) {
         arL_exam = new ArrayList<>();
         mnde_manageDetailExam = new manageDetailExam();
-        rie_randomIdExam = new randomIdExam(numberId);
+        rie_randomIdExam = new randomIdExam(numberId, subject);
 
         for (String str : rie_randomIdExam.getIdExam()) {
-            rQ_randomQuestion = new randomQuestion(RateLV1, RateLV2, RateLV3, RateLV4, numberQuestion, numberId);
+            rQ_randomQuestion = new randomQuestion(RateLV1, RateLV2, RateLV3, RateLV4, numberQuestion, numberId,
+                    subject);
             edto_examDTO = new ExamDTO(
                     mergeStrArrQuestion(rQ_randomQuestion.getRandomQuestionLV1(),
                             rQ_randomQuestion.getRandomQuestionLV2(),
@@ -50,8 +51,8 @@ public class manageExam {
         }
     }
 
-    public void saveToSql(String IdExam, ArrayList<DetailExam> detailExams, String TimeName) {
-        med_manageExamDAL.saveExam(IdExam, detailExams, TimeName);
+    public void saveToSql(String IdExam, ArrayList<DetailExam> detailExams, String TimeName, String Semester) {
+        med_manageExamDAL.saveExam(IdExam, detailExams, TimeName, Semester);
     }
 
     public void saveToSql(ArrayList<Exam> exam) {
@@ -62,19 +63,23 @@ public class manageExam {
         return arL_exam;
     }
 
-    public ArrayList<String> getAllIdExam() {
-        return med_manageExamDAL.getAllIdExam();
+    public ArrayList<String> getAllIdExamBySubject(String Subject) {
+        return med_manageExamDAL.getAllIdExamBySubject(Subject);
+    }
+
+    public ArrayList<String> getAllIdExamDisplay() {
+        return med_manageExamDAL.getAllIdExamDisplay();
     }
 
     public Exam getExamById(String Id) {
         return med_manageExamDAL.getExamById(Id);
     }
 
-    public Exam getRandExam() {
-        if (getAllIdExam().size() == 0)
+    public Exam getRandExam(String subject) {
+        if (med_manageExamDAL.getAllExamBySubject(subject).size() == 0)
             return null;
 
-        rie_randomIdExam = new randomIdExam(getAllIdExam());
+        rie_randomIdExam = new randomIdExam(med_manageExamDAL.getAllExamBySubject(subject));
 
         String str_idRand = rie_randomIdExam.getRandExam();
         mte_manageTimeExam = new manageTimeExam();

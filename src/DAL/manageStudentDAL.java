@@ -1,5 +1,7 @@
 package DAL;
 
+import java.util.ArrayList;
+
 import BLL.Student.Student;
 
 public class manageStudentDAL extends connectSQL {
@@ -30,5 +32,24 @@ public class manageStudentDAL extends connectSQL {
         closeConnectSQL();
 
         return student;
+    }
+
+    public ArrayList<String> getAllIdStudent() {
+        ArrayList<String> arL_id = new ArrayList<>();
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select * from Students");
+
+            while (resultSet.next()) {
+                arL_id.add(resultSet.getString(1).trim());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        closeConnectSQL();
+
+        return arL_id;
     }
 }

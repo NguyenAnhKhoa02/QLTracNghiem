@@ -39,18 +39,20 @@ import BLL.Lecture.Lecture;
 import GUI.frameListQuestion;
 import GUI.ExamPaperClasses.frameExamPaper;
 import GUI.MakingExamClasses.frameMakingExam;
+import GUI.StatisticClasses.FrameStatistic;
 
 public class frameLecture extends JFrame implements ActionListener, WindowListener {
 
     private JLabel lb_LectureTitle, lb_LectureId, lb_LectureFullName, lb_LecturePosition, lb_LectureIdField;
     private JLabel lb_Images;
     private JTextField jt_LectureId, jt_LectureFullName, jt_LecturePosition, jt_LectureIdField;
-    private JButton buttonDoTest, buttonLogOut, buttonMakingExam, buttonViewExamPaper;
+    private JButton buttonDoTest, buttonLogOut, buttonMakingExam, buttonViewExamPaper, buttonStatisitc;
     private Lecture lecture;
     private manageLecture ms_managelecture;
     private frameListQuestion flq_frameListQuestion;
     private frameMakingExam fme_frameMakingExam;
     private frameExamPaper fep_frameExamPaper;
+    private FrameStatistic fs_frameStatistic;
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -76,6 +78,11 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
                     JOptionPane.showMessageDialog(this, "Không có đề thi nào được tạo", "Thông báo",
                             JOptionPane.INFORMATION_MESSAGE);
                 }
+            }
+
+            if (evt.getSource() == buttonStatisitc) {
+                fs_frameStatistic = new FrameStatistic();
+                fs_frameStatistic.addWindowListener(this);
             }
         }
 
@@ -180,6 +187,10 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
             buttonViewExamPaper.setFont(new Font("Times New Roman", Font.BOLD, 12));
             buttonViewExamPaper.addActionListener(this);
             jp_DoTest.add(buttonViewExamPaper);
+
+            buttonStatisitc = new JButton("Thống kê");
+            buttonStatisitc.addActionListener(this);
+            jp_DoTest.add(buttonStatisitc);
         }
 
         buttonLogOut = new JButton("Đăng xuất");

@@ -37,11 +37,11 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
 
         makingRootPane();
         makingTitle();
-        makingPaneInfoQuesiton();
         makingTimeExam();
         makingSubject();
         makingSetting();
         makingButton();
+        makingPaneInfoQuesiton();
 
         setVisible(true);
     }
@@ -77,7 +77,8 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
     }
 
     private void makingPaneInfoQuesiton() {
-        piq_paneInfoQuestion = new paneInfoQuestion(mnQ_manageQuestion);
+        piq_paneInfoQuestion = new paneInfoQuestion(mnQ_manageQuestion,
+                jcb_Subject.getSelectedItem().toString().split("-")[0]);
 
         posInScreen.CUSTOM_WITH_PERCENT(piq_paneInfoQuestion, 0, 0);
         jlP_pane1.add(piq_paneInfoQuestion, JLayeredPane.PALETTE_LAYER);
@@ -135,6 +136,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         posInScreen.CUSTOM_CHILD_PARENT(jcb_Subject, jlp_paneDisplay, 75, 4);
         jcb_Subject.setBackground(Color.WHITE);
         jlp_paneDisplay.add(jcb_Subject);
+        jcb_Subject.addActionListener(this);
 
         lb_Subject = new JLabel("Môn");
         lb_Subject.setSize(int_widthLbSubject, int_heightLbSubject);
@@ -303,7 +305,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         int_widthJlpPaneDisplay = this.getWidth();
         int_heightJlpPaneDisplay = this.getHeight() * 3;
 
-        int_widthJcbSubject = 200;
+        int_widthJcbSubject = 250;
         int_heightJcbSubject = 25;
 
         int_widthLbSubject = 35;
@@ -401,8 +403,8 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         }
 
         if (e.getSource() == btn_makingExam) {
-            if (piq_paneInfoQuestion.isCountQuestion(int_numberQues, int_RateLv1, int_RateLv2, int_RateLv3,
-                    int_RateLv4)) {
+            if (Integer.parseInt(jtf_NumberQuestion.getText()) <= mnQ_manageQuestion
+                    .getAllCountQuestions(jcb_Subject.getSelectedItem().toString().split("-")[0])) {
 
                 isSave = false;
 
@@ -419,7 +421,8 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
                         int_numberId,
                         new TimeExam(jcb_TimeExam.getSelectedItem().toString(),
                                 jcb_TimeName.getSelectedItem().toString(),
-                                Integer.parseInt(jcb_Time.getSelectedItem().toString())));
+                                Integer.parseInt(jcb_Time.getSelectedItem().toString())),
+                        jcb_Subject.getSelectedItem().toString().split("-")[0]);
 
                 isSaveIdExam = new boolean[mnE_manageExam.getAllExam().size()];
                 for (boolean b : isSaveIdExam) {
@@ -444,8 +447,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
             }
 
             if (e.getSource() == pe_paneExam.getSaveButton()) {
-                mnE_manageExam.saveToSql(pe_paneExam.getIdExam(), pe_paneExam.getDeatilExam(),
-                        pe_paneExam.getIdTimeName());
+                mnE_manageExam.saveToSql(mnE_manageExam.getAllExam());
                 isSaveIdExam[int_indexIdExam] = true;
                 pe_paneExam.remove(pe_paneExam.getSaveButton());
                 pe_paneExam.repaint();
@@ -461,6 +463,17 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
                     jlp_paneDisplay.repaint();
                 }
             }
+        }
+
+        if (e.getSource() == jcb_Subject) {
+            piq_paneInfoQuestion.getButton().removeActionListener(this);
+            rcp_recommendPanel.getButtonRecommend().removeActionListener(this);
+            jlP_pane1.remove(piq_paneInfoQuestion);
+            jlP_pane1.remove(rcp_recommendPanel);
+            piq_paneInfoQuestion = null;
+            rcp_recommendPanel = null;
+            makingPaneInfoQuesiton();
+            jlP_pane1.repaint();
         }
     }
 

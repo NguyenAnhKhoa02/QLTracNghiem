@@ -6,8 +6,8 @@ import java.util.Random;
 import DAL.connectSQL;
 
 public class randomIdExam {
-    public randomIdExam(int numberId) {
-        ArrayList<String> arL_idExam = new manageExam().getAllIdExam();
+    public randomIdExam(int numberId, String subject) {
+        ArrayList<String> arL_idExam = new manageExam().getAllIdExamBySubject(subject);
 
         strArr_randomId = new String[numberId];
         random = new Random();

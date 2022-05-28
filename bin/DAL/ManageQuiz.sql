@@ -134,7 +134,7 @@ insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues)
 <<<<<<< HEAD
 =======
 select * from Questions where Id=41
-delete from Questions where Id=42
+delete from Questions where Id=39
 >>>>>>> 8da57441668ab3ef1ad7f3f1a5af2db212caca59
 
 select Answer 
@@ -270,10 +270,10 @@ insert into OptionsQuestion (Id,Options) values (38,N'a. ! b. >> c. << d. !!')
 insert into OptionsQuestion (Id,Options) values (39,N'a. Có thể truy cập các lớp từ trong cùng package b. Có thể truy cập đối tượng từ các lớp trong cùng package và lớp con nằm trong package c. Có thể truy cập đối tượng từ các phương thức khác trong lớp đó d. Có thể truy cập đối tượng từ bất kì vị trí nào của chương trình')
 insert into OptionsQuestion (Id,Options) values (40,N'a. UTF-8 b. UTF-16 c. UTF-32 d. Tất cả đều sai')
 delete from OptionsQuestion
+use ManageQuiz
 
-
-select * from OptionsQuestion where Id =42
-delete from OptionsQuestion where Id=42
+select * from OptionsQuestion where Id =39
+delete from OptionsQuestion where Id=39
 
 
 delete from OptionsQuestion

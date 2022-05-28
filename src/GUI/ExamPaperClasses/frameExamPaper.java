@@ -30,13 +30,14 @@ import GUI.MakingExamClasses.paneExam;
 import GUI.MakingExamClasses.paneExam.chechBoxAnswer;
 
 public class frameExamPaper extends JFrame implements Parameter, ActionListener, ItemListener {
-    public frameExamPaper(String IdStudent) {
+    public frameExamPaper(String IdStudent, String IdSubject) {
+        str_Subject = IdSubject;
         parameter();
 
         makingRootPane();
         displayInforStudent(IdStudent);
         mne_manageExam = new manageExam();
-        exam = mne_manageExam.getRandExam();
+        exam = mne_manageExam.getRandExam(str_Subject);
 
         if (exam == null)
             return;
@@ -52,7 +53,7 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
     public frameExamPaper() {
         parameter();
         mne_manageExam = new manageExam();
-        ArrayList<String> arL_exam = mne_manageExam.getAllIdExam();
+        ArrayList<String> arL_exam = mne_manageExam.getAllIdExamDisplay();
 
         if (arL_exam.size() == 0) {
             return;
@@ -370,6 +371,8 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
     private paneExam[] peArr_paneExam;
 
     private boolean isAdmit;
+
+    private String str_Subject;
 
     // public static void main(String[] args) {
     // String[] a = { "1" };

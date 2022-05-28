@@ -60,4 +60,74 @@ public class manageExamPaperDAL extends connectSQL {
 
         return examPaper;
     }
+
+    public boolean isDoExam(String IdStudent, String IdSubject) {
+        String str_query = "select distinct IdExam "
+                + "from ExamPapers e, DetailExamPaper d, Questions q, Subjects s, TimeExam t, Exam ex "
+                + "where e.IdStudent = '" + IdStudent
+                + "' and e.Id = d.Id and q.IdSubject = s.Id and d.IdQues = q.Id and s.Id ='" + IdSubject.trim()
+                + "' and e.IdExam = ex.Id and ex.Semester = t.TimeName and t.TimeName = 'HKII'";
+
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(str_query);
+
+            while (resultSet.next()) {
+                closeConnectSQL();
+                return true;
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        closeConnectSQL();
+
+        return false;
+    }
+
+    public int getAverageMart(String idStudent, String Semester) {
+        int mark = 0;
+        String str_query = "select AVG(Mark) "
+                + "from ExamPapers ep, Exam e, TimeExam t "
+                + "where IdStudent = '" + idStudent
+                + "' and ep.IdExam = e.Id and e.Semester = t.TimeName and t.TimeName = '" + Semester + "'";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement
+                    .executeQuery(str_query);
+
+            resultSet.next();
+            mark = resultSet.getInt(1);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        closeConnectSQL();
+        return mark;
+    }
+
+    public String getMarkByIdSubjectAndStudent(String IdSubject, String IdStudent, String Semester) {
+        String str = "";
+        String str_query = "select distinct ep.Mark "
+                + "from ExamPapers ep, Exam e, DetailExam de, Questions q, Subjects s, TimeExam t "
+                + "where ep.IdExam = e.Id and e.Id = de.Id and de.IdQues = q.Id and s.Id = q.IdSubject and s.Id ='"
+                + IdSubject.trim() + "' and ep.IdStudent = '" + IdStudent
+                + "' and e.Semester = t.TimeName and t.TimeName = '" + Semester + "'";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(str_query);
+
+            resultSet.next();
+            str = resultSet.getString(1);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return str;
+    }
 }

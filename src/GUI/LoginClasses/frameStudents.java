@@ -48,68 +48,94 @@ public class frameStudents extends JFrame implements ActionListener {
     private Student student;
     private manageStudent ms_manageStudent;
     private frameExamPaper fep_frameExamPaper;
+    private frameChooseSubject fcs_frameChooseSubject;
 
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == buttonDoTest) {
-            fep_frameExamPaper = new frameExamPaper(student.getId());
-            if (fep_frameExamPaper.getExam() != null) {
-                setVisible(false);
-                fep_frameExamPaper.addWindowListener((WindowListener) new WindowListener() {
+            fcs_frameChooseSubject = new frameChooseSubject(student.getId());
 
-                    @Override
-                    public void windowOpened(WindowEvent e) {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        // TODO Auto-generated method stub
-                        setVisible(true);
-                    }
-
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
-                    public void windowIconified(WindowEvent e) {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
-                    public void windowDeiconified(WindowEvent e) {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
-                    public void windowActivated(WindowEvent e) {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
-                    public void windowDeactivated(WindowEvent e) {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                });
-            } else {
-                setVisible(true);
-                JOptionPane.showMessageDialog(this, "Chưa có bài thi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            for (JButton btn : fcs_frameChooseSubject.getButtonChoose()) {
+                btn.addActionListener(this);
             }
-
         }
 
         if (evt.getSource() == buttonLogOut) {
             dispose();
             new frameLogin().showWindow();
+        }
+
+        if (fcs_frameChooseSubject != null) {
+            int index = 0;
+
+            for (JButton btn : fcs_frameChooseSubject.getButtonChoose()) {
+                if (evt.getSource() == btn) {
+                    fep_frameExamPaper = new frameExamPaper(student.getId(),
+                            fcs_frameChooseSubject.getAllSubject()[index].split("-")[0]);
+
+                    if (fep_frameExamPaper.getExam() != null) {
+                        setVisible(false);
+                        fcs_frameChooseSubject.setVisible(false);
+                        fcs_frameChooseSubject = null;
+                        fep_frameExamPaper.addWindowListener((WindowListener) new WindowListener() {
+
+                            @Override
+                            public void windowOpened(WindowEvent e) {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void windowClosing(WindowEvent e) {
+                                // TODO Auto-generated method stub
+                                setVisible(true);
+                                fep_frameExamPaper.dispose();
+                                fep_frameExamPaper = null;
+                                fcs_frameChooseSubject = null;
+                                // fcs_frameChooseSubject = new frameChooseSubject(student.getId());
+
+                                // for (JButton btn : fcs_frameChooseSubject.getButtonChoose()) {
+                                // btn.addActionListener((ActionListener) this);
+                                // }
+                            }
+
+                            @Override
+                            public void windowClosed(WindowEvent e) {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void windowIconified(WindowEvent e) {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void windowDeiconified(WindowEvent e) {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void windowActivated(WindowEvent e) {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void windowDeactivated(WindowEvent e) {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                        });
+                    }
+
+                }
+
+                index++;
+            }
         }
     }
 

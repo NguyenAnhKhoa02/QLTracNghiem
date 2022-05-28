@@ -57,7 +57,7 @@ public class manageQuestion {
             }
         }
 
-        sortQuestion(data, row, column);
+        // sortQuestion(data, row, column);
 
         return data;
     }
@@ -80,11 +80,11 @@ public class manageQuestion {
     }
 
     public Boolean addYesNoQuestion(YesNoQuestion yNoQuestion) {
-        return mqd_manageQuestion.addYesNoQuestion(yNoQuestion, String.valueOf(getAllCountQuestions() + 1));
+        return mqd_manageQuestion.addYesNoQuestion(yNoQuestion, String.valueOf(getAllCountQuestions("") + 1));
     }
 
     public Boolean addOptionsQuestion(OptionsQuestion optionsQuestion) {
-        return mqd_manageQuestion.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions() + 1));
+        return mqd_manageQuestion.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions("") + 1));
     }
 
     public Boolean deleteYesNoQuestion(YesNoQuestion yNoQuestion) {
@@ -99,19 +99,23 @@ public class manageQuestion {
         return mqd_manageQuestion.getCountQuesionsByLevel(level);
     }
 
-    public int getAllCountQuestions() {
+    public int getCountQuestionByLevelAndSubject(String level, String subject) {
+        return mqd_manageQuestion.getCountQuesionsByLevelAndSubject(level, subject);
+    }
+
+    public int getAllCountQuestions(String subject) {
         int int_sum = 0;
         String[] strArr_Levels = { "Nhận biết", "Thông hiểu", "Vận dụng thấp", "Vận dụng cao" };
 
         for (String str : strArr_Levels) {
-            int_sum += getCountQuestions(str);
+            int_sum += getCountQuestionByLevelAndSubject(str, subject);
         }
 
         return int_sum;
     }
 
-    public String[] getAllIdQuestion(String lv) {
-        return new QuestionDTO(mqd_manageQuestion.getAllIdQuestion(lv)).getStrArrQuestion();
+    public String[] getAllIdQuestion(String lv, String subject) {
+        return new QuestionDTO(mqd_manageQuestion.getAllIdQuestion(lv, subject)).getStrArrQuestion();
     }
 
     public String getAnswer(String Id) {
