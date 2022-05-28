@@ -229,10 +229,33 @@ public class frameListQuestion extends JFrame
 
             fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer().setSelectedItem(data[int_indexSelected][3].trim());
 
+            fDQ_detaulQuestion.getPanelDetailQuestion().getLevel().setEnabled(false);
+            fDQ_detaulQuestion.getPanelDetailQuestion().getSubject().setEnabled(false);
+            fDQ_detaulQuestion.getPanelDetailQuestion().getContent().setEditable(false);
+            fDQ_detaulQuestion.getPanelDetailQuestion().getType().setEnabled(false);
+            fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer().setEnabled(false);
+            fDQ_detaulQuestion.getPanelDetailQuestion().getOptions().setEditable(false);
+
             fDQ_detaulQuestion.getControllerButton().setText("Xóa");
             fDQ_detaulQuestion.getControllerButton().addActionListener(this);
             fDQ_detaulQuestion.addWindowListener(this);
         }
+    }
+
+    private boolean isOk() {
+        if (fDQ_detaulQuestion.getPanelDetailQuestion().getType().getSelectedIndex() == 0) {
+            String str_tempt = "a.\nb.\nc.\nd.";
+            if (fDQ_detaulQuestion.getPanelDetailQuestion().getOptions().getText().equals(str_tempt))
+                return false;
+        }
+
+        if (fDQ_detaulQuestion.getPanelDetailQuestion().getContent().getText().equals(""))
+            return false;
+
+        if (fDQ_detaulQuestion.getPanelDetailQuestion().getAnswer().getSelectedItem() == null)
+            return false;
+
+        return true;
     }
 
     @Override
@@ -250,12 +273,17 @@ public class frameListQuestion extends JFrame
             }
 
             if (fDQ_detaulQuestion.getControllerButton().getText().equals("Thêm")) {
-                fDQ_detaulQuestion.updateSQL(str_idLecture);
-                fDQ_detaulQuestion.dispose();
-                fDQ_detaulQuestion.addWindowListener(this);
-                getContentPane().remove(scrollPane);
-                repaint();
-                makingTable();
+                if (isOk()) {
+                    fDQ_detaulQuestion.updateSQL(str_idLecture);
+                    fDQ_detaulQuestion.dispose();
+                    fDQ_detaulQuestion.addWindowListener(this);
+                    getContentPane().remove(scrollPane);
+                    repaint();
+                    makingTable();
+                } else {
+                    JOptionPane.showMessageDialog(fDQ_detaulQuestion, "Không đủ dữ liệu", "Thôn báo",
+                            JOptionPane.WARNING_MESSAGE);
+                }
             }
 
             if (fDQ_detaulQuestion.getControllerButton().getText().equals("Xóa")) {

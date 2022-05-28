@@ -80,11 +80,12 @@ public class manageQuestion {
     }
 
     public Boolean addYesNoQuestion(YesNoQuestion yNoQuestion) {
-        return mqd_manageQuestion.addYesNoQuestion(yNoQuestion, String.valueOf(getAllCountQuestions("") + 1));
+        return mqd_manageQuestion.addYesNoQuestion(yNoQuestion, getCountBySubject(yNoQuestion.getSubjectQuestion()));
     }
 
     public Boolean addOptionsQuestion(OptionsQuestion optionsQuestion) {
-        return mqd_manageQuestion.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions("") + 1));
+        return mqd_manageQuestion.addOptionsQuestion(optionsQuestion,
+                getCountBySubject(optionsQuestion.getSubjectQuestion()));
     }
 
     public Boolean deleteYesNoQuestion(YesNoQuestion yNoQuestion) {
@@ -116,6 +117,11 @@ public class manageQuestion {
 
     public String[] getAllIdQuestion(String lv, String subject) {
         return new QuestionDTO(mqd_manageQuestion.getAllIdQuestion(lv, subject)).getStrArrQuestion();
+    }
+
+    public String getCountBySubject(String subject) {
+        return mqd_manageQuestion.getCountBySubject(subject);
+
     }
 
     public String getAnswer(String Id) {

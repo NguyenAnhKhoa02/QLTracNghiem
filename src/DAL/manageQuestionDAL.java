@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import BLL.Question.OptionsQuestion;
 import BLL.Question.YesNoQuestion;
+import BLL.Subject.Subject;
 
 public class manageQuestionDAL extends connectSQL {
     public manageQuestionDAL() {
@@ -12,12 +13,16 @@ public class manageQuestionDAL extends connectSQL {
     }
 
     public Boolean updateYesNoQuestion(YesNoQuestion yNoQuestion, boolean isChange) {
-        String str_Update = "update Questions "
-                + "set Questions.Content = N'" + yNoQuestion.getContentQuestion() + "' "
-                + ", Questions.LevelQues=N'" + yNoQuestion.getLevelQuestion() + "' "
-                + ", Questions.Answer=N'" + yNoQuestion.getAnswerQuestion() + "' "
-                + ", Questions.TypeQues=N'Yes/No' "
-                + "where Questions.Id=" + yNoQuestion.getIdQuestion() + "";
+        String str_Update = "update q "
+                + "set q.Content = N'" + yNoQuestion.getContentQuestion() + "' "
+                + ", q.LevelQues=N'" + yNoQuestion.getLevelQuestion() + "' "
+                + ", q.Answer=N'" + yNoQuestion.getAnswerQuestion() + "' "
+                + ", q.TypeQues=N'Yes/No' "
+                + ", q.IdSubject=N'" + yNoQuestion.getSubjectQuestion() + "' "
+                + "from Questions q inner join Subjects on q.IdSubject=Subjects.Id "
+                + "inner join YesNoQuestion on q.Id=YesNoQuestion.Id "
+                + "where q.Id='" + yNoQuestion.getIdQuestion() + "'";
+
         String str_UpdateOp = " update OptionsQuestion "
                 + "set OptionsQuestion.Options=N'a.Đúng b.Sai'";
         String str_Clear = "Delete from OptionsQuestion where Id=" + yNoQuestion.getIdQuestion();
@@ -41,14 +46,17 @@ public class manageQuestionDAL extends connectSQL {
     }
 
     public Boolean updateOptionsQuestion(OptionsQuestion optionsQuestion, boolean isChange) {
-        String str_Update = "update Questions "
-                + "set Questions.Content = N'" + optionsQuestion.getContentQuestion() + "' "
-                + ", Questions.LevelQues=N'" + optionsQuestion.getLevelQuestion() + "' "
-                + ", Questions.Answer=N'" + optionsQuestion.getAnswerQuestion() + "' "
-                + ", Questions.TypeQues=N'Options' "
-                + "where Questions.Id=" + optionsQuestion.getIdQuestion() + "";
-        String str_UpdateOp = " update OptionsQuestion "
-                + "set OptionsQuestion.Options=N'" + optionsQuestion.getOptionQuestionToSQL() + "'";
+        String str_Update = "update q "
+                + "set q.Content = N'" + optionsQuestion.getContentQuestion() + "' "
+                + ", q.LevelQues=N'" + optionsQuestion.getLevelQuestion() + "' "
+                + ", q.Answer=N'" + optionsQuestion.getAnswerQuestion() + "' "
+                + ", q.TypeQues=N'Options' "
+                + ", q.IdSubject=N'" + optionsQuestion.getSubjectQuestion() + "' "
+                + "from Questions q inner join Subjects on q.IdSubject=Subjects.Id "
+                + "inner join OptionsQuestion on q.Id=OptionsQuestion.Id "
+                + "where q.Id='" + optionsQuestion.getIdQuestion() + "' ";
+        String str_UpdateOp = "update OptionsQuestion "
+                + "set OptionsQuestion.Options=N'" + optionsQuestion.getOptionQuestionToSQL() + "' ";
         String str_Clear = "Delete from YesNoQuestion where Id=" + optionsQuestion.getIdQuestion();
         String str_Insert = "insert into OptionsQuestion (Id,Options) values (" + optionsQuestion.getIdQuestion()
                 + ",N'" + optionsQuestion.getOptionsQuestion()
@@ -72,13 +80,13 @@ public class manageQuestionDAL extends connectSQL {
     }
 
     public Boolean addYesNoQuestion(YesNoQuestion yNoQuestion, String id) {
-        String str_InsertQuestion = "insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ("
-                + id + ",'" + yNoQuestion.getLevelQuestion()
+        String str_InsertQuestion = "insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('"
+                + id + "','" + yNoQuestion.getLevelQuestion()
                 + "',N'" + yNoQuestion.getContentQuestion()
                 + "','" + yNoQuestion.getAnswerQuestion()
                 + "','" + yNoQuestion.getSubjectQuestion() + "','" + yNoQuestion.getLectureQuestion() + "','Yes/No')";
-        String str_InsertYnQuestion = "insert into YesNoQuestion (Id,Options) values (" + id
-                + ",N'a.Đúng b.Sai')";
+        String str_InsertYnQuestion = "insert into YesNoQuestion (Id,Options) values ('" + id
+                + "',N'a.Đúng b.Sai')";
         connetToSQL();
         try {
             statement = connection.createStatement();
@@ -96,8 +104,8 @@ public class manageQuestionDAL extends connectSQL {
     }
 
     public Boolean addOptionsQuestion(OptionsQuestion optionsQuestion, String id) {
-        String str_InsertQuestion = "insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture,TypeQues) values ("
-                + id
+        String str_InsertQuestion = "insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture,TypeQues) values ('"
+                + id + "' "
                 + ",'" + optionsQuestion.getLevelQuestion()
                 + "',N'" + optionsQuestion.getContentQuestion()
                 + "','" + optionsQuestion.getAnswerQuestion()
@@ -105,8 +113,8 @@ public class manageQuestionDAL extends connectSQL {
                 + "','" + optionsQuestion.getLectureQuestion()
                 + "','Options') ";
 
-        String str_InsertOpQuestion = "insert into OptionsQuestion (Id,Options) values ("
-                + id
+        String str_InsertOpQuestion = "insert into OptionsQuestion (Id,Options) values ('"
+                + id + "'"
                 + ",N'" + optionsQuestion.getOptionsQuestion()
                 + "')";
         connetToSQL();
@@ -204,6 +212,25 @@ public class manageQuestionDAL extends connectSQL {
         closeConnectSQL();
 
         return row;
+    }
+
+    public String getCountBySubject(String subJect) {
+        int count = 0;
+        String str_Qry = "select Questions.Id "
+                + "from Questions,Subjects "
+                + "where Questions.Idsubject =Subjects.Id and Questions.IdSubject='" + subJect + "'";
+        connetToSQL();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(str_Qry);
+            while (resultSet.next()) {
+                count++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        closeConnectSQL();
+        return subJect + (count + 1);
     }
 
     public String getAnswer(String Id) {
@@ -379,4 +406,10 @@ public class manageQuestionDAL extends connectSQL {
 
         return arrL_Id;
     }
+
+    // public static void main(String[] args) {
+    // manageQuestionDAL MA = new manageQuestionDAL();
+    // String n = "LTPT";
+    // System.out.println(MA.getCountBySubject(n));
+    // }
 }
