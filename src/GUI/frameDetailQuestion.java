@@ -41,6 +41,7 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         pDQ_detailQuestion.setSize(int_widthPaneDetailQuestion, int_heightPaneDetailQuestion);
         posInScreen.CUSTOM_WITH_PERCENT(pDQ_detailQuestion, 0, 0);
         pDQ_detailQuestion.getType().addActionListener(this);
+        pDQ_detailQuestion.getAnswer().addActionListener(this);
         add(pDQ_detailQuestion);
 
         buttonController();
@@ -94,12 +95,18 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
             optionsQuestion.setStr_Answer(pDQ_detailQuestion.getAnswer().getSelectedItem().toString());
             if (Id == null)
                 optionsQuestion.setStr_Lecture(pDQ_detailQuestion.getLecture().getText());
+
             else
                 optionsQuestion.setStr_Lecture(Id);
 
             if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 0) {
                 optionsQuestion.setStr_Subject("LTJV");
+            } else if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 1) {
+                optionsQuestion.setStr_Subject("LTPT");
+            } else if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 2) {
+                optionsQuestion.setStr_Subject("MNM");
             }
+
             if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
                 optionsQuestion.setStr_Type("Options");
             } else {
@@ -118,15 +125,25 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
         if (pDQ_detailQuestion.getType().getSelectedIndex() == 1) {
             yesNoQuestion = new YesNoQuestion();
             yesNoQuestion.setStr_Id(pDQ_detailQuestion.getId().getText());
-            yesNoQuestion.setStr_Level(pDQ_detailQuestion.getLevel().getSelectedIndex() + 1 + "");
             yesNoQuestion.setStr_Content(pDQ_detailQuestion.getContent().getText());
-            yesNoQuestion.setStr_Answer(pDQ_detailQuestion.getAnswer().getSelectedItem().toString());
+            if ((String.valueOf(pDQ_detailQuestion.getContent().getText()) == "")) {
+                System.out.println("huy");
+            }
+            try {
+                yesNoQuestion.setStr_Answer(pDQ_detailQuestion.getAnswer().getSelectedItem().toString());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Answer is null");
+            }
             if (Id == null)
                 yesNoQuestion.setStr_Lecture(pDQ_detailQuestion.getLecture().getText());
             else
                 yesNoQuestion.setStr_Lecture(Id);
             if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 0) {
                 yesNoQuestion.setStr_Subject("LTJV");
+            } else if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 1) {
+                yesNoQuestion.setStr_Subject("LTPT");
+            } else if (pDQ_detailQuestion.getSubject().getSelectedIndex() == 2) {
+                yesNoQuestion.setStr_Subject("MNM");
             }
             if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
                 yesNoQuestion.setStr_Type("Options");
@@ -168,7 +185,6 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String getEvent = e.getActionCommand();
         if (e.getSource() == pDQ_detailQuestion.getType()) {
             if (pDQ_detailQuestion.getType().getSelectedIndex() == 0) {
                 remove(pDQ_detailQuestion.getAnswer(), pDQ_detailQuestion.getOptions());
@@ -178,9 +194,8 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
                 remove(pDQ_detailQuestion.getAnswer(), pDQ_detailQuestion.getOptions());
                 pDQ_detailQuestion.changeStatus(paneDetailQuestion.YESNO_QUESTION, options, answer);
             }
-
             pDQ_detailQuestion.repaint();
         }
-    }
 
+    }
 }

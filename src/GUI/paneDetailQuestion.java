@@ -58,7 +58,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
     }
 
     private void makingSubject() {
-        String[] strArr_Subject = { "Lập trình java" };
+        String[] strArr_Subject = { "Lập trình java", "Lập trình python", "Hệ điều hành mở nguồn mở" };
 
         cb_Subject = new JComboBox<>(strArr_Subject);
         cb_Subject.setSize(int_widthCbSubject, int_heightCbSubject);

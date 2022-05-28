@@ -40,7 +40,6 @@ select * from Fields
  
 =======
 select * from Fields
->>>>>>> 8da57441668ab3ef1ad7f3f1a5af2db212caca59
 
 create table Lectures(
 	Id varchar(10) not null,
@@ -131,11 +130,9 @@ insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues)
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values (38,'4',N'Để đảo giá trị của một biến boolean, ta dùng toán tử nào?','a','LTJV','2','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values (39,'4',N'Nếu không khai báo từ khóa chỉ phạm vi truy cập, phạm vi truy cập của đối tượng là gì?','a','LTJV','2','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values (40,'4',N'Trong Java, kiểu char biểu diễn bộ mã code nào dưới đây?','b','LTJV','2','Options')
-<<<<<<< HEAD
-=======
+
 select * from Questions where Id=41
-delete from Questions where Id=42
->>>>>>> 8da57441668ab3ef1ad7f3f1a5af2db212caca59
+delete from Questions where Id=39
 
 select Answer 
 from Questions
@@ -187,23 +184,11 @@ create table LectureLogin(
 alter table LectureLogin add constraint PK_LectureLogin primary key(userLecture)
 alter table LectureLogin add constraint FK_LectureLogon_Lecture foreign key (userLecture) references Lectures(Id)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 insert into LectureLogin(userLecture,pass) values ('1','123')
 insert into LectureLogin(userLecture,pass) values ('2','123')
 insert into LectureLogin(userLecture,pass) values ('3','123')
-<<<<<<< HEAD
-=======
 
->>>>>>> parent of e511517 (NEW)
-
-=======
->>>>>>> d5116cc3c2211cfa8373b0cfdfc8784c57862ad7
-=======
-insert into LectureLogin(userLecture,pass) values ('1','123')
-insert into LectureLogin(userLecture,pass) values ('2','123')
-insert into LectureLogin(userLecture,pass) values ('3','123')
->>>>>>> c9c5342bdb7574cbfd9c0d485704e22dc57f1a23
 
 create table YesNoQuestion(
 	Id varchar(10) not null,
@@ -270,10 +255,10 @@ insert into OptionsQuestion (Id,Options) values (38,N'a. ! b. >> c. << d. !!')
 insert into OptionsQuestion (Id,Options) values (39,N'a. Có thể truy cập các lớp từ trong cùng package b. Có thể truy cập đối tượng từ các lớp trong cùng package và lớp con nằm trong package c. Có thể truy cập đối tượng từ các phương thức khác trong lớp đó d. Có thể truy cập đối tượng từ bất kì vị trí nào của chương trình')
 insert into OptionsQuestion (Id,Options) values (40,N'a. UTF-8 b. UTF-16 c. UTF-32 d. Tất cả đều sai')
 delete from OptionsQuestion
+use ManageQuiz
 
-
-select * from OptionsQuestion where Id =42
-delete from OptionsQuestion where Id=42
+select * from OptionsQuestion where Id =39
+delete from OptionsQuestion where Id=39
 
 
 delete from OptionsQuestion
@@ -303,20 +288,17 @@ create table DetailExam(
 select * from DetailExam
 select Id from Exam
 
-=======
+
 alter table DetailExam add constraint PK_IdDetailExam primary key (Id,IdQues)
->>>>>>> 8da57441668ab3ef1ad7f3f1a5af2db212caca59
+
 alter table DetailExam add constraint FK_DetailExam_Exam foreign key (Id) references Exam(Id)
 alter table DetailExam add constraint FK_DetailExam_Question foreign key (IdQues) references Questions(Id)
 insert into DetailExam (Id,IdQues) values ('597','1')
 select qs.Answer
 from DetailExam de, Questions qs
 where de.Id='994' and de.IdQues = qs.Id
-<<<<<<< HEAD
 select * from DetailExam
-=======
 
->>>>>>> 8da57441668ab3ef1ad7f3f1a5af2db212caca59
 delete from DetailExam
 where Id = '533'
 

@@ -57,7 +57,7 @@ public class manageQuestion {
             }
         }
 
-        sortQuestion(data, row, column);
+        // sortQuestion(data, row, column);
 
         return data;
     }
@@ -80,11 +80,13 @@ public class manageQuestion {
     }
 
     public Boolean addYesNoQuestion(YesNoQuestion yNoQuestion) {
-        return mqd_manageQuestion.addYesNoQuestion(yNoQuestion, String.valueOf(getAllCountQuestions() + 1));
+        return mqd_manageQuestion.addYesNoQuestion(yNoQuestion,
+                String.valueOf(getCountBySubject(yNoQuestion.getSubjectQuestion())));
     }
 
     public Boolean addOptionsQuestion(OptionsQuestion optionsQuestion) {
-        return mqd_manageQuestion.addOptionsQuestion(optionsQuestion, String.valueOf(getAllCountQuestions() + 1));
+        return mqd_manageQuestion.addOptionsQuestion(optionsQuestion,
+                String.valueOf(getCountBySubject(optionsQuestion.getSubjectQuestion())));
     }
 
     public Boolean deleteYesNoQuestion(YesNoQuestion yNoQuestion) {
@@ -108,6 +110,11 @@ public class manageQuestion {
         }
 
         return int_sum;
+    }
+
+    public String getCountBySubject(String subject) {
+        return mqd_manageQuestion.getCountBySubject(subject);
+
     }
 
     public String[] getAllIdQuestion(String lv) {

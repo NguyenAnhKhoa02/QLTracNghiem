@@ -77,9 +77,9 @@ public class connectSQL {
      * *****************
      */
 
-    private String host_name = "DESKTOP-F7JKQMS\\SQLEXPRESS";
+    private String host_name = "QUYQUY\\AO";
     private String user = "sa";
-    private String password = "admin";
+    private String password = "0977";
 
     // private String host_name = "LAPTOP-9Q1U79UH\\THANHLUC";
     // private String user = "sa";
