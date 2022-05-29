@@ -46,7 +46,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
     private JLabel lb_LectureTitle, lb_LectureId, lb_LectureFullName, lb_LecturePosition, lb_LectureIdField;
     private JLabel lb_Images;
     private JTextField jt_LectureId, jt_LectureFullName, jt_LecturePosition, jt_LectureIdField;
-    private JButton buttonDoTest, buttonLogOut, buttonMakingExam, buttonViewExamPaper, buttonStatisitc;
+    private JButton buttonManageQ, buttonLogOut, buttonMakingExam, buttonViewExamPaper, buttonStatisitc;
     private Lecture lecture;
     private manageLecture ms_managelecture;
     private frameListQuestion flq_frameListQuestion;
@@ -56,7 +56,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        if (evt.getSource() == buttonDoTest) {
+        if (evt.getSource() == buttonManageQ) {
             setVisible(false);
             flq_frameListQuestion = new frameListQuestion(lecture.getStr_Id());
             flq_frameListQuestion.addWindowListener(this);
@@ -103,7 +103,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
     }
 
     public void addActionEvent() {
-        buttonDoTest.addActionListener(this);
+        buttonManageQ.addActionListener(this);
         buttonLogOut.addActionListener(this);
     }
 
@@ -119,25 +119,25 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
         jp_LectureInfor.setBackground(Color.white);
 
         jp_LectureInfor.add(lb_LectureId = new JLabel("Mã giảng viên: "));
-        lb_LectureId.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_LectureId.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jt_LectureId = new JTextField(20);
         jt_LectureId.setText(lecture.getStr_Id());
         jp_LectureInfor.add(jt_LectureId);
 
         jp_LectureInfor.add(lb_LectureFullName = new JLabel("Họ tên: "));
-        lb_LectureFullName.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_LectureFullName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jt_LectureFullName = new JTextField(20);
         jt_LectureFullName.setText(lecture.getStr_Name());
         jp_LectureInfor.add(jt_LectureFullName);
 
         jp_LectureInfor.add(lb_LecturePosition = new JLabel("Chức vụ: "));
-        lb_LecturePosition.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_LecturePosition.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jt_LecturePosition = new JTextField(20);
         jt_LecturePosition.setText(lecture.getStr_Position());
         jp_LectureInfor.add(jt_LecturePosition);
 
         jp_LectureInfor.add(lb_LectureIdField = new JLabel("Khoa: "));
-        lb_LectureIdField.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_LectureIdField.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jt_LectureIdField = new JTextField(20);
         jt_LectureIdField.setText(lecture.getStr_Filed());
         jp_LectureInfor.add(jt_LectureIdField);
@@ -167,15 +167,14 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
 
         JPanel jp_DoTest = new JPanel();
         jp_DoTest.setBackground(Color.white);
-
-        buttonDoTest = new JButton("Quản lý câu hỏi");
+        
         if (lecture.getStr_Position().equals("Trưởng khoa")) {
             buttonMakingExam = new JButton("Ra đề thi");
             ImageIcon img_MakingExam = new ImageIcon(
                     "..\\QLTracNghiem\\src\\images\\makingexam.png");
 
             buttonMakingExam.setIcon(img_MakingExam);
-            buttonMakingExam.setFont(new Font("Times New Roman", Font.BOLD, 12));
+            buttonMakingExam.setFont(new Font("Times New Roman", Font.PLAIN, 12));
             buttonMakingExam.addActionListener(this);
             jp_DoTest.add(buttonMakingExam);
 
@@ -184,25 +183,31 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
                     "..\\QLTracNghiem\\src\\images\\viewtest.png");
 
             buttonViewExamPaper.setIcon(img_ViewTest);
-            buttonViewExamPaper.setFont(new Font("Times New Roman", Font.BOLD, 12));
+            buttonViewExamPaper.setFont(new Font("Times New Roman", Font.PLAIN, 12));
             buttonViewExamPaper.addActionListener(this);
             jp_DoTest.add(buttonViewExamPaper);
 
             buttonStatisitc = new JButton("Thống kê");
+            ImageIcon img_Statisitc = new ImageIcon(
+                "..\\QLTracNghiem\\src\\images\\statisitc.png");
+
+            buttonStatisitc.setIcon(img_Statisitc);
+            buttonStatisitc.setFont(new Font("Times New Roman", Font.PLAIN, 12));
             buttonStatisitc.addActionListener(this);
             jp_DoTest.add(buttonStatisitc);
         }
 
         buttonLogOut = new JButton("Đăng xuất");
+        buttonManageQ = new JButton("Quản lý câu hỏi");
         ImageIcon img_DoTest = new ImageIcon(
-                "..\\QLTracNghiem\\src\\images\\dotest.png");
+                "..\\QLTracNghiem\\src\\images\\managequestion.png");
         ImageIcon img_LogOut = new ImageIcon(
                 "..\\QLTracNghiem\\src\\images\\logout.png");
         buttonLogOut.setIcon(img_LogOut);
-        buttonDoTest.setIcon(img_DoTest);
-        buttonLogOut.setFont(new Font("Times New Roman", Font.BOLD, 12));
-        buttonDoTest.setFont(new Font("Times New Roman", Font.BOLD, 12));
-        jp_DoTest.add(buttonDoTest);
+        buttonManageQ.setIcon(img_DoTest);
+        buttonLogOut.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        buttonManageQ.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        jp_DoTest.add(buttonManageQ);
         jp_DoTest.add(buttonLogOut);
         add(jp_DoTest, BorderLayout.SOUTH);
     }
@@ -210,7 +215,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
     public void showWindow() {
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(600, 400);
+        this.setSize(650, 400);
         this.setLocationRelativeTo(null);
         this.setResizable(false); // Không thể thay đổi kích cỡ Frame
 

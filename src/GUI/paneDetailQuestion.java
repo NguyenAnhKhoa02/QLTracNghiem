@@ -2,7 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
-
+import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -46,11 +46,13 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         String[] strArr_level = { "Nhận biết", "Thông hiểu", "Vận dụng thấp", "Vận dụng cao" };
 
         cb_Level = new JComboBox<>(strArr_level);
+        cb_Level.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         cb_Level.setSize(int_widthCbLevel, int_heightCbLevel);
         cb_Level.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Level, 5, 2);
 
         lb_titleLevel = new JLabel("Mức độ");
+        lb_titleLevel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_titleLevel.setSize(int_widthLbTitleLevel, int_heightLbTitleLevel);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_titleLevel, cb_Level);
 
@@ -61,11 +63,13 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         String[] strArr_Subject = { "Lập trình java", "Lập trình python", "Hệ điều hành mở nguồn mở" };
 
         cb_Subject = new JComboBox<>(strArr_Subject);
+        cb_Subject.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         cb_Subject.setSize(int_widthCbSubject, int_heightCbSubject);
         cb_Subject.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Subject, 20, 2);
 
         lb_titleSubject = new JLabel("Môn học");
+        lb_titleSubject.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_titleSubject.setSize(int_widthLbTitleSubject, int_heightLbTitleSubject);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_titleSubject, cb_Subject);
 
@@ -79,6 +83,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         posInScreen.CUSTOM_WITH_PERCENT(tf_Lecture, 46, 2);
 
         lb_titleLecture = new JLabel("Giảng viên");
+        lb_titleLecture.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_titleLecture.setSize(int_widthLbLecture, int_heightLbLecture);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_titleLecture, tf_Lecture);
 
@@ -89,11 +94,13 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         String[] strArr_Type = { "Câu hỏi chọn lựa", "Câu hỏi đúng sai" };
 
         cb_Type = new JComboBox<>(strArr_Type);
+        cb_Type.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         cb_Type.setSize(int_widthCbType, int_heightCbType);
         cb_Type.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Type, 10, 10);
 
         lb_titleType = new JLabel("Loại");
+        lb_titleType.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_titleType.setSize(int_widthLbTitleType, int_heightLbTitleType);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_titleType, cb_Type);
 
@@ -117,11 +124,13 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         }
 
         cb_Answer = new JComboBox<>(strArr_options);
+        cb_Answer.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         cb_Answer.setSize(int_widthCbAnswer, int_heightCbAnswer);
         cb_Answer.setBackground(color);
         posInScreen.CUSTOM_WITH_PERCENT(cb_Answer, 40, 10);
 
         lb_titleAnswer = new JLabel("Đáp án");
+        lb_titleAnswer.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_titleAnswer.setSize(int_widthLbTitleAnswer, int_heightLbTitleAnswer);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_titleAnswer, cb_Answer);
 
@@ -130,10 +139,12 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
     private void makingContent() {
         ta_Content = new JTextArea();
+        ta_Content.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         ta_Content.setSize(int_widthTaContent, int_heightTaContent);
         posInScreen.CUSTOM_WITH_PERCENT(ta_Content, 1, 20);
 
         lb_titleContent = new JLabel("Câu hỏi");
+        lb_titleContent.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_titleContent.setSize(int_widthLbTitleContent, int_heightLbTitleContent);
         posInScreen.PARENT_CHILD_VERTICAL(lb_titleContent, ta_Content);
 
@@ -142,6 +153,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
 
     private void makingOptions(String typeQuestion, String options) {
         ta_Options = new JTextArea();
+        ta_Options.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         ta_Options.setSize(int_widthTaOptions, int_heightTaOptions);
         posInScreen.CUSTOM_WITH_PERCENT(ta_Options, 1, 40);
         if (options == null)
@@ -161,6 +173,7 @@ public class paneDetailQuestion extends JPanel implements Parameter {
         }
 
         lb_titleOptions = new JLabel("Lựa chọn");
+        lb_titleOptions.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_titleOptions.setSize(int_widthLbTitleOptions, int_heightLbTitleOptions);
         posInScreen.PARENT_CHILD_VERTICAL(lb_titleOptions, ta_Options);
 

@@ -70,7 +70,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
     private void makingTitle() {
         lb_Title = new JLabel("TẠO ĐỀ THI", JLabel.CENTER);
         lb_Title.setSize(int_widthLbTitle, int_heightLbTitle);
-        lb_Title.setFont(new Font("Time new roman", Font.BOLD, 25));
+        lb_Title.setFont(new Font("Times New Roman", Font.PLAIN, 25));
         posInScreen.CUSTOM_WITH_PERCENT(lb_Title, 0, 0);
 
         jlp_paneDisplay.add(lb_Title);
@@ -97,34 +97,40 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         manageTimeExam mte_manageTimeExam = new manageTimeExam();
 
         jcb_TimeExam = new JComboBox<>(mte_manageTimeExam.getTimeExam());
+        jcb_TimeExam.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jcb_TimeExam.setSize(int_widthJcbTimeExam, int_heightJcbTimeExam);
         jcb_TimeExam.setBackground(Color.WHITE);
         posInScreen.CUSTOM_CHILD_PARENT(jcb_TimeExam, jlp_paneDisplay, 25, 4);
         jlp_paneDisplay.add(jcb_TimeExam);
 
         lb_TimeExam = new JLabel("Kỳ thi");
+        lb_TimeExam.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_TimeExam.setSize(int_widthLbTimeExam, int_heightLbTimeExam);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_TimeExam, jcb_TimeExam);
         jlp_paneDisplay.add(lb_TimeExam);
 
         jcb_TimeName = new JComboBox<>(mte_manageTimeExam.getTimeName());
+        jcb_TimeName.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jcb_TimeName.setSize(int_widthJcbTimeName, int_heightJcbTimeName);
         jcb_TimeName.setBackground(Color.WHITE);
         posInScreen.CUSTOM_CHILD_PARENT(jcb_TimeName, jlp_paneDisplay, 50, 4);
         jlp_paneDisplay.add(jcb_TimeName);
 
         lb_TimeName = new JLabel("Học kì");
+        lb_TimeName.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_TimeName.setSize(int_widthLbTimeName, int_heightLbTimeName);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_TimeName, jcb_TimeName);
         jlp_paneDisplay.add(lb_TimeName);
 
         jcb_Time = new JComboBox<>(mte_manageTimeExam.getTime());
+        jcb_Time.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jcb_Time.setSize(int_widthJcbTime, int_heightJcbTime);
         jcb_Time.setBackground(Color.white);
         posInScreen.CUSTOM_CHILD_PARENT(jcb_Time, jlp_paneDisplay, 65, 4);
         jlp_paneDisplay.add(jcb_Time);
 
         lb_Time = new JLabel("Thời gian");
+        lb_Time.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_Time.setSize(int_widthLbTime, int_heightLbTime);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_Time, jcb_Time);
         jlp_paneDisplay.add(lb_Time);
@@ -132,6 +138,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
 
     private void makingSubject() {
         jcb_Subject = new JComboBox<>(new manageSubject().getStrArrSubject());
+        jcb_Subject.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jcb_Subject.setSize(int_widthJcbSubject, int_heightJcbSubject);
         posInScreen.CUSTOM_CHILD_PARENT(jcb_Subject, jlp_paneDisplay, 75, 4);
         jcb_Subject.setBackground(Color.WHITE);
@@ -139,6 +146,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         jcb_Subject.addActionListener(this);
 
         lb_Subject = new JLabel("Môn");
+        lb_Subject.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_Subject.setSize(int_widthLbSubject, int_heightLbSubject);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_Subject, jcb_Subject);
         jlp_paneDisplay.add(lb_Subject);
@@ -152,6 +160,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         jlp_paneDisplay.add(jtf_Level1);
 
         lb_RateLevel1 = new JLabel("Nhận biết");
+        lb_RateLevel1.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_RateLevel1.setSize(int_widthLbRateLevel1, int_heightLbRateLevel1);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_RateLevel1, jtf_Level1);
         jlp_paneDisplay.add(lb_RateLevel1);
@@ -163,6 +172,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         jlp_paneDisplay.add(jtf_Level2);
 
         lb_RateLevel2 = new JLabel("Thông hiểu");
+        lb_RateLevel2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_RateLevel2.setSize(int_widthLbRateLevel2, int_heightLbRateLevel2);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_RateLevel2, jtf_Level2);
         jlp_paneDisplay.add(lb_RateLevel2);
@@ -174,6 +184,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         jlp_paneDisplay.add(jtf_Level3);
 
         lb_RateLevel3 = new JLabel("Vận dụng thấp");
+        lb_RateLevel3.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_RateLevel3.setSize(int_widthLbRateLevel3, int_heightLbRateLevel3);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_RateLevel3, jtf_Level3);
         jlp_paneDisplay.add(lb_RateLevel3);
@@ -184,7 +195,8 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         jtf_Level4.addKeyListener(this);
         jlp_paneDisplay.add(jtf_Level4);
 
-        lb_RateLevel4 = new JLabel("Vận dụng thấp");
+        lb_RateLevel4 = new JLabel("Vận dụng cao");
+        lb_RateLevel4.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_RateLevel4.setSize(int_widthLbRateLevel4, int_heightLbRateLevel4);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_RateLevel4, jtf_Level4);
         jlp_paneDisplay.add(lb_RateLevel4);
@@ -196,6 +208,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         jlp_paneDisplay.add(jtf_NumberQuestion);
 
         lb_NumberQuestion = new JLabel("Số câu");
+        lb_NumberQuestion.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_NumberQuestion.setSize(int_widthLbNumberQuestion, int_heightLbNumberQuestion);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_NumberQuestion, jtf_NumberQuestion);
         jlp_paneDisplay.add(lb_NumberQuestion);
@@ -207,6 +220,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         jlp_paneDisplay.add(jtf_NumberId);
 
         lb_NumberId = new JLabel("Số đề");
+        lb_NumberId.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_NumberId.setSize(int_widthLbNumberId, int_heightLbNumberId);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_NumberId, jtf_NumberId);
         jlp_paneDisplay.add(lb_NumberId);
@@ -214,6 +228,7 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
 
     private void makingButton() {
         btn_makingExam = new JButton("Tạo đề");
+        btn_makingExam.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         btn_makingExam.setSize(int_widthBtnMakingExam, int_heightBtnMakingExam);
         btn_makingExam.setFocusable(false);
         btn_makingExam.setEnabled(false);
@@ -261,7 +276,8 @@ public class frameMakingExam extends JFrame implements Parameter, ActionListener
         if (btn_Save != null) {
             jlp_paneDisplay.remove(btn_Save);
         }
-        btn_Save = new JButton("SaveAll");
+        btn_Save = new JButton("Save All");
+        btn_Save.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         btn_Save.setSize(int_widthBtnSave, int_heightBtnSave);
         posInScreen.CENTER_CUSTOM_Y_CHILDREN_PARENT_ARRAY_COMPONENT(btn_Save, jlp_paneDisplay, 68);
         jlp_paneDisplay.add(btn_Save);

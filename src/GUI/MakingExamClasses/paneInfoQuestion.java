@@ -23,7 +23,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
 
     private void makingTitle() {
         jlb_Title = new JLabel("THÔNG TIN CÂU HỎI", JLabel.CENTER);
-        jlb_Title.setFont(new Font("Time new roman", Font.BOLD, 15));
+        jlb_Title.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         jlb_Title.setSize(int_widthJlbTitle, int_heightJlbTitle);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Title, this, 0, 0);
         this.add(jlb_Title);
@@ -33,12 +33,14 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
         String str_tempt;
         str_tempt = "Nhận biết: " + mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Nhận biết", str_Subject);
         jlb_Level1 = new JLabel(str_tempt);
+        jlb_Level1.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jlb_Level1.setSize(int_widthJlbLevel, int_heightJlbLevel);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Level1, this, 5, 15);
         add(jlb_Level1);
 
         str_tempt = "Thông hiểu: " + mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Thông hiểu", str_Subject);
         jlb_Level2 = new JLabel(str_tempt);
+        jlb_Level2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jlb_Level2.setSize(int_widthJlbLevel, int_heightJlbLevel);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Level2, this, 5, 35);
         add(jlb_Level2);
@@ -46,6 +48,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
         str_tempt = "Vận dụng thấp: "
                 + mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Vận dụng thấp", str_Subject);
         jlb_Level3 = new JLabel(str_tempt);
+        jlb_Level3.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jlb_Level3.setSize(int_widthJlbLevel, int_heightJlbLevel);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Level3, this, 5, 55);
         add(jlb_Level3);
@@ -53,6 +56,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
         str_tempt = "Vận dụng cao: "
                 + mnQ_manageQuestion.getCountQuestionByLevelAndSubject("Vận dụng cao", str_Subject);
         jlb_Level4 = new JLabel(str_tempt);
+        jlb_Level4.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jlb_Level4.setSize(int_widthJlbLevel, int_heightJlbLevel);
         posInScreen.CUSTOM_CHILD_PARENT(jlb_Level4, this, 5, 75);
         add(jlb_Level4);
@@ -60,6 +64,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
 
     private void makingButton() {
         btn_recommendPane = new JButton("Xem gợi ý");
+        btn_recommendPane.setFont(new Font("Times New Roman", Font.PLAIN, 13));
         btn_recommendPane.setSize(int_widthBtnRecommendPane, int_heightBtnRecommendPane);
         posInScreen.CUSTOM_CHILD_PARENT(btn_recommendPane, this, 0, 87);
         btn_recommendPane.setFocusable(false);
@@ -141,6 +146,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
             int_numberQuestion = mnQ_manageQuestion.getAllCountQuestions(str_Subject);
             int_numberQuestion = int_numberQuestion - int_numberQuestion % 10;
             lb_maxQuestions = new JLabel("Số câu hỏi: " + int_numberQuestion);
+            lb_maxQuestions.setFont(new Font("Times New Roman", Font.PLAIN, 12));
             lb_maxQuestions.setSize(int_widthLbMaxQuestions, int_heightLbMaxQuestion);
             posInScreen.CUSTOM_CHILD_PARENT(lb_maxQuestions, this, 0, 0);
             add(lb_maxQuestions);
@@ -151,6 +157,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
                     str_Subject)
                     / (float) int_numberQuestion * 100);
             lb_PercentLevel1 = new JLabel("Nhận biết: " + int_percentLevel1 + "%");
+            lb_PercentLevel1.setFont(new Font("Times New Roman", Font.PLAIN, 12));
             lb_PercentLevel1.setSize(int_widthLbPercentLevel, int_heightLbPercentLevel);
             posInScreen.CUSTOM_CHILD_PARENT(lb_PercentLevel1, this, 0, 10);
             add(lb_PercentLevel1);
@@ -159,6 +166,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
                     str_Subject)
                     / (float) int_numberQuestion * 100);
             lb_PercentLevel2 = new JLabel("Thông hiểu: " + int_percentLevel2 + "%");
+            lb_PercentLevel2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
             lb_PercentLevel2.setSize(int_widthLbPercentLevel, int_heightLbPercentLevel);
             posInScreen.CUSTOM_CHILD_PARENT(lb_PercentLevel2, this, 0, 30);
             add(lb_PercentLevel2);
@@ -167,12 +175,14 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
                     str_Subject)
                     / (float) int_numberQuestion * 100);
             lb_PercentLevel3 = new JLabel("Vận dụng thấp: " + int_percentLevel3 + "%");
+            lb_PercentLevel3.setFont(new Font("Times New Roman", Font.PLAIN, 12));
             lb_PercentLevel3.setSize(int_widthLbPercentLevel, int_heightLbPercentLevel);
             posInScreen.CUSTOM_CHILD_PARENT(lb_PercentLevel3, this, 0, 50);
             add(lb_PercentLevel3);
 
             int_percentLevel4 = 100 - int_percentLevel1 - int_percentLevel2 - int_percentLevel3;
             lb_PercentLevel4 = new JLabel("Vận dụng cao: " + int_percentLevel4 + "%");
+            lb_PercentLevel4.setFont(new Font("Times New Roman", Font.PLAIN, 12));
             lb_PercentLevel4.setSize(int_widthLbPercentLevel, int_heightLbPercentLevel);
             posInScreen.CUSTOM_CHILD_PARENT(lb_PercentLevel4, this, 0, 70);
             add(lb_PercentLevel4);
@@ -180,6 +190,7 @@ public class paneInfoQuestion extends JLayeredPane implements Parameter {
 
         private void makingButton() {
             btn_addRecommend = new JButton("Áp dụng gợi ý");
+            btn_addRecommend.setFont(new Font("Times New Roman", Font.PLAIN, 13));
             btn_addRecommend.setSize(int_widthBtnAddRecommend, int_heightBtnAddRecommend);
             btn_addRecommend.setFocusable(false);
             posInScreen.BOTTOM_CENTER_CHILD_PARENT(btn_addRecommend, this);

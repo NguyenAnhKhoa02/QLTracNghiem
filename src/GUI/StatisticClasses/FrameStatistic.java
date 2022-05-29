@@ -1,5 +1,7 @@
 package GUI.StatisticClasses;
 
+import java.awt.Font;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,6 +23,7 @@ public class FrameStatistic extends JFrame implements Parameter {
         psm_paneStaticMark = new paneStaticMark(int_widthJtpTabbedPane, int_heightJtpTabbedPane);
 
         jtp_tabbedPane = new JTabbedPane();
+        jtp_tabbedPane.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         jtp_tabbedPane.setSize(int_widthJtpTabbedPane, int_widthJtpTabbedPane);
         posInScreen.FULL(jtp_tabbedPane, this);
         jtp_tabbedPane.add("Xếp loại", psr_paneStaticRank);

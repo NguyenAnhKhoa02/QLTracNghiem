@@ -166,25 +166,25 @@ public class frameStudents extends JFrame implements ActionListener {
         jp_StudentsInfor.setBackground(Color.white);
 
         jp_StudentsInfor.add(lb_StudentsId = new JLabel("Mã sinh viên: "));
-        lb_StudentsId.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_StudentsId.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jt_StudentsId = new JTextField(20);
         jt_StudentsId.setText(student.getId());
         jp_StudentsInfor.add(jt_StudentsId);
 
         jp_StudentsInfor.add(lb_StudentsFullName = new JLabel("Họ tên: "));
-        lb_StudentsFullName.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_StudentsFullName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jt_StudentsFullName = new JTextField(20);
         jt_StudentsFullName.setText(student.getFullName());
         jp_StudentsInfor.add(jt_StudentsFullName);
 
         jp_StudentsInfor.add(lb_StudentsBirth = new JLabel("Ngày sinh: "));
-        lb_StudentsBirth.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_StudentsBirth.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jt_StudentsBirth = new JTextField(20);
         jt_StudentsBirth.setText(student.getBirthday());
         jp_StudentsInfor.add(jt_StudentsBirth);
 
         jp_StudentsInfor.add(lb_StudentsIdField = new JLabel("Ngành học: "));
-        lb_StudentsIdField.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_StudentsIdField.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jt_StudentsIdField = new JTextField(20);
         jt_StudentsIdField.setText(student.getField());
         jp_StudentsInfor.add(jt_StudentsIdField);
@@ -220,8 +220,8 @@ public class frameStudents extends JFrame implements ActionListener {
         ImageIcon img_LogOut = new ImageIcon("..\\QLTracNghiem\\src\\images\\logout.png");
         buttonLogOut.setIcon(img_LogOut);
         buttonDoTest.setIcon(img_DoTest);
-        buttonLogOut.setFont(new Font("Times New Roman", Font.BOLD, 12));
-        buttonDoTest.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        buttonLogOut.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        buttonDoTest.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jp_DoTest.add(buttonDoTest);
         jp_DoTest.add(buttonLogOut);
         // buttonViewTest = new JButton("Xem bài thi");

@@ -12,6 +12,7 @@ import BLL.Question.OptionsQuestion;
 import BLL.Question.Question;
 import BLL.Question.YesNoQuestion;
 
+import java.awt.Font;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -51,6 +52,7 @@ public class frameDetailQuestion extends JFrame implements Parameter, ActionList
 
     private void buttonController() {
         btn_Controller = new JButton("Controller");
+        btn_Controller.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         btn_Controller.setSize(int_widthBtnController, int_heightBtnController);
         btn_Controller.setFocusable(false);
         posInScreen.CUSTOM_CHILD_PARENT(btn_Controller, this, 45, 85);

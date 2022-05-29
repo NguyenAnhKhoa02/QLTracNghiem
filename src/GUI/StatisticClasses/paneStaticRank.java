@@ -8,6 +8,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.awt.Font;
+
 import BLL.manageExamPaper;
 import BLL.manageStudent;
 import BLL.manageTimeExam;
@@ -29,21 +31,25 @@ public class paneStaticRank extends JPanel implements Parameter, ActionListener 
 
     private void makingStatiMarkc() {
         lb_veryGood = new JLabel("Giỏi");
+        lb_veryGood.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_veryGood.setSize(int_widthLbRank, int_heightLbRank);
         posInScreen.CUSTOM_CHILD_PARENT(lb_veryGood, this, 2, 15);
         add(lb_veryGood);
 
         lb_Good = new JLabel("Khá");
+        lb_Good.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_Good.setSize(int_widthLbRank, int_heightLbRank);
         posInScreen.PARENT_CHILD_VERTICAL(lb_Good, lb_veryGood, 90);
         add(lb_Good);
 
         lb_Average = new JLabel("Trung bình");
+        lb_Average.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_Average.setSize(int_widthLbRank, int_heightLbRank);
         posInScreen.PARENT_CHILD_VERTICAL(lb_Average, lb_Good, 90);
         add(lb_Average);
 
         lb_Poor = new JLabel("Yếu");
+        lb_Poor.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_Poor.setSize(int_widthLbRank, int_heightLbRank);
         posInScreen.PARENT_CHILD_VERTICAL(lb_Poor, lb_Average, 90);
         add(lb_Poor);
@@ -95,12 +101,14 @@ public class paneStaticRank extends JPanel implements Parameter, ActionListener 
 
     private void makingTimeExam() {
         jcb_NameExam = new JComboBox<>(mte_manageTimeExam.getTimeExam());
+        jcb_NameExam.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jcb_NameExam.setSize(int_widthJcbNameExam, int_heightJcbNameExam);
         posInScreen.CUSTOM_CHILD_PARENT(jcb_NameExam, this, 3, 3);
         add(jcb_NameExam);
 
         String[] strArr_Semester = { "HKI", "HKII" };
         jcb_Semester = new JComboBox<>(strArr_Semester);
+        jcb_Semester.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jcb_Semester.setSelectedIndex(1);
         jcb_Semester.setSize(int_widthJcbSemester, int_heightJcbSemester);
         posInScreen.CUSTOM_CHILD_PARENT(jcb_Semester, this, 60, 3);

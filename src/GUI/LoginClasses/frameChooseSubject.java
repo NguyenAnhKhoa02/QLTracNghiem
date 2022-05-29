@@ -1,5 +1,8 @@
 package GUI.LoginClasses;
 
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -24,9 +27,10 @@ public class frameChooseSubject extends JFrame implements Parameter {
         strArr_subject = ms_manageSubject.getStrArrSubject();
         jbtn_Subject = new JButton[strArr_subject.length];
 
-        jlb_chooseSubject = new JLabel("Chọn môn thi");
+        jlb_chooseSubject = new JLabel("CHỌN MÔN THI");
+        jlb_chooseSubject.setFont(new Font("Calibri", Font.BOLD, 30));
         jlb_chooseSubject.setSize(int_widthJlbChooseSubject, int_heightJlbChooseSubject);
-        posInScreen.CUSTOM_CHILD_PARENT(jlb_chooseSubject, this, 40, 10);
+        posInScreen.CUSTOM_CHILD_PARENT(jlb_chooseSubject, this, 28, 10);
         add(jlb_chooseSubject);
 
         int index = 0;

@@ -2,6 +2,7 @@ package GUI.ExamPaperClasses;
 
 import java.awt.Checkbox;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -114,15 +115,19 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         student = mns_manageStudent.getStudentById(IdStudent);
 
         lb_IdStudent = new JLabel("MSSV: " + student.getId());
+        // lb_IdStudent.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_IdStudent.setSize(int_widthLbIdStudent, int_heightLbIdStudent);
 
         lb_FullNameStudent = new JLabel("Họ và tên: " + student.getFullName());
+        //lb_FullNameStudent.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_FullNameStudent.setSize(int_widthLbFullNameStudent, int_heightLbFullNameStudent);
 
         lb_Birthday = new JLabel("Ngày sinh: " + student.getBirthday());
+        // lb_Birthday.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_Birthday.setSize(int_widthLbBirthday, int_heightLbBirthday);
 
         lb_Field = new JLabel("Khoa: " + student.getField());
+        // lb_Field.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_Field.setSize(int_widthLbField, int_heightLbField);
 
         posInScreen.CENTER_CUSTOM_Y_CHILDREN_PARENT_ARRAY_COMPONENT(pn_display, 0, 1, lb_IdStudent, lb_FullNameStudent,
@@ -166,6 +171,7 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
 
     private void displayButtonAddmitExam() {
         btn_addmitExam = new JButton("Nộp bài");
+        btn_addmitExam.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         btn_addmitExam.setSize(int_widthBtnAddmitExam, int_heightBtnAddmitExam);
         posInScreen.CUSTOM_CHILD_PARENT(btn_addmitExam, this, 3, 90);
         pn_root.add(btn_addmitExam, JLayeredPane.MODAL_LAYER);
@@ -241,7 +247,7 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         int_heightFrame = parameterScreen.SCREEN_HEIGHT;
         setSize(int_widthFrame, int_heightFrame);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setTitle("Bài làm");
+        setTitle("Bài thi");
 
         int_widthPnRoot = this.getWidth();
         int_heightPnRoot = this.getHeight();

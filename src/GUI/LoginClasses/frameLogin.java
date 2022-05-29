@@ -115,8 +115,8 @@ public class frameLogin extends JFrame implements ActionListener, KeyListener {
         ImageIcon imageExit = new ImageIcon("..\\QLTracNghiem\\src\\images\\exit.png");
         buttonLogin.setIcon(imageLogin);
         buttonExit.setIcon(imageExit);
-        buttonLogin.setFont(new Font("Times New Roman", Font.BOLD, 12));
-        buttonExit.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        buttonLogin.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        buttonExit.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         // buttonLogin.setMnemonic(KeyEvent.VK_ENTER); // Nhấn phím Alt + Enter để đăng
         // nhập thay cho thao tác Click chuột
         jpBottom.add(buttonLogin);
@@ -126,15 +126,15 @@ public class frameLogin extends JFrame implements ActionListener, KeyListener {
         JPanel jpCenter = new JPanel();
         jpCenter.setBackground(Color.white);
         jpCenter.add(lb_User = new JLabel("Tên đăng nhập"));
-        lb_User.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_User.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jpCenter.add(tf_inputName = new JTextField(20));
         tf_inputName.addKeyListener(this);
         jpCenter.add(lb_Password = new JLabel("Mật khẩu"));
-        lb_Password.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        lb_Password.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         jpCenter.add(pf_inputPassword = new JPasswordField(20));
         pf_inputPassword.addKeyListener(this);
         jpCenter.add(showPassword = new JCheckBox("Hiển thị mật khẩu"));
-        showPassword.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        showPassword.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_Password.setPreferredSize(lb_User.getPreferredSize());
         add(jpCenter, BorderLayout.CENTER);
     }

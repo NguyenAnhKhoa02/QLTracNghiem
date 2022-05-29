@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Painter;
+import java.awt.Font;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,8 +31,10 @@ public class paneStaticMark extends JPanel implements Parameter, ActionListener 
         String[] column = { "MSSV", "Họ và tên", "Môn 1", "Môn 2", "Môn 3", "Trung bình", "Xếp loại" };
         String[][] data = mep_manageExamPaper.getArrStastic(jcb_Semester.getSelectedItem().toString());
         tb_statistic = new JTable(data, column);
+        tb_statistic.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         tb_statistic.setSize(int_widthPane, int_heightPane);
         scroll = new JScrollPane(tb_statistic);
+        scroll.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         scroll.setSize(int_widthPane, int_heightPane);
         posInScreen.CUSTOM_WITH_PERCENT(scroll, 0, 10);
         add(scroll);
@@ -39,12 +42,14 @@ public class paneStaticMark extends JPanel implements Parameter, ActionListener 
 
     private void makingTimeExam() {
         jcb_NameExam = new JComboBox<>(mte_manageTimeExam.getTimeExam());
+        jcb_NameExam.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jcb_NameExam.setSize(int_widthJcbNameExam, int_heightJcbNameExam);
         posInScreen.CUSTOM_CHILD_PARENT(jcb_NameExam, this, 5, 5);
         add(jcb_NameExam);
 
         String[] strArr_Semester = { "HKI", "HKII" };
         jcb_Semester = new JComboBox<>(strArr_Semester);
+        jcb_Semester.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         jcb_Semester.setSelectedIndex(1);
         jcb_Semester.setSize(int_widthJcbSemester, int_heightJcbSemester);
         posInScreen.CUSTOM_CHILD_PARENT(jcb_Semester, this, 63, 5);

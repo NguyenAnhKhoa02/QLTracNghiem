@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,7 +37,8 @@ public class frameListQuestion extends JFrame
         mnQ_questions = new manageQuestion();
 
         lb_titleFrame = new JLabel("DANH SÁCH CÂU HỎI", JLabel.CENTER);
-        lb_titleFrame.setFont(new Font("Time new roman", Font.BOLD, 50));
+        lb_titleFrame.setBackground(Color.blue);
+        lb_titleFrame.setFont(new Font("Times New Roman", Font.BOLD, 50));
         lb_titleFrame.setSize(int_widthLbTitleFrame, int_heightLbTitleFrame);
         posInScreen.CUSTOM_WITH_PERCENT(lb_titleFrame, 0, 0);
         add(lb_titleFrame);
@@ -45,6 +47,7 @@ public class frameListQuestion extends JFrame
         displayAddButton();
         displaySearch();
         setVisible(true);
+        setTitle("Câu hỏi");
     }
 
     @Override
@@ -82,6 +85,7 @@ public class frameListQuestion extends JFrame
         String[] column = { "Id", "Mức độ", "Nội dung", "Câu trả lời", "Môn học", "Giảng viên", "Loại câu hỏi" };
 
         tb_listQuestion = new JTable(data, column);
+        tb_listQuestion.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         tb_listQuestion.setRowHeight(int_heightRowTbListQuestion);
         setParameterTable(tb_listQuestion, 0, 50, 500, 10, 150, 150);
         tb_listQuestion.addMouseListener(this);
@@ -95,6 +99,9 @@ public class frameListQuestion extends JFrame
 
     private void displayAddButton() {
         btn_AddQuestion = new JButton("Thêm câu hỏi");
+        ImageIcon img_AddQuestion = new ImageIcon("..\\QLTracNghiem\\src\\images\\add.png");
+        btn_AddQuestion.setIcon(img_AddQuestion);
+        btn_AddQuestion.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         btn_AddQuestion.setSize(int_widthBtnAddQuestion, int_heightBtnAddQuestion);
         posInScreen.CUSTOM_WITH_PERCENT(btn_AddQuestion, 87, 18);
         this.add(btn_AddQuestion);
@@ -109,7 +116,7 @@ public class frameListQuestion extends JFrame
         jtf_Search.addKeyListener(this);
 
         lb_Search = new JLabel("Tìm kiếm");
-        lb_Search.setFont(new Font("Time new roman", Font.BOLD, 15));
+        lb_Search.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         lb_Search.setSize(int_widthLbSearch, int_heightLbSearch);
         posInScreen.PARENT_CHILD_HORIZONTAL(lb_Search, jtf_Search);
         add(lb_Search);
@@ -281,7 +288,7 @@ public class frameListQuestion extends JFrame
                     repaint();
                     makingTable();
                 } else {
-                    JOptionPane.showMessageDialog(fDQ_detaulQuestion, "Không đủ dữ liệu", "Thôn báo",
+                    JOptionPane.showMessageDialog(fDQ_detaulQuestion, "Không đủ dữ liệu", "Thông báo",
                             JOptionPane.WARNING_MESSAGE);
                 }
             }
