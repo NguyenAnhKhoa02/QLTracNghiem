@@ -167,7 +167,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
 
         JPanel jp_DoTest = new JPanel();
         jp_DoTest.setBackground(Color.white);
-        
+
         if (lecture.getStr_Position().equals("Trưởng khoa")) {
             buttonMakingExam = new JButton("Ra đề thi");
             ImageIcon img_MakingExam = new ImageIcon(
@@ -189,7 +189,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
 
             buttonStatisitc = new JButton("Thống kê");
             ImageIcon img_Statisitc = new ImageIcon(
-                "..\\QLTracNghiem\\src\\images\\statisitc.png");
+                    "..\\QLTracNghiem\\src\\images\\statisitc.png");
 
             buttonStatisitc.setIcon(img_Statisitc);
             buttonStatisitc.setFont(new Font("Times New Roman", Font.PLAIN, 12));
@@ -215,7 +215,7 @@ public class frameLecture extends JFrame implements ActionListener, WindowListen
     public void showWindow() {
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(650, 400);
+        this.setSize(620, 400);
         this.setLocationRelativeTo(null);
         this.setResizable(false); // Không thể thay đổi kích cỡ Frame
 

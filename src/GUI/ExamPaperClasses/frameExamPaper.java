@@ -119,7 +119,7 @@ public class frameExamPaper extends JFrame implements Parameter, ActionListener,
         lb_IdStudent.setSize(int_widthLbIdStudent, int_heightLbIdStudent);
 
         lb_FullNameStudent = new JLabel("Họ và tên: " + student.getFullName());
-        //lb_FullNameStudent.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        // lb_FullNameStudent.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         lb_FullNameStudent.setSize(int_widthLbFullNameStudent, int_heightLbFullNameStudent);
 
         lb_Birthday = new JLabel("Ngày sinh: " + student.getBirthday());

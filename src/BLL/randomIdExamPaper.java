@@ -24,6 +24,7 @@ public class randomIdExamPaper {
                 if (str_tempt.equalsIgnoreCase(arL_idExamPaper.get(index))) {
                     continue;
                 }
+                index++;
             }
 
             isDone = true;

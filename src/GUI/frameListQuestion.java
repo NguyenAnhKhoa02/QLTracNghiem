@@ -123,6 +123,10 @@ public class frameListQuestion extends JFrame
     }
 
     private void makingSearchTable(String[][] strArr_data) {
+        tb_listQuestion.removeMouseListener(this);
+        tb_listQuestion = null;
+        scrollPane = null;
+
         String[] column = { "Id", "Mức độ", "Nội dung", "Câu trả lời", "Môn học", "Giảng viên", "Loại câu hỏi" };
 
         tb_listQuestion = new JTable(strArr_data, column);
@@ -294,7 +298,7 @@ public class frameListQuestion extends JFrame
             }
 
             if (fDQ_detaulQuestion.getControllerButton().getText().equals("Xóa")) {
-                fDQ_detaulQuestion.updateSQL(null);
+                fDQ_detaulQuestion.updateSQL("");
                 fDQ_detaulQuestion.dispose();
                 fDQ_detaulQuestion.addWindowListener(this);
                 getContentPane().remove(scrollPane);
@@ -357,7 +361,7 @@ public class frameListQuestion extends JFrame
             }
         }
 
-        String[][] strArr = new String[arL_search.size()][7];
+        String[][] strArr = new String[arL_search.size()][8];
         int index = 0;
         for (String str : arL_search) {
             for (int i = 0; i < tb_listQuestion.getRowCount(); i++) {
@@ -373,7 +377,8 @@ public class frameListQuestion extends JFrame
                 }
             }
         }
-
+        data = strArr;
+        getContentPane().remove(tb_listQuestion);
         getContentPane().remove(scrollPane);
         repaint();
         if (arL_search.size() == 0)

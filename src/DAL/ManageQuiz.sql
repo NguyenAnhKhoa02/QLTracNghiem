@@ -6,21 +6,20 @@ create table Students(
 	Birthday date,
 	IdField char(10) not null
 );
-DROP DATABASE ManageQuiz
+
 alter table Students add constraint PK_Students primary key (Id)
 alter table Students add constraint FK_Students_Fields foreign key (IdField) references Fields(Id)
 select * from Students
-delete from Students
 insert into Students(Id,FullName,Birthday,IdField) values ('234',N'Nguyễn Văn B','01-01-2002','CNTT');
 insert into Students(Id,FullName,Birthday,IdField) values ('123',N'Nguyễn Văn A','01-01-2002','CNTT');
 insert into Students(Id,FullName,Birthday,IdField) values ('345',N'Nguyễn Văn C','01-01-2002','CNTT');
 insert into Students(Id,FullName,Birthday,IdField) values ('456',N'Nguyễn Văn C','01-01-2002','CNTT');
 insert into Students(Id,FullName,Birthday,IdField) values ('567',N'Nguyễn Văn D','01-01-2002','CNTT');
-insert into Students(Id,FullName,Birthday,IdField) values ('678',N'Nguyễn Văn E','01-01-2002','CNTT');
-insert into Students(Id,FullName,Birthday,IdField) values ('789',N'Nguyễn Văn F','02-07-2002','CNTT');
-insert into Students(Id,FullName,Birthday,IdField) values ('891',N'Nguyễn Văn G','01-05-2002','CNTT');
-insert into Students(Id,FullName,Birthday,IdField) values ('628',N'Nguyễn Văn H','01-01-2002','CNTT');
-insert into Students(Id,FullName,Birthday,IdField) values ('618',N'Nguyễn Văn I','01-01-2002','CNTT');
+insert into Students(Id,FullName,Birthday,IdField) values ('678','Nguyễn Văn E','01-01-2002','CNTT');
+insert into Students(Id,FullName,Birthday,IdField) values ('789','Nguyễn Văn F','02-07-2002','CNTT');
+insert into Students(Id,FullName,Birthday,IdField) values ('891','Nguyễn Văn G','01-05-2002','CNTT');
+insert into Students(Id,FullName,Birthday,IdField) values ('628','Nguyễn Văn H','01-01-2002','CNTT');
+insert into Students(Id,FullName,Birthday,IdField) values ('618','Nguyễn Văn I','01-01-2002','CNTT');
 
 select Id
 from Students
@@ -102,7 +101,7 @@ alter table Questions add constraint FK_Questions_Lectures foreign key (Idlectur
 alter table Questions add constraint FK_Questions_Levels foreign key (LevelQues) references Levels(Id)
 
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('LTPT1','1',N'Câu hỏi','Câu trả lời (a,b,c,d)','Mã môn (PT)','Mã giảng viên ra đề (1,2 hoặc 3)','Options-Yes/no')
-delete from Questions --
+delete from Questions
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('LTPT1','1',N'Nhận xét này đúng hay sai: Python là ngôn ngữ mã nguồn mở.','a','LTPT','1','Yes/No')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('LTPT2','1',N'Các khối code (khối lệnh của hàm, vòng lặp,...) trong Python được xác định?','b','LTPT','2','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('LTPT3','1',N'Nội dung của chú thích sẽ được trình thông dịch bỏ qua, đúng hay sai?','a','LTPT','3','Yes/No')
@@ -177,7 +176,7 @@ insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues)
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('MNM31','4',N'Emacs là một chương trình','a','MNM','3','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('MNM32','4',N'Để xem các tiến trình hiện có trong hệ thống Linux ta dùng lệnh ps. Đúng hay sai?','a','MNM','3','Yes/No')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('MNM33','4',N'Để xem chi tiết các tiến trình đang chạy trong hệ thống ta dùng lệnh ps với các tham số nào sau đây?','b','MNM','1','Options')
-insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('MNM34','4',N'Mỗi tiến trình chạy trong hệ thống Linux được đặc trưng bởi:','a','MNM','1','Options')
+insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('MNM34','4',N'Mỗi tiến trình chạy trong hệ thống Linux được đặc trưng bởi:','a','LTJV','1','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('MNM35','4',N'Tham số PPIUD dùng để chỉ Parent process ID','a','MNM','1','Yes/No')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('MNM36','4',N'Để dừng một tiến trình ta dùng lệnh nào stop. Đúng hay sai?','b','MNM','1','Yes/No')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('MNM37','4',N'Điều gì xảy ra với một tiến trình khi ta kill tiến trình cha của nó','b','MNM','1','Options')
@@ -225,7 +224,19 @@ insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues)
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('LTJV38','4',N'Để đảo giá trị của một biến boolean, ta dùng toán tử nào?','a','LTJV','2','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('LTJV39','4',N'Nếu không khai báo từ khóa chỉ phạm vi truy cập, phạm vi truy cập của đối tượng là gì?','a','LTJV','2','Options')
 insert into Questions(Id,LevelQues,Content,Answer,IdSubject,IdLecture, TypeQues) values ('LTJV40','4',N'Trong Java, kiểu char biểu diễn bộ mã code nào dưới đây?','b','LTJV','2','Options')
- 
+ use ManageQuiz
+select Id
+from Questions
+where  Id= 'LTJV41'
+order by Id DESC
+
+delete from  where Id='LTJV41'
+
+delete from OptionsQuestion where Id='LTJV41'
+delete from Questions where Id='LTJV41'
+
+select * from Questions where IdSubject = 'LTJV'
+select * from OptionsQuestion where IdSubject = 'LTJV'
 select qs.Id, qs.TypeQues
 from Questions qs, Levels lv
 where qs.IdSubject = 'LTJV' and lv.LvName=N'Nhận biết' and qs.LevelQues = lv.Id
@@ -272,8 +283,6 @@ create table StudentsLogin(
 alter table StudentsLogin add constraint PK_StudentsLogin primary key(userStudent)
 alter table StudentsLogin add constraint FK_StudentsLogon_Students foreign key (userStudent) references Students(Id)
 
-select * from StudentsLogin
-
 insert into StudentsLogin(userStudent,pass) values ('123','01012002')
 insert into StudentsLogin(userStudent,pass) values ('234','01012002')
 insert into StudentsLogin(userStudent,pass) values ('345','01012002');
@@ -285,7 +294,6 @@ insert into StudentsLogin(userStudent,pass)values ('891','01012002');
 insert into StudentsLogin(userStudent,pass)values ('628','01012002');
 insert into StudentsLogin(userStudent,pass)values ('618','01012002');
 
-delete from StudentsLogin
 
 select * from StudentsLogin
 
@@ -307,7 +315,7 @@ create table YesNoQuestion(
 	Id varchar(10) not null,
 	Options nvarchar(MAX)
 )
-
+select * from Questions
 
 alter table YesNoQuestion add constraint PK_YesNoQuestion primary key (Id)
 alter table YesNoQuestion add constraint FK_YesNoQuestion_Question foreign key(Id) references Questions(Id)
@@ -491,28 +499,50 @@ insert into Exam (Id,TimeName,Semester) values (830,N'Kì thi kết thúc học 
 insert into Exam (Id,TimeName,Semester) values (852,N'Kì thi kết thúc học phần 2022 - 2023',N'HKII')
 insert into Exam (Id,TimeName,Semester) values (858,N'Kì thi kết thúc học phần 2022 - 2023',N'HKI')
 insert into Exam (Id,TimeName,Semester) values (941,N'Kì thi kết thúc học phần 2022 - 2023',N'HKII')
-
-delete from DetailExamPaper
-delete from ExamPapers
 use ManageQuiz
-select *
-from Exam e, DetailExam d
-where e.Id = d.Id
+select * from Exam
 
-delete from DetailExam
-delete from Exam
-where Id = '886'
+select Id 
+from Exam
+where Semester = 'HKI' 
+delete from DetailExamPaper where Id = 725
+delete from ExamPapers  where Id = 725
+delete from DetailExam where Id = 725
+delete from Exam where Id = 725
+where Id = '997'
+
+select distinct de.Id, s.NameSubject, e.Semester
+from DetailExam de, Exam e, Questions q, Subjects s
+where de.Id = e.Id and de.IdQues = q.Id and q.IdSubject = s.Id
 
 create table DetailExam(
 	Id nvarchar(10) not null,
 	IdQues varchar(10) not null
 )
 select * from DetailExam
-delete from DetailExam
-delete from DetailExamPaper --
 alter table DetailExam add constraint PK_IdDetailExam primary key (Id,IdQues)
 alter table DetailExam add constraint FK_DetailExam_Exam foreign key (Id) references Exam(Id)
 alter table DetailExam add constraint FK_DetailExam_Question foreign key (IdQues) references Questions(Id)
+insert into DetailExam (Id,IdQues) values ('255','MNM14')
+insert into DetailExam (Id,IdQues) values ('255','MNM15')
+insert into DetailExam (Id,IdQues) values ('255','MNM17')
+insert into DetailExam (Id,IdQues) values ('255','MNM26')
+insert into DetailExam (Id,IdQues) values ('255','MNM28')
+insert into DetailExam (Id,IdQues) values ('255','MNM29')
+insert into DetailExam (Id,IdQues) values ('255','MNM32')
+insert into DetailExam (Id,IdQues) values ('255','MNM34')
+insert into DetailExam (Id,IdQues) values ('255','MNM4')
+insert into DetailExam (Id,IdQues) values ('255','MNM7')
+insert into DetailExam (Id,IdQues) values ('214','LTPT15')
+insert into DetailExam (Id,IdQues) values ('214','LTPT17')
+insert into DetailExam (Id,IdQues) values ('214','LTPT19')
+insert into DetailExam (Id,IdQues) values ('214','LTPT2')
+insert into DetailExam (Id,IdQues) values ('214','LTPT21')
+insert into DetailExam (Id,IdQues) values ('214','LTPT25')
+insert into DetailExam (Id,IdQues) values ('214','LTPT27')
+insert into DetailExam (Id,IdQues) values ('214','LTPT3')
+insert into DetailExam (Id,IdQues) values ('214','LTPT36')
+insert into DetailExam (Id,IdQues) values ('214','LTPT38')
 insert into DetailExam (Id,IdQues) values ('310','MNM20')
 insert into DetailExam (Id,IdQues) values ('310','MNM21')
 insert into DetailExam (Id,IdQues) values ('310','MNM26')
@@ -655,24 +685,32 @@ create table ExamPapers(
 	NumberWrong int,
 	Mark float
 )
-
-select * from Exam
+delete from DetailExam where Id = 803
+delete from Exam where Id = 803
+delete from DetailExamPaper where Id=446
+delete from ExamPapers where IdStudent = 123 and Id = 446
+select * from ExamPapers where IdStudent = 123
+select * from DetailExamPaper 
 
 alter table ExamPapers add constraint PK_ExamPapers primary key (Id)
 alter table ExamPapers add constraint FK_ExamPapers_Exam foreign key (IdExam) references Exam(Id)
 alter table ExamPapers add constraint FK_ExamPapers_Students foreign key (IdStudent) references Students (Id)
-select * from ExamPapers
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('234','255','878',10,0,10)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('234','444','827',8,2,8)
+select * from Exam
+
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('123','372','875',10,0,10)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('123','858','100',8,2,8)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('123','694','210',9,1,9)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('234','372','878',10,0,10)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('234','858','827',8,2,8)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('234','694','218',9,1,9)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('345','242','629',6,4,6)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('345','372','629',6,4,6)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('345','858','471',7,3,7)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('345','694','635',8,2,8)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','242','991',6,4,6)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','372','991',6,4,6)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','858','641',7,3,7)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','694','939',8,2,8)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','255','597',5,5,5)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','444','917',6,4,6)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','372','597',5,5,5)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','858','917',6,4,6)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','694','648',7,3,7)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('678','372','395',4,6,4)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('678','444','544',5,5,5)
@@ -689,50 +727,53 @@ insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values 
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('618','372','646',10,0,10)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('618','858','123',9,1,9)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('618','694','986',8,2,8)
-
 delete from ExamPapers
+select distinct de.Id, s.NameSubject, e.Semester
+from DetailExam de, Exam e, Questions q, Subjects s
+where de.Id = e.Id and de.IdQues = q.Id and q.IdSubject = s.Id
 
 select * from ExamPapers where IdStudent = 891
 update ExamPapers
 set IdExam = '372'
 where IdExam = '214' and IdStudent ='891' and Id = 844
-
+delete from ExamPapers
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('234','214','727',10,0,10)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('234','941','824',8,2,8)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('234','310','999',9,1,9)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('345','214','712',6,4,6)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('345','852','511',7,3,7)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('345','941','511',7,3,7)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('345','310','271',8,2,8)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','214','593',6,4,6)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','310','665',7,3,7)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','852','383',8,2,8)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','941','665',7,3,7)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('456','310','383',8,2,8)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','214','858',5,5,5)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','310','699',6,4,6)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','852','757',7,3,7)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','941','699',6,4,6)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('567','310','757',7,3,7)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('678','214','353',4,6,4)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('678','310','266',5,5,5)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('678','852','284',6,4,6)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('678','941','266',5,5,5)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('678','310','284',6,4,6)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('789','214','329',10,0,0)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('789','310','344',9,1,0)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('789','852','122',8,2,8)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('789','941','344',9,1,0)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('789','310','122',8,2,8)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('891','214','877',7,3,7)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('891','310','741',6,4,6)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('891','214','495',5,5,5)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('628','372','485',5,5,5)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('628','310','942',4,6,4)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('628','852','358',3,7,3)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('618','214','879',10,0,10)
-insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('618','941','738',9,1,9)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('891','941','741',6,4,6)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('891','310','495',5,5,5)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('628','214','485',5,5,5)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('628','941','942',4,6,4)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('628','310','358',3,7,3)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('618','941','879',10,0,10)
+insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('618','214','738',9,1,9)
 insert into ExamPapers(IdStudent,IdExam,Id,NumberRight,NumberWrong,Mark) values ('618','310','336',8,2,8)
 
-
+delete from ExamPapers
 select distinct IdExam
 from ExamPapers e, DetailExamPaper d, Questions q, Subjects s, TimeExam t, Exam ex
 where e.IdStudent = 234 and e.Id = d.Id and q.IdSubject = s.Id and d.IdQues = q.Id and s.Id = 'LTJV' and e.IdExam = ex.Id and ex.Semester = t.TimeName and t.TimeName = 'HKI'
 
-select * from DetailExamPaper where Id = 740
-select * from ExamPapers where IdStudent = 123
+delete  from DetailExamPaper where Id = 704
+delete  from ExamPapers where IdStudent = 123 and Id = 704
 
+select * from ExamPapers where IdStudent = 123
 
 
 update ExamPapers
@@ -757,7 +798,6 @@ select Id from Exam where Semester = 'HKII'
 select * from DetailExam
 select * from ExamPapers where IdStudent = '123'
 delete from DetailExamPaPer where Id = 452
-select * from DetailExamPaper
 delete from ExamPapers where Id = 452
 delete from ExamPapers
 where Id = 383
@@ -796,11 +836,9 @@ create table DetailExamPaper(
 alter table DetailExamPaper add constraint FK_DetailExamPaper_ExamPapaers foreign key (Id) references ExamPapers(Id)
 alter table DetailExamPaper add constraint FK_DetailExamPaper_Questions foreign key (IdQues) references Questions(Id)
 =======
-select * from DetailExamPaper
 select * from ExamPapers
 select * from DetailExam
  drop table DetailExamPaper
-
  drop table ExamPapers
 
 select distinct IdExam

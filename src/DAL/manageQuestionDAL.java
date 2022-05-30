@@ -138,8 +138,9 @@ public class manageQuestionDAL extends connectSQL {
         connetToSQL();
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("delete from YesNoQuestion where id='" + yesNoQuestion.getIdQuestion() + "'");
-            statement.executeUpdate("delete from Questions where id='" + yesNoQuestion.getIdQuestion() + "'");
+            statement
+                    .executeUpdate("delete from YesNoQuestion where Id='" + yesNoQuestion.getIdQuestion().trim() + "'");
+            statement.executeUpdate("delete from Questions where Id='" + yesNoQuestion.getIdQuestion().trim() + "'");
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -154,8 +155,9 @@ public class manageQuestionDAL extends connectSQL {
         connetToSQL();
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("delete from OptionsQuestion where id='" + optionsQuestion.getIdQuestion() + "'");
-            statement.executeUpdate("delete from Questions where id='" + optionsQuestion.getIdQuestion() + "'");
+            statement.executeUpdate(
+                    "delete from OptionsQuestion where Id='" + optionsQuestion.getIdQuestion().trim() + "';");
+            statement.executeUpdate("delete from Questions where Id='" + optionsQuestion.getIdQuestion().trim() + "'");
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
